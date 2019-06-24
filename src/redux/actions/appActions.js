@@ -1,9 +1,8 @@
-export const LOAD_STARTUP_DATA = 'LOAD_STARTUP_DATA';
-export const STARTUP_DATA_LOADED = 'STARTUP_DATA_LOADED';
-export const GET_USER_INFO = 'GET_USER_INFO';
+import { LOAD_STARTUP_DATA, STARTUP_DATA_LOADED, GET_USER_INFO } from "../actionTypes";
+
 
 export const getUserInfo = () => ({
-	type: GET_USER_INFO
+  type: GET_USER_INFO
 });
 
 export const loadStartupData = () => ({
