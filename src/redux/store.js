@@ -1,6 +1,7 @@
 import { createStore, combineReducers, compose, applyMiddleware } from 'redux';
 import thunk from 'redux-thunk';
 import startupMiddleware from './middlewares/startupMiddleware';
+import appReducer from './reducers/appReducer';
 
 const composeEnhancers =
   typeof window === 'object' && window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__
@@ -9,7 +10,7 @@ const composeEnhancers =
     : compose;
 
 const rootReducer = combineReducers({
-
+  app: appReducer
 });
 
 const store = createStore(
