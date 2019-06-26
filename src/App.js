@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import { Switch, Route, Redirect } from 'react-router-dom';
 import path from './helpers/path';
+
+import 'bootstrap/dist/css/bootstrap.min.css';
 import './styles/app.css';
 
 import LogInContainer from './layouts/HomePageLayout';
