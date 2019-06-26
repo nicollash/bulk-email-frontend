@@ -1,9 +1,26 @@
 .header__container {
-	margin: 0;
-	padding: 0;
-	min-height: 5rem;
 	display: flex;
+	justify-content: space-between;
 	align-items: center;
-	justify-content: center;
-	background: var(--palette01);
+	height: 55px;
+	border-bottom: 1px solid var(--gray);
+}
+
+.header__logo {
+  display: inline-block;
+}
+
+.header__logo-container {
+  display: flex;
+}
+
+.header__logout {
+  height: 45px;
+  width: 100px;
+  background-color: var(--gray);
+  color: var(--dark-blue);
+  border: none;
+  margin: 5px;
+  border-radius: 5px;
+  border: 2px solid var(--shadow-gray);
 }
