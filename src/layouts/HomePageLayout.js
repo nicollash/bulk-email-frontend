@@ -22,7 +22,7 @@ class HomePageLayout extends React.Component {
             <SidebarContainer />
           </div>
 
-          <div className={homePageLayoutClasses('footer')}>
+          <div className={homePageLayoutClasses('body')}>
             { this.props.children }
           </div>
 
