@@ -2,7 +2,6 @@ import { connect } from 'react-redux';
 import HeaderComponent from '../components/HeaderComponent';
 
 const mapStateToProps = state => {
-
   return {
     userName: 'Test User'
   };
