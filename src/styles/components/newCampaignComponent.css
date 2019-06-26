@@ -1,0 +1,16 @@
+.new-campaign__container {
+    width: calc(100% - 100px);
+    margin-top: 55px;
+    margin-left: 50px;
+}
+
+.new-campaign__title {
+    width: 100%;
+    font-size: 30px;
+    color: #535258;
+    border-bottom: 1px solid #8a8eb1;
+}
+
+.new-campaign__content {
+    display: flex;
+}
