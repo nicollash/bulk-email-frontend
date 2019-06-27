@@ -1,7 +1,7 @@
 import React from 'react';
 import { getBEMClasses } from '../helpers/cssClassesHelper';
 
-import HomePageLayout from '../../layouts/HomePageLayout';
+import HomePageLayout from '../layouts/HomePageLayout';
 
 import '../styles/components/loginComponent.css';
 

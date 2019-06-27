@@ -6,11 +6,6 @@ import './styles/app.css';
 import LogInContainer from'./layouts/HomePageLayout';
 
 class App extends Component {
-
-  constructor(props) {
-    super(props);
-  }
-
   componentDidMount() {
 
   }
