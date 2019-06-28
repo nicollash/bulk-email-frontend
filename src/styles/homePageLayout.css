@@ -3,3 +3,9 @@ body {
   padding: 0;
   font-family: sans-serif;
 }
+
+.main-layout__body {
+  height: 100%;
+  padding-left: 100px;
+  background-color: var(--fluent-gray);
+}

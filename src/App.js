@@ -1,9 +1,12 @@
 import React, { Component } from 'react';
 import { Switch, Route, Redirect } from 'react-router-dom';
 import path from './helpers/path';
+
+import 'bootstrap/dist/css/bootstrap.min.css';
 import './styles/app.css';
 
-import LogInContainer from'./layouts/HomePageLayout';
+import LogInContainer from './layouts/HomePageLayout';
+import NewCampaignContainer from './containers/NewCampaignContainer';
 
 class App extends Component {
   componentDidMount() {
@@ -15,6 +18,7 @@ class App extends Component {
       <React.Fragment>
         <Switch>
           <Route path={path('/login')} component={LogInContainer} exact />
+          <Route path={path('/create-campaign')} component={NewCampaignContainer} exact />
           <Redirect to="/login" />
         </Switch>
       </React.Fragment>
