@@ -17,18 +17,90 @@ const Channel = {
 }
 
 class NewCampaignComponent extends React.Component {
-  constructor(props) {
-    super(props);
-
-    //initialize state
-    this.state = {
-      name: "",
-      channel: Channel.SMS,
-      bot: 3000,
-      filepath: "",
-      message: "",
-    }
+  //initialize state
+  state = {
+    name: "",
+    channel: Channel.SMS,
+    bot: 3000,
+    filepath: "",
+    message: "",
   }
+
+  // MARK: - Event handlers
+
+  handleNameChange = (e) => {
+    const name = e.target.value;
+
+    this.setState({
+      name
+    });
+  }
+
+  handleChannelChange = (e) => {
+    const channel = e.target.value;
+
+    this.setState({
+      channel
+    });
+  }
+
+  handleBotChange = (e) => {
+    const bot = e.target.value;
+
+    this.setState({
+      bot
+    });
+  }
+
+  handleMessageChange = (e) => {
+    const message = e.target.value;
+
+    this.setState({
+      message
+    });
+  }
+
+  handleUploadClick = (e) => {
+    e.stopPropagation();
+    e.preventDefault();
+
+    this.fileInput.click();
+  }
+
+  handleUploadChange = (e) => {
+    e.stopPropagation();
+    e.preventDefault();
+
+    if (e.target.files.length === 0) {
+      return;
+    }
+
+    let file = e.target.files[0];
+
+    // let formData = new FormData();
+    // formData.append('file', file);
+
+    // fetch(`${Settings.fileServer}/upload`, {
+    //   method: 'POST',
+    //   headers: {
+    //   },
+    //   body: formData,
+    // }).then(response => response.json()).then(reply => {
+    //   this.setState({
+    //     filepath: `${reply.data}`
+    //   });
+    // });
+
+    this.setState({
+      filepath: file.name
+    });
+  }
+
+  handleSaveClick = (e) => {
+    console.log("save clicked!");
+  }
+
+  // MARK: - Lifecycle Methods
 
   render() {
     const { name, channel, bot, filepath, message } = this.state;
@@ -87,72 +159,6 @@ class NewCampaignComponent extends React.Component {
         </div>
       </HomePageLayout>
     )
-  }
-
-  // MARK: - Event handlers
-
-  handleNameChange = (e) => {
-    const name = e.target.value;
-
-    this.setState({
-      name
-    });
-  }
-
-  handleChannelChange = (e) => {
-    const channel = e.target.value;
-
-    this.setState({
-      channel
-    });
-  }
-
-  handleMessageChange = (e) => {
-    const message = e.target.value;
-
-    this.setState({
-      message
-    });
-  }
-
-  handleUploadClick = (e) => {
-    e.stopPropagation();
-    e.preventDefault();
-
-    this.fileInput.click();
-  }
-
-  handleUploadChange = (e) => {
-    e.stopPropagation();
-    e.preventDefault();
-
-    if (e.target.files.length === 0) {
-      return;
-    }
-
-    let file = e.target.files[0];
-
-    // let formData = new FormData();
-    // formData.append('file', file);
-
-    // fetch(`${Settings.fileServer}/upload`, {
-    //   method: 'POST',
-    //   headers: {
-    //   },
-    //   body: formData,
-    // }).then(response => response.json()).then(reply => {
-    //   this.setState({
-    //     filepath: `${reply.data}`
-    //   });
-    // });
-
-    this.setState({
-      filepath: file.name
-    });
-  }
-
-  handleSaveClick = (e) => {
-    console.log("save clicked!");
   }
 };
 
