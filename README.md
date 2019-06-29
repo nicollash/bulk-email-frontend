@@ -1,6 +1,5 @@
-#### Install and available scripts
 
-- Install
+#### Install
 
     Make sure you have webpack installed globally:  
     `npm install -g webpack`
@@ -11,7 +10,7 @@
     Install npm dependencies:  
     `npm install`
 
-- Available Scripts
+#### Available scripts
 
     `npm start`  
     Runs the app in the development mode.
