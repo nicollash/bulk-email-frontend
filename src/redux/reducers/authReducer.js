@@ -5,16 +5,8 @@ import {
   AUTH_LOGIN_FAILED,
   AUTH_LOGIN_RESET_STATE,
   NEW_PASSWORD_REQUIRED,
-  AUTH_USER_CREDENTIAL_SET,
-  AUTH_SIGNUP_REQUESTED,
-  AUTH_SIGNUP_SUCCEEDED,
-  AUTH_SIGNUP_FAILED,
-  AUTH_SIGNUP_RESET_STATE,
-  AUTH_EMAIL_VERIFICATION_REQUESTED,
-  AUTH_EMAIL_VERIFICATION_SUCCEEDED,
-  AUTH_EMAIL_VERIFICATION_FAILED,
-  AUTH_EMAIL_VERIFICATION_RESET_STATE,
-  AUTH_SET_USER_FROM_STORAGE,
+  NEW_PASSWORD_SUCCESS,
+  NEW_PASSWORD_FAILD,
   AUTH_FORGOT_CODE_SENT,
   AUTH_PASSWORD_CHANGE_SUCCEEDED,
   AUTH_PASSWORD_CHANGE_FAILED,
@@ -42,11 +34,13 @@ const initialState = {
 
 export default function (state = initialState, { type, payload }) {
   switch (type) {
+
     case AUTH_CHECK_LIST:
       return {
         ...state,
         auth: type
       }
+
     case AUTH_LOGIN_INITIAL_STATE:
       return {
         ...state,
@@ -59,6 +53,7 @@ export default function (state = initialState, { type, payload }) {
           companyPhoneNumber: payload.phone_number
         }
       }
+
     case AUTH_INIT_PASSWORD_STATE:
       return {
         ...state,
@@ -66,24 +61,28 @@ export default function (state = initialState, { type, payload }) {
         passwordChanged: false,
         passwordChangedFailed: false
       }
+
     case AUTH_PASSWORD_CHANGE_SUCCEEDED:
       return {
         ...state,
         auth: type,
         passwordChanged: true
       }
+
     case AUTH_PASSWORD_CHANGE_FAILED:
       return {
         ...state,
         auth: type,
         passwordChangedFailed: true
       }
+
     case AUTH_LOGIN_RESET_STATE:
       return {
         ...state,
         auth: type,
         isLoading: false
       }
+
     case NEW_PASSWORD_REQUIRED:
       return {
         ...state,
@@ -91,18 +90,21 @@ export default function (state = initialState, { type, payload }) {
         newPasswordChallenge: payload,
         isLoading: false
       }
-    case AUTH_SET_USER_FROM_STORAGE:
+      
+    case NEW_PASSWORD_SUCCESS:
       return {
         ...state,
         auth: type,
-        ...payload
+        isLoading: false
       }
 
-    case AUTH_LOGIN_STORE:
+    case NEW_PASSWORD_FAILD:
       return {
         ...state,
-        cred: payload
+        auth: type,
+        isLoading: false
       }
+
     case AUTH_LOGIN_REQUESTED:
       return {
         ...state,
@@ -128,69 +130,6 @@ export default function (state = initialState, { type, payload }) {
         auth: type,
         isAuthenticated: false,
         isLoading: false
-      }
-
-    case AUTH_SIGNUP_REQUESTED:
-      return {
-        ...state,
-        auth: type,
-        userInfo: payload,
-        isEmailVerified: false,
-        isLoading: true
-      }
-
-    case AUTH_SIGNUP_SUCCEEDED:
-      return {
-        ...state,
-        auth: type,
-        isLoading: false
-      }
-
-    case AUTH_SIGNUP_FAILED:
-      return {
-        ...state,
-        auth: type,
-        error: payload,
-        isLoading: false
-      }
-
-    case AUTH_SIGNUP_RESET_STATE:
-      return {
-        ...state,
-        auth: type
-      }
-
-    case AUTH_USER_CREDENTIAL_SET:
-      return {
-        ...state,
-        auth: type,
-        userCred: payload
-      }
-    case AUTH_EMAIL_VERIFICATION_REQUESTED:
-      return {
-        ...state,
-        auth: type,
-        isLoading: true
-      }
-    case AUTH_EMAIL_VERIFICATION_SUCCEEDED:
-      return {
-        ...state,
-        auth: type,
-        signInUserSession: payload,
-        isEmailVerified: true,
-        isLoading: false
-      }
-    case AUTH_EMAIL_VERIFICATION_FAILED:
-      return {
-        ...state,
-        auth: type,
-        isEmailVerified: false,
-        isLoading: false
-      }
-    case AUTH_EMAIL_VERIFICATION_RESET_STATE:
-      return {
-        ...state,
-        auth: type
       }
 
     case AUTH_FORGOT_CODE_SENT:

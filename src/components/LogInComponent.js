@@ -28,7 +28,8 @@ class LogInComponent extends React.Component {
     const { auth, history } = this.props
 
     if (auth.auth === 'NEW_PASSWORD_REQUIRED') {
-      history.push('/request-password');
+      toastr.success('Success', 'Log in success!')
+      history.push('/request-password')
     }
 
     if (auth.auth === 'AUTH_LOGIN_INITIAL_STATE') {

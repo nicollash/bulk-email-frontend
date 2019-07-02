@@ -24,17 +24,15 @@ class ResetPasswordComponent extends React.Component {
   }
 
   componentDidUpdate () {
-    const { auth, history, initAuthPwdState } = this.props
+    const { auth, history } = this.props
 
     if (auth.passwordChanged) {
       toastr.success('Success', 'Password has been successfully reset!')
-      initAuthPwdState()
       history.push('/login')
     }
 
     if (auth.passwordChangedFailed) {
       toastr.error('Error', 'An error occured in changing your password!')
-      initAuthPwdState()
     }
   }
 

@@ -8,6 +8,7 @@ import {
   // WebIdentityCredentials
 } from 'amazon-cognito-identity-js'
 import Cookies from 'universal-cookie'
+import { toastr } from 'react-redux-toastr'
 
 import Amplify from 'aws-amplify'
 import {
@@ -144,11 +145,11 @@ export function createPassword (newPasswordChallenge, password) {
     Auth.completeNewPassword(newPasswordChallenge, password)
       .then((data) => {
         console.log('created data: ', data)
-        return data;
+        res(data)
       })
       .catch(err => {
-        console.log('created err: ', err)
-        res(err)
+        toastr.error('Error', err.message)
+        rej(err)
       })
   })
   return p
@@ -158,7 +159,6 @@ export function signInUser (username, password) {
   const p = new Promise((res, rej) => {
     Auth.signIn(username, password)
       .then((user) => {
-        console.log('signin user: ', user);
         if (user.challengeName && user.challengeName === 'NEW_PASSWORD_REQUIRED') {
           return user;
         }
@@ -183,7 +183,6 @@ export function signInUser (username, password) {
         return buildUserObject(user)
       })
       .then((userProfileObject) => {
-        console.log('signin userProfileObject: ', userProfileObject);
         // if successfully built the object, return it back to your React app
         res(userProfileObject)
       })

@@ -1,5 +1,6 @@
 import { createStore, combineReducers, compose, applyMiddleware } from 'redux'
 import { persistReducer, persistStore } from 'redux-persist'
+import { reducer as toastrReducer } from 'react-redux-toastr'
 import storage from 'redux-persist/lib/storage'
 import thunk from 'redux-thunk'
 import startupMiddleware from './middlewares/startupMiddleware'
@@ -18,14 +19,9 @@ const config = {
 }
 
 const rootReducer = combineReducers({
-  auth
+  auth: persistReducer(config, auth),
+  toastr: toastrReducer
 })
-
-const rootPersistReducer = combineReducers({
-  auth
-})
-
-const appReducer = persistReducer(config, rootPersistReducer)
 
 const store = createStore(
   rootReducer,
@@ -39,18 +35,6 @@ const store = createStore(
   )
 )
 
-const persistorStore = createStore(
-  appReducer,
-  undefined,
-  composeEnhancers(
-    applyMiddleware(
-      startupMiddleware,
-      authMiddleware,
-      thunk
-    )
-  )
-)
-
-export const persistor = persistStore(persistorStore)
+export const persistor = persistStore(store)
 
 export default store

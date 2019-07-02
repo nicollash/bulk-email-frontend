@@ -17,24 +17,17 @@ class NewPasswordRequestComponent extends React.Component {
     super(props)
 
     this.state = {
-      pin: '',
       password: '',
       confirmPassword: ''
     }
   }
 
   componentDidUpdate () {
-    const { auth, history, initAuthPwdState } = this.props
+    const { auth, history } = this.props
 
-    if (auth.passwordChanged) {
+    if (auth.auth === 'NEW_PASSWORD_SUCCESS') {
       toastr.success('Success', 'Password has been successfully reset!')
-      initAuthPwdState()
       history.push('/login')
-    }
-
-    if (auth.passwordChangedFailed) {
-      toastr.error('Error', 'An error occured in changing your password!')
-      initAuthPwdState()
     }
   }
 
