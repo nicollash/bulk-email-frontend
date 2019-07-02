@@ -97,7 +97,6 @@ class NewCampaignComponent extends React.Component {
   }
 
   handleSaveClick = (e) => {
-    console.log("save clicked!");
   }
 
   // MARK: - Lifecycle Methods

@@ -1,5 +1,14 @@
 @import './palette.css';
+@import './forms.css';
 
 :root {
+    --form-input-tiny-height: 30px;
+    --form-input-small-height: 40px;
+    --form-input-medium-height: 52px;
 
+    --form-spacing-tiny-unit: 4px;
+    --form-spacing-medium-unit: 8px;
+    --form-spacing-large-unit: 16px;
+
+    --form-input-placeholder-color: var(--dark-gray);
 }
