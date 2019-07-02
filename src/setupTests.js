@@ -10,12 +10,12 @@ expect.extend({
     const isString = typeof received === 'string' || received instanceof String;
     return isString
       ? {
-          message: () => `expected ${received} to be string`,
-          pass: true
-        }
+        message: () => `expected ${received} to be string`,
+        pass: true
+      }
       : {
-          message: () => `expected ${received} to be string`,
-          pass: false
-        };
+        message: () => `expected ${received} to be string`,
+        pass: false
+      };
   }
 });
