@@ -28,6 +28,6 @@ class HeaderComponent extends React.Component {
       </header>
     )
   }
-};
+}
 
 export default HeaderComponent;

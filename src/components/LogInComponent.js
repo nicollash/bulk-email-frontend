@@ -19,6 +19,6 @@ class LogInComponent extends React.Component {
       </HomePageLayout>
     )
   }
-};
+}
 
 export default LogInComponent;
