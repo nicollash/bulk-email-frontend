@@ -3,10 +3,6 @@ button {
     outline: none !important;
 }
 
-.base__button {
-
-}
-
 .base__button-success {
     color: var(--white) !important;
     background: var(--light-seafoam) !important;

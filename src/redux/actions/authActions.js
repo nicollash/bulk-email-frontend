@@ -117,7 +117,6 @@ export const login = values => async (dispatch, getState) => {
 export const createNewPassword = values => async (dispatch, getState) => {
   const userProfile = await createPassword(values.newPasswordChallenge, values.password)
 
-  console.log('userProfile: ', userProfile);
   if (!userProfile.code) {
     dispatch(setNewPasswordSuccess())
   } else {

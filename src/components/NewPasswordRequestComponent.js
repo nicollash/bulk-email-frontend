@@ -38,7 +38,11 @@ class NewPasswordRequestComponent extends React.Component {
   }
 
   createNewPassword () {
-    const { password } = this.state
+    const { password, confirmPassword } = this.state
+    if (password !== confirmPassword) {
+      toastr.error('Error', 'password and confirm password are not same.');
+      return ;
+    }
     const { auth, createNewPassword } = this.props
 
     createNewPassword({ newPasswordChallenge: auth.newPasswordChallenge, password })

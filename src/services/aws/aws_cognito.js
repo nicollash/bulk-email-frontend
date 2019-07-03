@@ -33,7 +33,7 @@ Amplify.configure({
     userPoolWebClientId: process.env.REACT_APP_CLIENT_ID || '1hi0uenmaq6rfkbvm88o30g7s1',
 
     // OPTIONAL - Enforce user authentication prior to accessing AWS resources or not
-    mandatorySignIn: true,
+    mandatorySignIn: false,
   }
 })
 
@@ -141,7 +141,6 @@ export function signUpUser ( username, email, password, givenName, familyName ) 
 
 export function createPassword (newPasswordChallenge, password) {
   const p = new Promise((res, rej) => {
-    console.log('newPasswordChallenge, password: ', newPasswordChallenge, password);
     Auth.completeNewPassword(newPasswordChallenge, password)
       .then((data) => {
         console.log('created data: ', data)
