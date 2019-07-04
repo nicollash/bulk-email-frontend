@@ -23,8 +23,6 @@ const persistConfig = {
   storage,
 }
 
-const persistedReducer = persistReducer(persistConfig, createRootReducer(history));
-
 const configureStore = (history, initialState = {}) => {
   const middlewares = [
     routerMiddleware(history),
@@ -33,6 +31,8 @@ const configureStore = (history, initialState = {}) => {
     startupMiddleware,
     authMiddleware,
   ];
+
+  const persistedReducer = persistReducer(persistConfig, createRootReducer(history));
 
   const store = createStore(
     persistedReducer,
