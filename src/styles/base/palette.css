@@ -1,8 +1,12 @@
 :root {
-  --palette01: #cdd3de;
-  --palette02: #1b2029;
-  --palette03: #212630;
-  --gray: #ced4da;
+  --blue: #5d92f4;
+  --font-light-blue: #1565C0;
   --dark-blue: #0e2876;
+  --dark-green: #224b7a;
+  --dark-gray: #212529;
+  --light-seafoam: #00d0bd;
+  --gray: #ced4da;
   --shadow-gray: #988e98;
+  --fluent-gray: #f8f9fa;
+  --white: #ffffff;
 }

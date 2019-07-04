@@ -1,0 +1,11 @@
+.ReactTable .rt-thead .rt-tr {
+    height: 50px;
+    display: flex;
+    align-items: center;
+}
+
+.ReactTable .rt-tr {
+    height: 50px;
+    display: flex;
+    align-items: center;
+}

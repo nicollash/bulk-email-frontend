@@ -1,0 +1,38 @@
+*, ::after, ::before {
+    box-sizing: border-box;
+}
+
+h2 {
+    font-weight: 500;
+    font-size: 1.2rem;
+}
+
+a {
+    text-decoration: none;
+}
+
+meter {
+    margin: 0 auto 1em;
+    width: 100%;
+    height: .5em;
+    background: none;
+    background-color: rgba(0,0,0,.1);
+}
+
+.btn {
+    border-radius: 1px;
+}
+
+.filter__position-dropdown {
+    display: none;
+}
+
+.dropdown-menu {
+    font-size: 14px;
+}
+
+.span-link {
+    color: #007bff;
+    font-size: 12px;
+    cursor: pointer;
+}
