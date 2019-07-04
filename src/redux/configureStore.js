@@ -1,6 +1,4 @@
 import { createStore, compose, applyMiddleware } from 'redux';
-import { persistReducer } from 'redux-persist';
-import storage from 'redux-persist/lib/storage'; // defaults to localStorage for web
 
 // middlewares
 import { routerMiddleware } from 'connected-react-router';
@@ -18,11 +16,6 @@ const composeEnhancers =
     ? window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__({})
     : compose;
 
-const persistConfig = {
-  key: 'root',
-  storage,
-}
-
 const configureStore = (history, initialState = {}) => {
   const middlewares = [
     routerMiddleware(history),
@@ -32,10 +25,8 @@ const configureStore = (history, initialState = {}) => {
     authMiddleware,
   ];
 
-  const persistedReducer = persistReducer(persistConfig, createRootReducer(history));
-
   const store = createStore(
-    persistedReducer,
+    createRootReducer(history),
     initialState,
     composeEnhancers(applyMiddleware(...middlewares))
   );
