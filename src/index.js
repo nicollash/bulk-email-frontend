@@ -1,25 +1,37 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import registerServiceWorker from './registerServiceWorker';
 import { Provider } from 'react-redux';
-import { PersistGate } from 'redux-persist/lib/integration/react'
-import { Router } from 'react-router-dom';
-import store, { persistor } from './redux/store';
-import history from './helpers/history';
+import { ConnectedRouter } from 'connected-react-router';
+import { persistStore } from 'redux-persist';
+import { PersistGate } from 'redux-persist/lib/integration/react';
+
+import { createBrowserHistory } from 'history';
+
+import configureStore from './redux/configureStore';
+import * as serviceWorker from './serviceWorker';
+
 import App from './App';
 
 import './styles/base/base.css'
 import './styles/index.css';
 // import 'bootstrap/dist/css/bootstrap.css';
 
+const history = createBrowserHistory();
+const store = configureStore(history);
+const persistor = persistStore(store);
+
 ReactDOM.render(
-	<Provider store={store}>
+  <Provider store={store}>
     <PersistGate persistor={persistor}>
-      <Router history={history}>
+      <ConnectedRouter history={history}>
         <App />
-      </Router>
+      </ConnectedRouter>
     </PersistGate>
-	</Provider>,
-	document.getElementById('root')
+  </Provider>,
+  document.getElementById('root')
 );
-registerServiceWorker();
+
+// If you want your app to work offline and load faster, you can change
+// unregister() to register() below. Note this comes with some pitfalls.
+// Learn more about service workers: http://bit.ly/CRA-PWA
+serviceWorker.register();

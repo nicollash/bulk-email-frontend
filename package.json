@@ -8,6 +8,8 @@
     "amazon-cognito-js": "^1.1.0",
     "aws-amplify": "^1.1.29",
     "bootstrap": "^4.3.1",
+    "connected-react-router": "^6.5.0",
+    "history": "^4.9.0",
     "react": "^16.8",
     "react-bem-helper": "^1.4.1",
     "react-bootstrap-typeahead": "^3.4.5",
@@ -20,6 +22,7 @@
     "reactstrap": "^8.0.0",
     "redux": "^4.0.1",
     "redux-localstorage": "^0.4.1",
+    "redux-logger": "^3.0.6",
     "redux-persist": "^5.10.0",
     "redux-thunk": "^2.3.0",
     "universal-cookie": "^4.0.0"
@@ -28,7 +31,9 @@
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test --env=jsdom",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "lint:eslint": "eslint --ignore-path .eslintignore src",
+    "lint:eslint:fix": "eslint --ignore-path .eslintignore src --fix"
   },
   "browserslist": {
     "production": [

@@ -156,6 +156,6 @@ class LogInComponent extends React.Component {
       </div>
     )
   }
-};
+}
 
 export default LogInComponent;

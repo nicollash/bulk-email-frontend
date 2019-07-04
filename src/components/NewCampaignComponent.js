@@ -142,6 +142,6 @@ class NewCampaignComponent extends React.Component {
       </HomePageLayout>
     )
   }
-};
+}
 
 export default NewCampaignComponent;
