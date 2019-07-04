@@ -89,6 +89,6 @@ class NewPasswordRequestComponent extends React.Component {
       </div>
     )
   }
-};
+}
 
 export default NewPasswordRequestComponent

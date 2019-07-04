@@ -103,6 +103,6 @@ class ResetPasswordComponent extends React.Component {
       </div>
     )
   }
-};
+}
 
 export default ResetPasswordComponent

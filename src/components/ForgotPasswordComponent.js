@@ -75,6 +75,6 @@ class ForgotPasswordComponent extends React.Component {
       </div>
     )
   }
-};
+}
 
 export default ForgotPasswordComponent

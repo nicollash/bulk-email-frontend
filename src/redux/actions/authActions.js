@@ -81,7 +81,6 @@ export const sendEmail = (email) => async (dispatch, getState) => {
 
   if (res.code === 'SUCCESS') {
     dispatch(forgotCodeSent(res))
-  } else {
   }
 }
 

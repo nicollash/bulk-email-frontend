@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Switch, Route, Redirect } from 'react-router-dom';
+import { Switch, Redirect } from 'react-router-dom';
 import path from './helpers/path';
 import ReduxToastr from 'react-redux-toastr'
 

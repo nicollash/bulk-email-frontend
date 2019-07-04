@@ -32,9 +32,9 @@ export const getJSON = function (url, token) {
     method: 'GET',
     headers: headers
   }).then(resp => resp.json())
-  .catch(err => {
-    console.log(err);
-  })
+    .catch(err => {
+      console.log(err);
+    })
 }
 
 export const getResponse = function (url, token) {

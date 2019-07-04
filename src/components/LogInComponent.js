@@ -1,7 +1,7 @@
 import React from 'react';
 import { getBEMClasses } from '../helpers/cssClassesHelper';
 import { Form, FormGroup, Input } from 'reactstrap';
-import { Link } from 'react-router-dom'
+// import { Link } from 'react-router-dom';
 import Button from '@material-ui/core/Button'
 import { toastr } from 'react-redux-toastr'
 import ReactLoading from 'react-loading'
@@ -13,13 +13,13 @@ import '../styles/components/loginComponent.css';
 const loginClasses = getBEMClasses(['login']);
 
 class LogInComponent extends React.Component {
-  
+
   state = {
     username: '',
     password: ''
   }
 
-  getSnapshotBeforeUpdate () {
+  getSnapshotBeforeUpdate() {
     const { auth } = this.props
 
     if (auth.auth === 'NEW_PASSWORD_REQUIRED') {
@@ -38,24 +38,26 @@ class LogInComponent extends React.Component {
     return null
   }
 
-  componentDidUpdate (prevProps, prevState, snapshot) {
+  componentDidUpdate(prevProps, prevState, snapshot) {
     const { history, setNewPasswordPending } = this.props
-      switch (snapshot) {
-        case 'passwordRequired':
-          setNewPasswordPending()
-          history.push('/request-password')
-          break;
-        case 'failed':
-          toastr.error('Error', 'Log in failed!')
-          break;
-        case 'success':
-          history.push('/create-campaign')
-          break;
-      }
+    switch (snapshot) {
+      case 'passwordRequired':
+        setNewPasswordPending()
+        history.push('/request-password')
+        break;
+      case 'failed':
+        toastr.error('Error', 'Log in failed!')
+        break;
+      case 'success':
+        history.push('/create-campaign')
+        break;
+      default:
+        break;
+    }
   }
 
   handleChange = (evt) => {
-    const{ name, value } = evt.target;
+    const { name, value } = evt.target;
     this.setState({
       [name]: value
     })
@@ -110,7 +112,7 @@ class LogInComponent extends React.Component {
             </div>
           }
           <LogoComponent />
-          <h2 className={loginClasses('title')}></h2>
+          <h2 className={loginClasses('title')}> </h2>
           <Form>
             <FormGroup className={loginClasses('form-group')}>
               <Input

@@ -41,7 +41,7 @@ var AWS = require('aws-sdk/dist/aws-sdk-react-native')
 
 const attrs = ['email', 'family_name', 'given_name', 'custom:accountName']
 
-function storeInCookie () {
+function storeInCookie() {
   // Read all data from localstore
   var i = 0; var oJson = {}; var sKey
   for (; sKey = window.localStorage.key(i); i++) {
@@ -66,7 +66,7 @@ function storeInCookie () {
   }
 } */
 
-export function checkAuth () {
+export function checkAuth() {
   return new Promise((resolve, reject) => {
     const cognitoUser = userPool.getCurrentUser()
 
@@ -89,7 +89,7 @@ export function checkAuth () {
   })
 }
 
-export function refreshToken () {
+export function refreshToken() {
   Auth.currentSession()
     .then(data => {
       localStorage.setItem('user_token', data.accessToken.jwtToken)
@@ -100,7 +100,7 @@ export function refreshToken () {
     .catch(err => console.log('err currentSession: ', err))
 }
 
-export function createPassword (newPasswordChallenge, password) {
+export function createPassword(newPasswordChallenge, password) {
   const p = new Promise((res, rej) => {
     Auth.completeNewPassword(newPasswordChallenge, password)
       .then((data) => {
@@ -115,7 +115,7 @@ export function createPassword (newPasswordChallenge, password) {
   return p
 }
 
-export function signInUser (username, password) {
+export function signInUser(username, password) {
   const p = new Promise((res, rej) => {
     Auth.signIn(username, password)
       .then((user) => {
@@ -129,15 +129,15 @@ export function signInUser (username, password) {
         localStorage.setItem('refresh_token', user.signInUserSession.refreshToken.token)
 
         const loginsObj = {
-                  [USERPOOL_ID]: user.signInUserSession.idToken.jwtToken
+          [USERPOOL_ID]: user.signInUserSession.idToken.jwtToken
         }
 
         AWS.config.credentials = new AWS.CognitoIdentityCredentials({
-                  IdentityPoolId: IDENTITY_POOL_ID,
-                  Logins: loginsObj
+          IdentityPoolId: IDENTITY_POOL_ID,
+          Logins: loginsObj
         })
 
-              // AWS.config.credentials.refresh(function(error){})
+        // AWS.config.credentials.refresh(function(error){})
 
         storeInCookie()
         return buildUserObject(user)
@@ -156,7 +156,7 @@ export function signInUser (username, password) {
 
 // buildUserObject() gets the user attributes from Cognito and creates an object to represent our user
 // this will be used by the Redux state so that we can reference the user
-function buildUserObject (cognitoUser) {
+function buildUserObject(cognitoUser) {
   const p = new Promise((res, rej) => {
     // call the cognito function `getUserAttributes()`
     cognitoUser.getUserAttributes(function (err, result) {
@@ -189,7 +189,7 @@ function buildUserObject (cognitoUser) {
 
 // when users sign up, they need to verify their account
 // verification requires their unique identifier (in this case, their email) and the verification PIN
-export function verifyUserAccount (username, pin) {
+export function verifyUserAccount(username, pin) {
   const p = new Promise((res, rej) => {
     // we create an object to hold our userData that will be used to create our `cognitoUser` object
     // we cannot just use `userPool` to instantiate a `cognitoUser` object, as no user has been signed in yet
@@ -201,27 +201,27 @@ export function verifyUserAccount (username, pin) {
     const cognitoUser = new CognitoUser(userData)
     // call the `confirmRegistration()` function of `cognitoUser` and pass in the verification PIN
     cognitoUser.confirmRegistration(pin, true, function (err, result) {
-          if (err) {
-              console.log(err)
-            res(err)
-              return
-          }
-          // if successful, we signout to refresh the cognitoUser (they will have to login again)
+      if (err) {
+        console.log(err)
+        res(err)
+        return
+      }
+      // if successful, we signout to refresh the cognitoUser (they will have to login again)
       // actually this is not mandatory either, but during testing I discovered that login does not immediately work after verification due to un-refreshed authentication
       // logging in again will get those authentication tokens
-          if (result === 'SUCCESS') {
-            cognitoUser.signOut()
-            res(result)
-          } else {
+      if (result === 'SUCCESS') {
+        cognitoUser.signOut()
+        res(result)
+      } else {
         // if otherwise failure, we reject the promise
-            rej('Could not verify account')
-          }
-      })
+        rej('Could not verify account')
+      }
+    })
   })
   return p
 }
 
-export function requestPhoneVerificationCode () {
+export function requestPhoneVerificationCode() {
   return new Promise((resolve, reject) => {
     console.log('======= request started =================')
     const cognitoUser = userPool.getCurrentUser()
@@ -246,7 +246,7 @@ export function requestPhoneVerificationCode () {
   })
 }
 
-export function verifyPhoneNumber (pin) {
+export function verifyPhoneNumber(pin) {
   return new Promise((resolve, reject) => {
     const cognitoUser = userPool.getCurrentUser()
     cognitoUser.getSession(function (err, result) {
@@ -266,7 +266,7 @@ export function verifyPhoneNumber (pin) {
 }
 
 // if we want to update the info of our user, we must pass in their unique identifier (email) and an object representing the user info
-export function updateUserInfo (email, editedInfo) {
+export function updateUserInfo(email, editedInfo) {
   console.log(editedInfo)
   const p = new Promise((res, rej) => {
     // we create an array for our attributes that we want to update, and push all `CognitoUserAttribute` objects into it
@@ -288,9 +288,9 @@ export function updateUserInfo (email, editedInfo) {
     }
     console.log(attributeList)
     // instantiate the `cognitoUser` from our userPool (we can do this because the user is already signed in if they are attempting to change their attributes)
-      const cognitoUser = userPool.getCurrentUser()
+    const cognitoUser = userPool.getCurrentUser()
     // get the latest cognito session so that we can `updateAttributes()`
-      cognitoUser.getSession(function (err, result) {
+    cognitoUser.getSession(function (err, result) {
       if (result) {
         // if we successfully got the latest session, we can `updateAttributes()` from 'cognitoUser', passing in the `attributeList` array
         cognitoUser.updateAttributes(attributeList, function (err, result) {
@@ -324,7 +324,7 @@ export function updateUserInfo (email, editedInfo) {
   return p
 }
 
-export function changePasswordWithCode (cognitoUser, data) {
+export function changePasswordWithCode(cognitoUser, data) {
   return new Promise((res, rej) => {
     cognitoUser.confirmPassword(data.pin, data.password, {
       onSuccess: function (result) {
@@ -343,10 +343,10 @@ export function changePasswordWithCode (cognitoUser, data) {
 }
 
 // if a user forgets a password, we can instantiate the password reset process (requiring an email)
-export function forgotPassword (email) {
+export function forgotPassword(email) {
   return new Promise((res, rej) => {
     // we create the `userData` object to create a `cognitoUser`
-     const userData = {
+    const userData = {
       Username: email,
       Pool: userPool
     }
@@ -360,33 +360,33 @@ export function forgotPassword (email) {
 
       // if successful, then we can resolve the promise with cognitoUser and the `this` declaration from the React component that calls `forgotPassword()`
       // but we may also resolve the promise with the third function `inputVerificationCode()` which handles behind the scenes of `forgotPassword()`
-          onSuccess: function (result) {
+      onSuccess: function (result) {
         res({
           code: 'SUCCEEDED',
-           cognitoUser: cognitoUser,
+          cognitoUser: cognitoUser,
           thirdArg: this
         })
-          },
+      },
       // if failure, reject the promise
-          onFailure: function (err) {
+      onFailure: function (err) {
         res(err)
-          },
-          // Optional automatic callback that passes in `data` object from `forgotPassword()` and resolve the same was as `onSuccess`
+      },
+      // Optional automatic callback that passes in `data` object from `forgotPassword()` and resolve the same was as `onSuccess`
       // `inputVerificationCode()` handles behind the scenes of `forgotPassword()`, but we don't actually use it. Its here if needed in the future.
-          inputVerificationCode: function (data) {
-              res({
+      inputVerificationCode: function (data) {
+        res({
           code: 'SUCCESS',
-                cognitoUser: cognitoUser,
+          cognitoUser: cognitoUser,
           thirdArg: this,
           details: data
-              })
+        })
       }
-      })
+    })
   })
 }
 
 // reset the verification PIN for verifying a new user
-export function resetVerificationPIN (email) {
+export function resetVerificationPIN(email) {
   const p = new Promise((res, rej) => {
     // create the `userData` object for instantiating a new `cognitoUser` object
     const userData = {
@@ -398,67 +398,67 @@ export function resetVerificationPIN (email) {
     // and call the `resendConfirmationCode()` of `cognitoUser`
     cognitoUser.resendConfirmationCode(function (err, result) {
       // reject promise if confirmation code failed
-          if (err) {
-              console.log(err)
+      if (err) {
+        console.log(err)
         rej(err)
-          }
+      }
       // resolve if successfull
-          res()
-      })
+      res()
+    })
   })
   return p
 }
 
 // for automatic signin of a user (so they don't have to login each time)
-export function retrieveUserFromLocalStorage () {
+export function retrieveUserFromLocalStorage() {
   const p = new Promise((res, rej) => {
     // grab the `cognitoUser` object from `userPool`
     // this is possible without login because we had already logged in before (whereas verifyPIN and resetPassword have not)
-      const cognitoUser = userPool.getCurrentUser()
+    const cognitoUser = userPool.getCurrentUser()
     console.log('Getting cognitoUser from local storage...')
 
-      if (cognitoUser != null) {
+    if (cognitoUser != null) {
       // get the latest session from `cognitoUser`
-          cognitoUser.getSession(function (err, session) {
+      cognitoUser.getSession(function (err, session) {
         // if failed to get session, reject the promise
-              if (err) {
-                  rej(err)
-              }
+        if (err) {
+          rej(err)
+        }
         // check that the session is valid
-              console.log('session validity: ' + session.isValid())
-              console.log(session)
+        console.log('session validity: ' + session.isValid())
+        console.log(session)
         // save to localStorage the jwtToken from the `session`
-              localStorage.setItem('user_token', session.getAccessToken().getJwtToken())
-              // Edge case, AWS Cognito does not allow for the Logins attr to be dynamically generated. So we must create the loginsObj beforehand
-              const loginsObj = {
-                  // our loginsObj will just use the jwtToken to verify our user
-                  [USERPOOL_ID]: session.getIdToken().getJwtToken()
+        localStorage.setItem('user_token', session.getAccessToken().getJwtToken())
+        // Edge case, AWS Cognito does not allow for the Logins attr to be dynamically generated. So we must create the loginsObj beforehand
+        const loginsObj = {
+          // our loginsObj will just use the jwtToken to verify our user
+          [USERPOOL_ID]: session.getIdToken().getJwtToken()
         }
 
         // create a new `CognitoIdentityCredentials` object to set our credentials
         // we are logging into a AWS federated identity pool
 
         AWS.config.credentials = new AWS.CognitoIdentityCredentials({
-                  IdentityPoolId: IDENTITY_POOL_ID, // your identity pool id here
-                  Logins: loginsObj
-              })
+          IdentityPoolId: IDENTITY_POOL_ID, // your identity pool id here
+          Logins: loginsObj
+        })
         // refresh the credentials so we can use it in our app
-              AWS.config.credentials.refresh(function () {
-                console.log(AWS.config.credentials)
+        AWS.config.credentials.refresh(function () {
+          console.log(AWS.config.credentials)
           // resolve the promise by again building the user object to be used in our React-Redux app
-                res(buildUserObject(cognitoUser))
-              })
-          })
-      } else {
+          res(buildUserObject(cognitoUser))
+        })
+      })
+    } else {
       // if failure, reject the promise
-        rej('Failed to retrieve user from localStorage')
-      }
+      rej('Failed to retrieve user from localStorage')
+    }
   })
   return p
 }
 
 // signout the current user
-export function signOutUser () {
+export function signOutUser() {
   const p = new Promise((res, rej) => {
     // since the user is already logged in, we can instantiate `cognitoUser` with `userPool`
     const cognitoUser = userPool.getCurrentUser()
@@ -469,29 +469,29 @@ export function signOutUser () {
 
 // login to cognito using Facebook instead of an AWS email/password login flow
 // requires first logging in with Facebook and passing in the result of the login function to `registerFacebookLoginWithCognito()`
-export function registerFacebookLoginWithCognito (response) {
+export function registerFacebookLoginWithCognito(response) {
   console.log('registerFacebookLoginWithCognito')
   console.log(response)
   // Check if the user logged in successfully.
   if (response.authResponse) {
-      console.log('You are now logged in.')
-      // Add the Facebook access token to the Cognito credentials login map
+    console.log('You are now logged in.')
+    // Add the Facebook access token to the Cognito credentials login map
     // we pass in the accessToken from the fb response into our `CognitoIdentityCredentials`
-      AWS.config.credentials = new AWS.CognitoIdentityCredentials({
+    AWS.config.credentials = new AWS.CognitoIdentityCredentials({
       // we are logging into an AWS federated identify pool, for facebook login
-          IdentityPoolId: IDENTITY_POOL_ID,
-          Logins: {
-             'graph.facebook.com': response.authResponse.accessToken
-          }
-      })
+      IdentityPoolId: IDENTITY_POOL_ID,
+      Logins: {
+        'graph.facebook.com': response.authResponse.accessToken
+      }
+    })
 
-      // AWS Cognito Sync to sync Facebook
+    // AWS Cognito Sync to sync Facebook
     // aka refreshing the credentials to use thorughout our app
-      AWS.config.credentials.get(function () {
-        // const client = new AWS.CognitoSyncManager();
-        console.log(AWS.config.credentials)
+    AWS.config.credentials.get(function () {
+      // const client = new AWS.CognitoSyncManager();
+      console.log(AWS.config.credentials)
     })
   } else {
-      console.log('There was a problem logging you in.')
+    console.log('There was a problem logging you in.')
   }
 }
