@@ -5,18 +5,18 @@ import {
   AUTH_LOGIN_FAILED,
   AUTH_LOGIN_RESET_STATE,
   NEW_PASSWORD_REQUIRED,
+  NEW_PASSWORD_PENDING,
   NEW_PASSWORD_SUCCESS,
   NEW_PASSWORD_FAILD,
   AUTH_FORGOT_CODE_SENT,
   AUTH_PASSWORD_CHANGE_SUCCEEDED,
   AUTH_PASSWORD_CHANGE_FAILED,
-  AUTH_LOGIN_STORE,
   SET_USER_REQUESTED,
   SET_USER_SUCCEEDED,
   SET_USER_FAILED,
   AUTH_INIT_PASSWORD_STATE,
   AUTH_CHECK_LIST
-} from '../actions/authActions'
+} from '../actionTypes'
 
 const initialState = {
   auth: '',
@@ -77,6 +77,13 @@ export default function (state = initialState, { type, payload }) {
       }
 
     case AUTH_LOGIN_RESET_STATE:
+      return {
+        ...state,
+        auth: type,
+        isLoading: false
+      }
+
+    case NEW_PASSWORD_PENDING:
       return {
         ...state,
         auth: type,

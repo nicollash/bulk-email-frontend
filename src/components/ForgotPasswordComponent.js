@@ -13,12 +13,8 @@ const baseClasses = getBEMClasses(['base'])
 const forgotPasswordClasses = getBEMClasses(['forgot-password'])
 
 class ForgotPasswordComponent extends React.Component {
-  constructor (props) {
-    super(props)
-
-    this.state = {
-      email: this.props.email || ''
-    }
+  state = {
+    email: this.props.email || ''
   }
 
   componentDidUpdate () {
@@ -30,13 +26,15 @@ class ForgotPasswordComponent extends React.Component {
     }
   }
 
-  handleChange (attr, evt) {
+  handleChange = (evt) => {
+    const {name, value} = evt.target;
+
     this.setState({
-      [attr]: evt.target.value
+      [name]: value
     })
   }
 
-  sendEmail () {
+  sendEmail = () => {
     const { email } = this.state
     const { sendEmail } = this.props
 
@@ -58,8 +56,9 @@ class ForgotPasswordComponent extends React.Component {
                 required
                 placeholder='Enter Username or Email Address'
                 className={forgotPasswordClasses('form-input')}
+                name="email"
                 value={email}
-                onChange={this.handleChange.bind(this, 'email')} />
+                onChange={this.handleChange} />
               <span className={forgotPasswordClasses('input-icon')}><i className='ti-email' /></span>
             </FormGroup>
             <FormGroup className='mb-15'>
@@ -67,7 +66,7 @@ class ForgotPasswordComponent extends React.Component {
                 className={forgotPasswordClasses('form-button') + ' ' + baseClasses('button-success')}
                 variant='contained'
                 size='large'
-                onClick={this.sendEmail.bind(this)}>
+                onClick={this.sendEmail}>
 								Send Verification Code
               </Button>
             </FormGroup>

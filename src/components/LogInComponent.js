@@ -13,45 +13,55 @@ import '../styles/components/loginComponent.css';
 const loginClasses = getBEMClasses(['login']);
 
 class LogInComponent extends React.Component {
-  constructor (props) {
-    super(props)
-
-    this.passwordInput = React.createRef()
-    
-    this.state = {
-      username: '',
-      password: ''
-    }
+  
+  state = {
+    username: '',
+    password: ''
   }
 
-  componentDidUpdate () {
-    const { auth, history } = this.props
+  getSnapshotBeforeUpdate () {
+    const { auth } = this.props
 
     if (auth.auth === 'NEW_PASSWORD_REQUIRED') {
       toastr.success('Success', 'Log in success!')
-      history.push('/request-password')
-    }
-
-    if (auth.auth === 'AUTH_LOGIN_INITIAL_STATE') {
-      history.push('/checklist')
+      return 'passwordRequired'
     }
 
     if (auth.auth === 'AUTH_LOGIN_FAILED') {
-      toastr.error('Error', 'Log in failed!')
+      return 'failed'
     }
 
     if (auth.auth === 'AUTH_LOGIN_SUCCEEDED') {
-      history.push('/create-campaign')
+      return 'success'
     }
+
+    return null
   }
 
-  handleChange (attr, evt) {
+  componentDidUpdate (prevProps, prevState, snapshot) {
+    const { history, setNewPasswordPending } = this.props
+      switch (snapshot) {
+        case 'passwordRequired':
+          setNewPasswordPending()
+          history.push('/request-password')
+          break;
+        case 'failed':
+          toastr.error('Error', 'Log in failed!')
+          break;
+        case 'success':
+          history.push('/create-campaign')
+          break;
+      }
+  }
+
+  handleChange = (evt) => {
+    const{ name, value } = evt.target;
     this.setState({
-      [attr]: evt.target.value
+      [name]: value
     })
   }
 
-  doLogin () {
+  doLogin = () => {
     const { login } = this.props
     const { username, password } = this.state
 
@@ -62,19 +72,19 @@ class LogInComponent extends React.Component {
     }
   }
 
-  forgotPassword () {
+  forgotPassword = () => {
     const { history } = this.props
 
     history.push('/forgot-password')
   }
 
-  keyDownEmail (evt) {
+  keyDownEmail = (evt) => {
     if (evt.keyCode === 13) {
       this.passwordInput.current.focus()
     }
   }
 
-  keyDownPassword (evt) {
+  keyDownPassword = (evt) => {
     if (evt.keyCode === 13) {
       this.doLogin()
     }
@@ -108,9 +118,10 @@ class LogInComponent extends React.Component {
                 required
                 placeholder='Enter Username or Email Address'
                 className={loginClasses('form-input')}
+                name='username'
                 value={username}
-                onKeyDown={this.keyDownEmail.bind(this)}
-                onChange={this.handleChange.bind(this, 'username')} />
+                onKeyDown={this.keyDownEmail}
+                onChange={this.handleChange} />
               <span className={loginClasses('input-icon')}><i className='ti-email' /></span>
             </FormGroup>
             <FormGroup className={loginClasses('form-group')}>
@@ -120,8 +131,9 @@ class LogInComponent extends React.Component {
                 placeholder='Password'
                 value={password}
                 innerRef={this.passwordInput}
-                onKeyDown={this.keyDownPassword.bind(this)}
-                onChange={this.handleChange.bind(this, 'password')} />
+                name='password'
+                onKeyDown={this.keyDownPassword}
+                onChange={this.handleChange} />
               <span className={loginClasses('input-icon')}><i className='ti-lock' /></span>
             </FormGroup>
             <FormGroup className={loginClasses('form-group')}>
@@ -130,10 +142,10 @@ class LogInComponent extends React.Component {
                 className={loginClasses('form-button')}
                 variant='contained'
                 size='large'
-                onClick={this.doLogin.bind(this)}>
+                onClick={this.doLogin}>
                 Sign In
               </Button>
-              <div onClick={this.forgotPassword.bind(this)} className={loginClasses('forgot-password')}>
+              <div onClick={this.forgotPassword} className={loginClasses('forgot-password')}>
                 Forgot your password?
               </div>
             </FormGroup>

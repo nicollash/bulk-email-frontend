@@ -4,7 +4,7 @@ export default function asyncComponent(getComponent) {
         static Component = null;
         state = { Component: AsyncComponent.Component };
 
-        componentWillMount() {
+        componentDidMount() {
             if (!this.state.Component) {
                 getComponent().then(Component => {
                     AsyncComponent.Component = Component
@@ -12,6 +12,7 @@ export default function asyncComponent(getComponent) {
                 })
             }
         }
+
         render() {
             const { Component } = this.state
             if (Component) {

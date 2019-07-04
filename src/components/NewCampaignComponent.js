@@ -77,20 +77,6 @@ class NewCampaignComponent extends React.Component {
 
     let file = e.target.files[0];
 
-    // let formData = new FormData();
-    // formData.append('file', file);
-
-    // fetch(`${Settings.fileServer}/upload`, {
-    //   method: 'POST',
-    //   headers: {
-    //   },
-    //   body: formData,
-    // }).then(response => response.json()).then(reply => {
-    //   this.setState({
-    //     filepath: `${reply.data}`
-    //   });
-    // });
-
     this.setState({
       filepath: file.name
     });

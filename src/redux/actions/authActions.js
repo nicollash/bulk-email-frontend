@@ -6,25 +6,25 @@ import {
   refreshToken,
   updateUserInfo
 } from '../../services/aws/aws_cognito'
-// import { getUser } from '../actions/userActions'
 
-export const AUTH_LOGIN_INITIAL_STATE = 'AUTH_LOGIN_INITIAL_STATE'
-export const AUTH_LOGIN_REQUESTED = 'AUTH_LOGIN_REQUESTED'
-export const AUTH_LOGIN_SUCCEEDED = 'AUTH_LOGIN_SUCCEEDED'
-export const AUTH_LOGIN_FAILED = 'AUTH_LOGIN_FAILED'
-export const AUTH_LOGIN_RESET_STATE = 'AUTH_LOGIN_RESET_STATE'
-export const NEW_PASSWORD_REQUIRED = 'NEW_PASSWORD_REQUIRED'
-export const NEW_PASSWORD_SUCCESS = 'NEW_PASSWORD_SUCCESS'
-export const NEW_PASSWORD_FAILD = 'NEW_PASSWORD_FAILD'
-export const AUTH_FORGOT_CODE_SENT = 'AUTH_FORGOT_CODE_SENT'
-export const AUTH_PASSWORD_CHANGE_SUCCEEDED = 'AUTH_PASSWORD_CHANGE_SUCCEEDED'
-export const AUTH_PASSWORD_CHANGE_FAILED = 'AUTH_PASSWORD_CHANGE_FAILED'
-export const AUTH_USER_SIGNED_OUT = 'AUTH_USER_SIGNED_OUT'
-export const SET_USER_REQUESTED = 'SET_USER_REQUESTED'
-export const SET_USER_SUCCEEDED = 'SET_USER_SUCCEEDED'
-export const SET_USER_FAILED = 'SET_USER_FAILED'
-export const AUTH_INIT_PASSWORD_STATE = 'AUTH_INIT_PASSWORD_STATE'
-export const AUTH_CHECK_LIST = 'AUTH_CHECK_LIST'
+import {
+  AUTH_LOGIN_INITIAL_STATE,
+  AUTH_LOGIN_REQUESTED,
+  AUTH_LOGIN_SUCCEEDED,
+  AUTH_LOGIN_FAILED,
+  AUTH_LOGIN_RESET_STATE,
+  NEW_PASSWORD_REQUIRED,
+  NEW_PASSWORD_PENDING,
+  NEW_PASSWORD_SUCCESS,
+  NEW_PASSWORD_FAILD,
+  AUTH_FORGOT_CODE_SENT,
+  AUTH_PASSWORD_CHANGE_SUCCEEDED,
+  AUTH_PASSWORD_CHANGE_FAILED,
+  SET_USER_REQUESTED,
+  SET_USER_SUCCEEDED,
+  SET_USER_FAILED,
+  AUTH_INIT_PASSWORD_STATE
+} from '../actionTypes'
 
 export const updateUser = (editedInfo) => async (dispatch, getState) => {
   dispatch(updateRequested())
@@ -144,6 +144,10 @@ export const loginResetState = () => ({
 export const resetNewPassword = (payload) => ({
   type: NEW_PASSWORD_REQUIRED,
   payload
+})
+
+export const setNewPasswordPending = () => ({
+  type: NEW_PASSWORD_PENDING,
 })
 
 export const loginRequested = () => ({

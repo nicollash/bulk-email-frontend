@@ -1,7 +1,7 @@
 import { connect } from 'react-redux';
 import LogInComponent from '../components/LogInComponent';
 
-import { login } from '../redux/actions/authActions'
+import { login, setNewPasswordPending } from '../redux/actions/authActions'
 
 const mapStateToProps = state => {
   const { auth } = state
@@ -12,7 +12,8 @@ const mapStateToProps = state => {
 }
 
 const mapDispatchToProps = {
-  login
+  login,
+  setNewPasswordPending
 }
 
 export default connect(

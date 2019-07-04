@@ -8,14 +8,6 @@ const headerClasses = getBEMClasses(['header']);
 
 class HeaderComponent extends React.Component {
 
-  constructor (props) {
-    super(props)
-
-    this.state = {
-
-    }
-  }
-
   render() {
     return(
       <header className={headerClasses('container')}>

@@ -100,45 +100,6 @@ export function refreshToken () {
     .catch(err => console.log('err currentSession: ', err))
 }
 
-export function signUpUser ( username, email, password, givenName, familyName ) {
-  const p = new Promise((res) => {
-    Auth.signIn(email, password)
-      .then(user => {
-        return Auth.signOut()
-      })
-      .then(response => {
-        const errData = {
-          code: 'UserExistException'
-        }
-        res(errData)
-      })
-      .catch(err => {
-        console.log('error message: ', err);
-        if (err.code === 'UserNotFoundException') {
-          Auth.signUp({
-            username,
-            email,
-            password,
-            attributes: {
-              given_name: givenName,
-              family_name: familyName,
-              email: email,
-            }
-          })
-          .then(data => {
-            res(data)
-          })
-          .catch(err => {
-            res(err)
-          })
-      } else {
-        res(err)
-      }
-    })
-  })
-  return p
-}
-
 export function createPassword (newPasswordChallenge, password) {
   const p = new Promise((res, rej) => {
     Auth.completeNewPassword(newPasswordChallenge, password)

@@ -1,4 +1,3 @@
-/* eslint-disable react/jsx-no-bind */
 /* eslint-disable react/prop-types */
 import React from 'react'
 import { getBEMClasses } from '../helpers/cssClassesHelper'
@@ -13,13 +12,10 @@ const baseClasses = getBEMClasses(['base'])
 const forgotPasswordClasses = getBEMClasses(['forgot-password'])
 
 class NewPasswordRequestComponent extends React.Component {
-  constructor (props) {
-    super(props)
 
-    this.state = {
-      password: '',
-      confirmPassword: ''
-    }
+  state = {
+    password: '',
+    confirmPassword: ''
   }
 
   componentDidUpdate () {
@@ -31,13 +27,14 @@ class NewPasswordRequestComponent extends React.Component {
     }
   }
 
-  handleChange (attr, evt) {
+  handleChange = (evt) => {
+    const { name, value } = evt.target;
     this.setState({
-      [attr]: evt.target.value
+      [name]: value
     })
   }
 
-  createNewPassword () {
+  createNewPassword = () => {
     const { password, confirmPassword } = this.state
     if (password !== confirmPassword) {
       toastr.error('Error', 'password and confirm password are not same.');
@@ -59,22 +56,22 @@ class NewPasswordRequestComponent extends React.Component {
             <FormGroup className={forgotPasswordClasses('form-group')}>
               <Input
                 type='Password'
-                name='new-password'
+                name='password'
                 className={forgotPasswordClasses('form-input')}
                 placeholder='Password'
                 value={password}
-                onChange={this.handleChange.bind(this, 'password')}
+                onChange={this.handleChange}
               />
               <span className={forgotPasswordClasses('input-icon')}><i className='ti-lock' /></span>
             </FormGroup>
             <FormGroup className={forgotPasswordClasses('form-group')}>
               <Input
                 type='Password'
-                name='new-confirm-password'
+                name='confirmPassword'
                 className={forgotPasswordClasses('form-input')}
                 placeholder='Confirm Password'
                 value={confirmPassword}
-                onChange={this.handleChange.bind(this, 'confirmPassword')}
+                onChange={this.handleChange}
               />
               <span className={forgotPasswordClasses('input-icon')}><i className='ti-lock' /></span>
             </FormGroup>
@@ -83,7 +80,7 @@ class NewPasswordRequestComponent extends React.Component {
                 className={forgotPasswordClasses('form-button') + ' ' + baseClasses('button-success')}
                 variant='contained'
                 size='large'
-                onClick={this.createNewPassword.bind(this)}>
+                onClick={this.createNewPassword}>
                   Change Password
               </Button>
             </FormGroup>

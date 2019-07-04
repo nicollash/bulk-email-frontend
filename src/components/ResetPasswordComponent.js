@@ -1,4 +1,3 @@
-/* eslint-disable react/jsx-no-bind */
 /* eslint-disable react/prop-types */
 import React from 'react'
 import { getBEMClasses } from '../helpers/cssClassesHelper'
@@ -13,14 +12,11 @@ const baseClasses = getBEMClasses(['base'])
 const forgotPasswordClasses = getBEMClasses(['forgot-password'])
 
 class ResetPasswordComponent extends React.Component {
-  constructor (props) {
-    super(props)
-
-    this.state = {
-      pin: '',
-      password: '',
-      confirmPassword: ''
-    }
+  
+  state = {
+    pin: '',
+    password: '',
+    confirmPassword: ''
   }
 
   componentDidUpdate () {
@@ -36,13 +32,14 @@ class ResetPasswordComponent extends React.Component {
     }
   }
 
-  handleChange (attr, evt) {
+  handleChange = (evt) => {
+    const { name, value } = evt.target;
     this.setState({
-      [attr]: evt.target.value
+      [name]: value
     })
   }
 
-  changePassword () {
+  changePassword = () => {
     const { pin, password } = this.state
     const { changePassword } = this.props
 
@@ -62,33 +59,33 @@ class ResetPasswordComponent extends React.Component {
             <FormGroup className={forgotPasswordClasses('form-group')}>
               <Input
                 type='text'
-                name='verification-code'
+                name='pin'
                 className={forgotPasswordClasses('form-input')}
                 placeholder='Verification code'
                 value={pin}
-                onChange={this.handleChange.bind(this, 'pin')}
+                onChange={this.handleChange}
               />
               <span className={forgotPasswordClasses('input-icon')}><i className='ti-lock' /></span>
             </FormGroup>
             <FormGroup className={forgotPasswordClasses('form-group')}>
               <Input
                 type='Password'
-                name='new-password'
+                name='password'
                 className={forgotPasswordClasses('form-input')}
                 placeholder='Password'
                 value={password}
-                onChange={this.handleChange.bind(this, 'password')}
+                onChange={this.handleChange}
               />
               <span className={forgotPasswordClasses('input-icon')}><i className='ti-lock' /></span>
             </FormGroup>
             <FormGroup className={forgotPasswordClasses('form-group')}>
               <Input
                 type='Password'
-                name='new-confirm-password'
+                name='confirmPassword'
                 className={forgotPasswordClasses('form-input')}
                 placeholder='Confirm Password'
                 value={confirmPassword}
-                onChange={this.handleChange.bind(this, 'confirmPassword')}
+                onChange={this.handleChange}
               />
               <span className={forgotPasswordClasses('input-icon')}><i className='ti-lock' /></span>
             </FormGroup>
@@ -97,7 +94,7 @@ class ResetPasswordComponent extends React.Component {
                 className={forgotPasswordClasses('form-button') + ' ' + baseClasses('button-success')}
                 variant='contained'
                 size='large'
-                onClick={this.changePassword.bind(this)}>
+                onClick={this.changePassword}>
                   Change Password
               </Button>
             </FormGroup>
