@@ -5,7 +5,7 @@ export const GET_USER_REQUESTED = 'GET_USER_REQUESTED'
 export const GET_USER_SUCCEEDED = 'GET_USER_SUCCEEDED'
 export const GET_USER_FAILED = 'GET_USER_FAILED'
 
-const baseUrl = process.env.REACT_APP_API_BASE_URL || 'https://api.chatmantics.com/dev/'
+const baseUrl = process.env.REACT_APP_API_BASE_URL || 'https://internal.chatmantics.com/dev/'
 
 export const getUser = () => async (dispatch, getState) => {
   const token = localStorage.getItem('id_token')

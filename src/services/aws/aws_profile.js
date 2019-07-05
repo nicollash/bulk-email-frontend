@@ -4,8 +4,8 @@ import 'amazon-cognito-js'
 var AWS = require('aws-sdk/dist/aws-sdk-react-native')
 
 const REGION = 'us-east-1'
-const USER_POOL_ID = process.env.REACT_APP_USER_POOL_ID || 'us-east-1_RBzytJ5Jv'
-const CLIENT_ID = process.env.REACT_APP_CLIENT_ID || '1hi0uenmaq6rfkbvm88o30g7s1'
+const USER_POOL_ID = process.env.REACT_APP_USER_POOL_ID || 'us-east-1_tmpIXOt9R'
+const CLIENT_ID = process.env.REACT_APP_CLIENT_ID || 'qjeh9n82t686onl2s00gmdfmp'
 
 AWS.config.update({
   region: REGION
