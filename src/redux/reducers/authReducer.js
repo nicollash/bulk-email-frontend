@@ -7,7 +7,7 @@ import {
   NEW_PASSWORD_REQUIRED,
   NEW_PASSWORD_PENDING,
   NEW_PASSWORD_SUCCESS,
-  NEW_PASSWORD_FAILD,
+  NEW_PASSWORD_FAILED,
   AUTH_FORGOT_CODE_SENT,
   AUTH_PASSWORD_CHANGE_SUCCEEDED,
   AUTH_PASSWORD_CHANGE_FAILED,
@@ -26,152 +26,146 @@ const initialState = {
   forgot: {},
   signInUserSession: {},
   isAuthenticated: false,
-  isEmailVerified: false,
   isLoading: false,
   passwordChanged: false,
   passwordChangedFailed: false
 }
 
-export default function (state = initialState, { type, payload }) {
-  switch (type) {
+const actionHandlers = {
+  [AUTH_CHECK_LIST]: (state, {type, payload}) => {
+    return {
+      ...state,
+      auth: type
+    }
+  },
+  [AUTH_LOGIN_INITIAL_STATE]: (state, {type, payload}) => {
+    return {
+      ...state,
+      auth: type,
+      isLoading: false,
+      userInfo: {
+        phoneNumber: payload.phone_number,
+      }
+    }
+  },
+  [AUTH_INIT_PASSWORD_STATE]: (state, {type}) => {
+    return {
+      ...state,
+      auth: type,
+      passwordChanged: false,
+      passwordChangedFailed: false
+    }
+  },
+  [AUTH_PASSWORD_CHANGE_SUCCEEDED]: (state, {type}) => {
+    return {
+      ...state,
+      auth: type,
+      passwordChanged: true
+    }
+  },
+  [AUTH_PASSWORD_CHANGE_FAILED]: (state, {type}) => {
+    return {
+      ...state,
+      auth: type,
+      passwordChangedFailed: true
+    }
+  },
+  [AUTH_LOGIN_RESET_STATE]: (state, {type}) => {
+    return {
+      ...state,
+      auth: type,
+      isLoading: false
+    }
+  },
+  [NEW_PASSWORD_PENDING]: (state, {type}) => {
+    return {
+      ...state,
+      auth: type,
+      isLoading: false
+    }
+  },
+  [NEW_PASSWORD_REQUIRED]: (state, {type, payload}) => {
+    return {
+      ...state,
+      auth: type,
+      user: payload,
+      isLoading: false
+    }
+  },
+  [NEW_PASSWORD_SUCCESS]: (state, {type}) => {
+    return {
+      ...state,
+      auth: type,
+      isLoading: false
+    }
+  },
+  [NEW_PASSWORD_FAILED]: (state, {type}) => {
+    return {
+      ...state,
+      auth: type,
+      isLoading: false
+    }
+  },
+  [AUTH_LOGIN_REQUESTED]: (state, {type}) => {
+    return {
+      ...state,
+      auth: type,
+      signSMA: false,
+      isLoading: true
+    }
+  },
+  [AUTH_LOGIN_SUCCEEDED]: (state, {type, payload}) => {
+    return {
+      ...state,
+      auth: type,
+      userProfile: payload,
+      isAuthenticated: true,
+      isLoading: false
+    }
+  },
+  [AUTH_LOGIN_FAILED]: (state, {type}) => {
+    return {
+      ...state,
+      auth: type,
+      isAuthenticated: false,
+      isLoading: false
+    }
+  },
+  [AUTH_FORGOT_CODE_SENT]: (state, {type, payload}) => {
+    return {
+      ...state,
+      auth: type,
+      forgot: payload
+    }
+  },
+  [SET_USER_REQUESTED]: (state) => {
+    return {
+      ...state,
+      isLoading: true
+    }
+  },
+  [SET_USER_SUCCEEDED]: (state, {type, payload}) => {
+    return {
+      ...state,
+      auth: type,
+      userProfile: payload,
+      userInfo: {
+        phoneNumber: payload.phone_number,
+        companyPhoneNumber: payload.phone_number
+      },
+      isLoading: false
+    }
+  },
+  [SET_USER_FAILED]: (state, {type}) => {
+    return {
+      ...state,
+      auth: type,
+      isLoading: false
+    }
+  },
+}
 
-    case AUTH_CHECK_LIST:
-      return {
-        ...state,
-        auth: type
-      }
-
-    case AUTH_LOGIN_INITIAL_STATE:
-      return {
-        ...state,
-        auth: type,
-        isLoading: false,
-        isEmailVerified: (payload.email_verified === 'true'),
-        isPhoneVerified: (payload.phone_number_verified === 'true'),
-        userInfo: {
-          phoneNumber: payload.phone_number,
-          companyPhoneNumber: payload.phone_number
-        }
-      }
-
-    case AUTH_INIT_PASSWORD_STATE:
-      return {
-        ...state,
-        auth: type,
-        passwordChanged: false,
-        passwordChangedFailed: false
-      }
-
-    case AUTH_PASSWORD_CHANGE_SUCCEEDED:
-      return {
-        ...state,
-        auth: type,
-        passwordChanged: true
-      }
-
-    case AUTH_PASSWORD_CHANGE_FAILED:
-      return {
-        ...state,
-        auth: type,
-        passwordChangedFailed: true
-      }
-
-    case AUTH_LOGIN_RESET_STATE:
-      return {
-        ...state,
-        auth: type,
-        isLoading: false
-      }
-
-    case NEW_PASSWORD_PENDING:
-      return {
-        ...state,
-        auth: type,
-        isLoading: false
-      }
-
-    case NEW_PASSWORD_REQUIRED:
-      return {
-        ...state,
-        auth: type,
-        newPasswordChallenge: payload,
-        isLoading: false
-      }
-      
-    case NEW_PASSWORD_SUCCESS:
-      return {
-        ...state,
-        auth: type,
-        isLoading: false
-      }
-
-    case NEW_PASSWORD_FAILD:
-      return {
-        ...state,
-        auth: type,
-        isLoading: false
-      }
-
-    case AUTH_LOGIN_REQUESTED:
-      return {
-        ...state,
-        auth: type,
-        isEmailVerified: false,
-        isPhoneVerified: false,
-        signSMA: false,
-        isLoading: true
-      }
-
-    case AUTH_LOGIN_SUCCEEDED:
-      return {
-        ...state,
-        auth: type,
-        userProfile: payload,
-        isAuthenticated: true,
-        isLoading: false
-      }
-
-    case AUTH_LOGIN_FAILED:
-      return {
-        ...state,
-        auth: type,
-        isAuthenticated: false,
-        isLoading: false
-      }
-
-    case AUTH_FORGOT_CODE_SENT:
-      return {
-        ...state,
-        auth: type,
-        forgot: payload
-      }
-
-    case SET_USER_REQUESTED:
-      return {
-        ...state,
-        isLoading: true
-      }
-
-    case SET_USER_SUCCEEDED:
-      return {
-        ...state,
-        auth: type,
-        userProfile: payload,
-        userInfo: {
-          phoneNumber: payload.phone_number,
-          companyPhoneNumber: payload.phone_number
-        },
-        isLoading: false
-      }
-
-    case SET_USER_FAILED:
-      return {
-        ...state,
-        auth: type,
-        isLoading: false
-      }
-      
-    default:
-      return state
-  }
+export default function (state = initialState, action) {
+  const handler = actionHandlers[action.type];
+  return handler ? handler(state, action) : state;
 }

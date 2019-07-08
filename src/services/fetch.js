@@ -1,8 +1,8 @@
 /* eslint-disable no-undef */
-const baseUrl = process.env.REACT_APP_API_BASE_URL || 'https://api.chatmantics.com/dev/'
+const baseUrl = process.env.REACT_APP_API_BASE_URL || 'https://internal.chatmantics.com/dev/'
 
 const composeUrl = (url) => {
-  return url.replace('https://api.chatmantics.com/dev/', baseUrl)
+  return url.replace('https://internal.chatmantics.com/dev/', baseUrl)
 }
 export const postJSON = function (url, body, token) {
   const headers = {

@@ -3,11 +3,15 @@ import { getBEMClasses } from '../helpers/cssClassesHelper';
 import LogoIconComponent from './LogoIconComponent'
 
 import '../styles/components/headerComponent.css';
-
+import {signOutUser} from '../services/aws/aws_cognito';
 const headerClasses = getBEMClasses(['header']);
 
 class HeaderComponent extends React.Component {
 
+
+  signOut = () => {
+    signOutUser();
+  }
   render() {
     return(
       <header className={headerClasses('container')}>
@@ -16,7 +20,7 @@ class HeaderComponent extends React.Component {
             <LogoIconComponent />
           </div>
         </div>
-        <button className={headerClasses('logout')}>Logout</button>
+        <button onClick={this.signOut} className={headerClasses('logout')}>Logout</button>
       </header>
     )
   }

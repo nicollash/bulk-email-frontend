@@ -46,7 +46,7 @@ class LogInComponent extends React.Component {
         history.push('/request-password')
         break;
       case 'failed':
-        toastr.error('Error', 'Log in failed!')
+        toastr.error('Error', 'Incorrect username or password!')
         break;
       case 'success':
         history.push('/create-campaign')

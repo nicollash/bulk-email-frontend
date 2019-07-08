@@ -4,7 +4,6 @@ import {
   forgotPassword,
   changePasswordWithCode,
   refreshToken,
-  updateUserInfo
 } from '../../services/aws/aws_cognito'
 
 import {
@@ -16,7 +15,7 @@ import {
   NEW_PASSWORD_REQUIRED,
   NEW_PASSWORD_PENDING,
   NEW_PASSWORD_SUCCESS,
-  NEW_PASSWORD_FAILD,
+  NEW_PASSWORD_FAILED,
   AUTH_FORGOT_CODE_SENT,
   AUTH_PASSWORD_CHANGE_SUCCEEDED,
   AUTH_PASSWORD_CHANGE_FAILED,
@@ -25,16 +24,6 @@ import {
   SET_USER_FAILED,
   AUTH_INIT_PASSWORD_STATE
 } from '../actionTypes'
-
-export const updateUser = (editedInfo) => async (dispatch, getState) => {
-  dispatch(updateRequested())
-  const res = await updateUserInfo('keith@chatmantics.com', editedInfo)
-  if (res) {
-    dispatch(updateSucceeded(res))
-  } else {
-    dispatch(updateFailed())
-  }
-}
 
 export const updateRequested = () => ({
   type: SET_USER_REQUESTED
@@ -91,35 +80,41 @@ export const forgotCodeSent = payload => ({
 
 export const login = values => async (dispatch, getState) => {
   dispatch(loginRequested())
-  const userProfile = await signInUser(values.username, values.password)
-
-  if (userProfile.email) {
-    if (userProfile.email_verified === 'true' && userProfile.phone_number_verified === 'true') {
-      dispatch(loginSucceeded(userProfile))
-    } else {
-      dispatch(loginInitialState(userProfile))
-    }
-  } else {
+  try {
+    const userProfile = await signInUser(values.username, values.password)
     if (userProfile.challengeName === 'NEW_PASSWORD_REQUIRED') {
       dispatch(resetNewPassword(userProfile))
-    } else if (userProfile.code === 'UserNotConfirmedException') {
-      dispatch(loginInitialState(userProfile))
     } else {
-      dispatch(loginFailed(userProfile))
-      setTimeout(function () {
-        dispatch(loginResetState())
-      }, 500)
+      dispatch(loginSucceeded(userProfile))
+    } 
+    /*
+    if (userProfile.email) {
+      if (userProfile.email_verified === 'true' && userProfile.phone_number_verified === 'true') {
+        dispatch(loginSucceeded(userProfile))
+      } else {
+        dispatch(loginInitialState(userProfile))
+      }
+    } else {
+       else if (userProfile.code === 'UserNotConfirmedException') {
+        dispatch(loginInitialState(userProfile))
+      } 
     }
+    */
+  } catch (error) {
+    dispatch(loginFailed())
+    setTimeout(function () {
+      dispatch(loginResetState())
+    }, 500)
   }
 }
 
 export const createNewPassword = values => async (dispatch, getState) => {
-  const userProfile = await createPassword(values.newPasswordChallenge, values.password)
-
-  if (!userProfile.code) {
-    dispatch(setNewPasswordSuccess())
-  } else {
-    dispatch(setNewPasswordFaild())
+  try {
+    const userProfile = await createPassword(values.user, values.password)
+    if (!userProfile.challengeName) dispatch(setNewPasswordSuccess())
+    else throw Error('Something went wrong!');
+  } catch (error) {
+    dispatch(setNewPasswordFailed())
   }
 }
 
@@ -127,8 +122,8 @@ export const setNewPasswordSuccess = () => ({
   type: NEW_PASSWORD_SUCCESS
 })
 
-export const setNewPasswordFaild = () => ({
-  type: NEW_PASSWORD_FAILD
+export const setNewPasswordFailed = () => ({
+  type: NEW_PASSWORD_FAILED
 })
 
 export const loginInitialState = (payload) => ({
