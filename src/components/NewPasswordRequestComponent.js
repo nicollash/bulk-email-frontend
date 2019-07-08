@@ -42,7 +42,7 @@ class NewPasswordRequestComponent extends React.Component {
     }
     const { auth, createNewPassword } = this.props
 
-    createNewPassword({ newPasswordChallenge: auth.newPasswordChallenge, password })
+    createNewPassword({ user: auth.user, password })
   }
 
   render () {
