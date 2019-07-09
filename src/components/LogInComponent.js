@@ -1,7 +1,6 @@
 import React from 'react';
 import { getBEMClasses } from '../helpers/cssClassesHelper';
 import { Form, FormGroup, Input } from 'reactstrap';
-// import { Link } from 'react-router-dom';
 import Button from '@material-ui/core/Button'
 import { toastr } from 'react-redux-toastr'
 import ReactLoading from 'react-loading'
@@ -112,7 +111,6 @@ class LogInComponent extends React.Component {
             </div>
           }
           <LogoComponent />
-          <h2 className={loginClasses('title')}> </h2>
           <Form>
             <FormGroup className={loginClasses('form-group')}>
               <Input
@@ -152,8 +150,6 @@ class LogInComponent extends React.Component {
               </div>
             </FormGroup>
           </Form>
-          <div className={loginClasses('signup-container')}>
-          </div>
         </div>
       </div>
     )

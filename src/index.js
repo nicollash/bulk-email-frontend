@@ -14,7 +14,6 @@ import App from './App';
 
 import './styles/base/base.css'
 import './styles/index.css';
-// import 'bootstrap/dist/css/bootstrap.css';
 
 const history = createBrowserHistory();
 const store = configureStore(history);

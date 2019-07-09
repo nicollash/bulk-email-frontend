@@ -41,7 +41,3 @@
   filter: invert(100%);
 
 }
-
-.side-bar__nav-icon--no-filter {
-  filter: none !important;
-}

@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import { Switch, Redirect } from 'react-router-dom';
-import path from './helpers/path';
 import ReduxToastr from 'react-redux-toastr'
 
 import AuthenticatedRoute from './containers/AuthenticatedRouteContainer'
@@ -18,19 +17,16 @@ const ResetPasswordContainer = asyncComponent(() => import('./containers/ResetPa
 const NewPasswordRequestContainer = asyncComponent(() => import('./containers/NewPasswordRequestContainer').then(module => module.default))
 
 class App extends Component {
-  componentDidMount() {
-
-  }
-
+  
   render() {
     return (
       <React.Fragment>
         <Switch>
-          <UnAuthenticatedRoute path={path('/login')} component={LogInContainer} exact />
-          <AuthenticatedRoute path={path('/create-campaign')} component={NewCampaignContainer} exact />
-          <UnAuthenticatedRoute path={path('/forgot-password')} component={ForgotPasswordContainer} exact />
-          <UnAuthenticatedRoute path={path('/reset-password')} component={ResetPasswordContainer} exact />
-          <UnAuthenticatedRoute path={path('/request-password')} component={NewPasswordRequestContainer} />
+          <UnAuthenticatedRoute path={'/login'} component={LogInContainer} exact />
+          <AuthenticatedRoute path={'/create-campaign'} component={NewCampaignContainer} exact />
+          <UnAuthenticatedRoute path={'/forgot-password'} component={ForgotPasswordContainer} exact />
+          <UnAuthenticatedRoute path={'/reset-password'} component={ResetPasswordContainer} exact />
+          <UnAuthenticatedRoute path={'/request-password'} component={NewPasswordRequestContainer} />
           <Redirect to="/create-campaign" />
         </Switch>
         <ReduxToastr

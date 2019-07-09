@@ -4,7 +4,6 @@ import { createStore, compose, applyMiddleware } from 'redux';
 import { routerMiddleware } from 'connected-react-router';
 import { createLogger } from 'redux-logger';
 import thunk from 'redux-thunk';
-import startupMiddleware from './middlewares/startupMiddleware';
 import authMiddleware from './middlewares/authMiddleware';
 
 import createRootReducer from './reducers';
@@ -21,7 +20,6 @@ const configureStore = (history, initialState = {}) => {
     routerMiddleware(history),
     loggerMiddleware,
     thunk,
-    startupMiddleware,
     authMiddleware,
   ];
 
