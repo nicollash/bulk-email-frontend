@@ -8,10 +8,10 @@ const headerClasses = getBEMClasses(['header']);
 
 class HeaderComponent extends React.Component {
 
-
   signOut = () => {
     signOutUser();
   }
+  
   render() {
     return(
       <header className={headerClasses('container')}>

@@ -1,5 +1,4 @@
 import {
-  AUTH_LOGIN_INITIAL_STATE,
   AUTH_LOGIN_REQUESTED,
   AUTH_LOGIN_SUCCEEDED,
   AUTH_LOGIN_FAILED,
@@ -11,9 +10,6 @@ import {
   AUTH_FORGOT_CODE_SENT,
   AUTH_PASSWORD_CHANGE_SUCCEEDED,
   AUTH_PASSWORD_CHANGE_FAILED,
-  SET_USER_REQUESTED,
-  SET_USER_SUCCEEDED,
-  SET_USER_FAILED,
   AUTH_INIT_PASSWORD_STATE,
   AUTH_CHECK_LIST
 } from '../actionTypes'
@@ -36,16 +32,6 @@ const actionHandlers = {
     return {
       ...state,
       auth: type
-    }
-  },
-  [AUTH_LOGIN_INITIAL_STATE]: (state, {type, payload}) => {
-    return {
-      ...state,
-      auth: type,
-      isLoading: false,
-      userInfo: {
-        phoneNumber: payload.phone_number,
-      }
     }
   },
   [AUTH_INIT_PASSWORD_STATE]: (state, {type}) => {
@@ -137,32 +123,7 @@ const actionHandlers = {
       auth: type,
       forgot: payload
     }
-  },
-  [SET_USER_REQUESTED]: (state) => {
-    return {
-      ...state,
-      isLoading: true
-    }
-  },
-  [SET_USER_SUCCEEDED]: (state, {type, payload}) => {
-    return {
-      ...state,
-      auth: type,
-      userProfile: payload,
-      userInfo: {
-        phoneNumber: payload.phone_number,
-        companyPhoneNumber: payload.phone_number
-      },
-      isLoading: false
-    }
-  },
-  [SET_USER_FAILED]: (state, {type}) => {
-    return {
-      ...state,
-      auth: type,
-      isLoading: false
-    }
-  },
+  }
 }
 
 export default function (state = initialState, action) {

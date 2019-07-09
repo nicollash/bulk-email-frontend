@@ -7,7 +7,6 @@ import {
 } from '../../services/aws/aws_cognito'
 
 import {
-  AUTH_LOGIN_INITIAL_STATE,
   AUTH_LOGIN_REQUESTED,
   AUTH_LOGIN_SUCCEEDED,
   AUTH_LOGIN_FAILED,
@@ -19,24 +18,8 @@ import {
   AUTH_FORGOT_CODE_SENT,
   AUTH_PASSWORD_CHANGE_SUCCEEDED,
   AUTH_PASSWORD_CHANGE_FAILED,
-  SET_USER_REQUESTED,
-  SET_USER_SUCCEEDED,
-  SET_USER_FAILED,
   AUTH_INIT_PASSWORD_STATE
 } from '../actionTypes'
-
-export const updateRequested = () => ({
-  type: SET_USER_REQUESTED
-})
-
-export const updateSucceeded = (payload) => ({
-  type: SET_USER_SUCCEEDED,
-  payload
-})
-
-export const updateFailed = () => ({
-  type: SET_USER_FAILED
-})
 
 export const changePassword = (payload) => async (dispatch, getState) => {
   const { cognitoUser } = getState().auth.forgot
@@ -87,19 +70,6 @@ export const login = values => async (dispatch, getState) => {
     } else {
       dispatch(loginSucceeded(userProfile))
     } 
-    /*
-    if (userProfile.email) {
-      if (userProfile.email_verified === 'true' && userProfile.phone_number_verified === 'true') {
-        dispatch(loginSucceeded(userProfile))
-      } else {
-        dispatch(loginInitialState(userProfile))
-      }
-    } else {
-       else if (userProfile.code === 'UserNotConfirmedException') {
-        dispatch(loginInitialState(userProfile))
-      } 
-    }
-    */
   } catch (error) {
     dispatch(loginFailed())
     setTimeout(function () {
@@ -124,11 +94,6 @@ export const setNewPasswordSuccess = () => ({
 
 export const setNewPasswordFailed = () => ({
   type: NEW_PASSWORD_FAILED
-})
-
-export const loginInitialState = (payload) => ({
-  type: AUTH_LOGIN_INITIAL_STATE,
-  payload
 })
 
 export const loginResetState = () => ({

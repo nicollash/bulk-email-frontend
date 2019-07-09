@@ -1,6 +1,3 @@
-/* eslint-disable no-tabs */
-/* eslint-disable react/jsx-no-bind */
-/* eslint-disable react/prop-types */
 import React from 'react'
 import { getBEMClasses } from '../helpers/cssClassesHelper'
 import { Form, FormGroup, Input } from 'reactstrap'

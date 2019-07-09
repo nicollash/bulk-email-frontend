@@ -11,7 +11,7 @@
   flex: 0 0 33.333333%;
   max-width: 33.333333%;
   min-width: 300px;
-  padding: 2rem 2rem 0 2rem;
+  padding: 2rem 2rem 2rem 2rem;
   background-color: var(--white);
   border-radius: 5px;
   box-shadow: var(--gray) 0px 1px 15px 1px;
@@ -26,10 +26,6 @@
 
 .login__container--loading {
   opacity: 0.5;
-}
-
-.login__title {
-  color: var(--dark-gray);
 }
 
 .login__form-group {
@@ -63,29 +59,10 @@
   width: 100%;
 }
 
-.login__signup-container {
-  margin: 3rem -2rem 0;
-  padding: 1.5rem 0;
-  background-color: var(--fluent-gray);
-  text-align: center;
-}
-
-.login__signup-link {
-  margin-left: 5px;
-  color: var(--font-light-blue);
-}
-
 .login__forgot-password {
   color: var(--font-light-blue);
   text-align: right;
   margin-top: 10px;
   font-weight: 300;
   cursor: pointer;
-}
-
-@media (max-width: 1180px) {
-  .login__signup-link {
-    display: block;
-    margin-top: 10px;
-  }
 }
