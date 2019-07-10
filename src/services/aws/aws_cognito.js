@@ -1,25 +1,24 @@
 /* eslint-disable no-undef */
 /* eslint-disable no-cond-assign */
 
-import Amplify from 'aws-amplify'
+import Amplify, { Auth } from 'aws-amplify';
 
-const Auth = Amplify.Auth
 Amplify.configure({
   Auth: {
     // REQUIRED only for Federated Authentication - Amazon Cognito Identity Pool ID
     identityPoolId: process.env.REACT_APP_IDENTITY_POOL_ID || 'us-east-1:fa266d05-be67-4e59-b740-37a7d22f1633',
-
     // REQUIRED - Amazon Cognito Region
     region: 'us-east-1',
-
     // OPTIONAL - Amazon Cognito User Pool ID
     userPoolId: process.env.REACT_APP_USER_POOL_ID || 'us-east-1_tmpIXOt9R',
-
     // OPTIONAL - Amazon Cognito Web Client ID (26-char alphanumeric string)
     userPoolWebClientId: process.env.REACT_APP_CLIENT_ID || 'qjeh9n82t686onl2s00gmdfmp',
-
     // OPTIONAL - Enforce user authentication prior to accessing AWS resources or not
     mandatorySignIn: false,
+  },
+  Analytics: {
+    // OPTIONAL - disable Analytics if true
+    disabled: false
   }
 })
 export function refreshToken() {
