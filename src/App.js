@@ -15,6 +15,7 @@ const NewCampaignContainer = asyncComponent(() => import('./containers/NewCampai
 const ForgotPasswordContainer = asyncComponent(() => import('./containers/ForgotPasswordContainer').then(module => module.default))
 const ResetPasswordContainer = asyncComponent(() => import('./containers/ResetPasswordContainer').then(module => module.default))
 const NewPasswordRequestContainer = asyncComponent(() => import('./containers/NewPasswordRequestContainer').then(module => module.default))
+const OverviewContainer = asyncComponent(() => import('./containers/OverviewContainer').then(module => module.default))
 
 class App extends Component {
   
@@ -24,10 +25,11 @@ class App extends Component {
         <Switch>
           <UnAuthenticatedRoute path={'/login'} component={LogInContainer} exact />
           <AuthenticatedRoute path={'/create-campaign'} component={NewCampaignContainer} exact />
+          <AuthenticatedRoute path={'/overview'} component={OverviewContainer} exact/>
           <UnAuthenticatedRoute path={'/forgot-password'} component={ForgotPasswordContainer} exact />
           <UnAuthenticatedRoute path={'/reset-password'} component={ResetPasswordContainer} exact />
           <UnAuthenticatedRoute path={'/request-password'} component={NewPasswordRequestContainer} />
-          <Redirect to="/create-campaign" />
+          <Redirect to="/overview" />
         </Switch>
         <ReduxToastr
           timeOut={3000}
