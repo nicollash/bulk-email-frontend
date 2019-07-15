@@ -30,6 +30,10 @@
   border-bottom: 1px solid #595c78;
 }
 
+.side-bar__nav-item span {
+  text-align: center;
+}
+
 .side-bar__nav-item:hover span, .side-bar__nav-item:hover img {
   opacity: 0.7;
 }
@@ -39,5 +43,9 @@
   height: 18px;
   margin: 5px 0;
   filter: invert(100%);
+}
 
+.side-bar__nav-bottom {
+  padding-left: 10px;
+  padding-right: 10px;
 }
