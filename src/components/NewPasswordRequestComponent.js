@@ -18,8 +18,22 @@ class NewPasswordRequestComponent extends React.Component {
     confirmPassword: ''
   }
 
-  componentDidUpdate () {
-    const { auth, history } = this.props
+  getSnapshotBeforeUpdate(prevProps, prevState) {
+    const { auth } = this.props;
+
+    if (prevProps.auth.auth !== 'NEW_PASSWORD_FAILED' && auth.auth === 'NEW_PASSWORD_FAILED') {
+      return 'failed';
+    }
+
+    return null;
+  }
+
+  componentDidUpdate(prevProps, prevState, snapshot) {
+    const { auth, history } = this.props;
+    
+    if (snapshot === 'failed') {
+      toastr.error('Failed', auth.errMsg);
+    }
 
     if (auth.auth === 'NEW_PASSWORD_SUCCESS') {
       toastr.success('Success', 'Password has been successfully reset!')
@@ -38,14 +52,14 @@ class NewPasswordRequestComponent extends React.Component {
     const { password, confirmPassword } = this.state
     if (password !== confirmPassword) {
       toastr.error('Error', 'password and confirm password are not same.');
-      return ;
+      return;
     }
     const { auth, createNewPassword } = this.props
 
     createNewPassword({ user: auth.user, password })
   }
 
-  render () {
+  render() {
     const { password, confirmPassword } = this.state
 
     return (
@@ -81,7 +95,7 @@ class NewPasswordRequestComponent extends React.Component {
                 variant='contained'
                 size='large'
                 onClick={this.createNewPassword}>
-                  Change Password
+                Change Password
               </Button>
             </FormGroup>
           </Form>
