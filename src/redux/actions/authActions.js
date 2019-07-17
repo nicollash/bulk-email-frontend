@@ -69,7 +69,7 @@ export const login = values => async (dispatch, getState) => {
       dispatch(resetNewPassword(userProfile))
     } else {
       dispatch(loginSucceeded(userProfile))
-    } 
+    }
   } catch (error) {
     dispatch(loginFailed())
     setTimeout(function () {
@@ -80,11 +80,12 @@ export const login = values => async (dispatch, getState) => {
 
 export const createNewPassword = values => async (dispatch, getState) => {
   try {
+    dispatch(setNewPasswordPending())
     const userProfile = await createPassword(values.user, values.password)
     if (!userProfile.challengeName) dispatch(setNewPasswordSuccess())
     else throw Error('Something went wrong!');
   } catch (error) {
-    dispatch(setNewPasswordFailed())
+    dispatch(setNewPasswordFailed(error.message))
   }
 }
 
@@ -92,9 +93,10 @@ export const setNewPasswordSuccess = () => ({
   type: NEW_PASSWORD_SUCCESS
 })
 
-export const setNewPasswordFailed = () => ({
-  type: NEW_PASSWORD_FAILED
-})
+export const setNewPasswordFailed = (error) => ({
+  type: NEW_PASSWORD_FAILED,
+  error
+});
 
 export const loginResetState = () => ({
   type: AUTH_LOGIN_RESET_STATE
