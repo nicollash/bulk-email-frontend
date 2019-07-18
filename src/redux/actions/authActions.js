@@ -18,7 +18,8 @@ import {
   AUTH_FORGOT_CODE_SENT,
   AUTH_PASSWORD_CHANGE_SUCCEEDED,
   AUTH_PASSWORD_CHANGE_FAILED,
-  AUTH_INIT_PASSWORD_STATE
+  AUTH_INIT_PASSWORD_STATE,
+  AUTH_USER_SIGNED_OUT
 } from '../actionTypes'
 
 export const changePassword = (payload) => async (dispatch, getState) => {
@@ -77,6 +78,10 @@ export const login = values => async (dispatch, getState) => {
     }, 500)
   }
 }
+
+export const signOut = () => ({
+  type: AUTH_USER_SIGNED_OUT
+})
 
 export const createNewPassword = values => async (dispatch, getState) => {
   try {

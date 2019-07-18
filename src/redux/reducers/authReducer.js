@@ -11,6 +11,7 @@ import {
   AUTH_PASSWORD_CHANGE_SUCCEEDED,
   AUTH_PASSWORD_CHANGE_FAILED,
   AUTH_INIT_PASSWORD_STATE,
+  AUTH_USER_SIGNED_OUT,
   AUTH_CHECK_LIST
 } from '../actionTypes'
 
@@ -64,7 +65,15 @@ const actionHandlers = {
       isLoading: false
     }
   },
-  [NEW_PASSWORD_PENDING]: (state, { type }) => {
+  [AUTH_USER_SIGNED_OUT]: (state, {type}) => {
+    return {
+      ...state,
+      auth: type,
+      isAuthenticated: false,
+      userCred: {}
+    }
+  },
+  [NEW_PASSWORD_PENDING]: (state, {type}) => {
     return {
       ...state,
       auth: type,

@@ -68,6 +68,4 @@ export function forgotPassword(email) {
 // signout the current user
 export function signOutUser() {
   return Auth.signOut({ global: true })
-    .then(data => console.log(data))
-    .catch(err => console.log(err));
 }

@@ -23,7 +23,10 @@ class SidebarComponent extends React.Component {
   }
   
   signout = () => {
-    signOutUser();
+    const { signOut } = this.props;
+    if (signOutUser()) {
+      signOut();
+    }
   }
 
   render() {
