@@ -19,7 +19,7 @@ const actionHandlers = {
             isLoading: true
         }
     },
-    [GET_CAMPAIGN_SUCCEEDED]: (state, payload) => {
+    [GET_CAMPAIGN_SUCCEEDED]: (state, {type, payload}) => {
         return {
             ...state,
             campaigns: payload,

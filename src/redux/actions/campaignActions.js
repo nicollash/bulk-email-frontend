@@ -11,14 +11,14 @@ import { getJSON, postJSON } from '../../services/fetch';
 import { baseUrl } from '../../services/config';
 
 export const getCampaigns = () => async (dispatch, getState) => {
-    const token = localStorage.getItem('id_token');
+    const { signInUserSession } = getState().auth.userProfile;
 
     dispatch(getCampaignRequested());
-    if (token) {
-        const res = await getJSON(baseUrl + '/data/campaign');
+    if (signInUserSession) {
+        const res = await getJSON(baseUrl + '/data/campaign', signInUserSession.idToken.jwtToken);
 
         if (res && res.status === 'success') {
-            dispatch(getCampaignSucceeded(res.data));
+            dispatch(getCampaignSucceeded(res.content.items));
         } else {
             dispatch(getCampaignFailed());
         }
@@ -31,8 +31,9 @@ export const getCampaignRequested = () => ({
     type: GET_CAMPAIGN_REQUESTED
 });
 
-export const getCampaignSucceeded = (payload) => ({
-    type: GET_CAMPAIGN_SUCCEEDED
+export const getCampaignSucceeded = payload => ({
+    type: GET_CAMPAIGN_SUCCEEDED,
+    payload
 });
   
 export const getCampaignFailed = () => ({
