@@ -27,38 +27,9 @@ class NewCampaignComponent extends React.Component {
   }
 
   // MARK: - Event handlers
-
-  handleNameChange = (e) => {
-    const name = e.target.value;
-
-    this.setState({
-      name
-    });
-  }
-
-  handleChannelChange = (e) => {
-    const channel = e.target.value;
-
-    this.setState({
-      channel
-    });
-  }
-
-  handleBotChange = (e) => {
-    const bot = e.target.value;
-
-    this.setState({
-      bot
-    });
-  }
-
-  handleMessageChange = (e) => {
-    const message = e.target.value;
-
-    this.setState({
-      message
-    });
-  }
+  handleChange = ({target}) => this.setState({
+    [target.name]: target.value
+  })
 
   handleUploadClick = (e) => {
     e.stopPropagation();
@@ -109,15 +80,15 @@ class NewCampaignComponent extends React.Component {
           <div className={newCampaignClasses('content')}>
             <FormGroup>
               <Label htmlFor="name">Name</Label>
-              <Input type="text" id="name" placeholder="Enter campaign name" required value={name} onChange={this.handleNameChange} />
+              <Input type="text" id="name" placeholder="Enter campaign name" required value={name} onChange={this.handleChange} />
             </FormGroup>
             <FormGroup>
               <Label htmlFor="channel">Channel</Label>
-              <Select options={channelValues} id="channel" placeholder="Choose a channel" value={channel} onChange={this.handleChannelChange} />
+              <Select options={channelValues} id="channel" name="channel" placeholder="Choose a channel" value={channel} onChange={this.handleChange} />
             </FormGroup>
             <FormGroup>
               <Label htmlFor="bot">Bot</Label>
-              <Select options={botValues} id="bot" placeholder="Choose a bot" value={bot} onChange={this.handleBotChange} />
+              <Select options={botValues} id="bot" name="bot" placeholder="Choose a bot" value={bot} onChange={this.handleChange} />
             </FormGroup>
             <FormGroup>
               <Label>File</Label>
@@ -132,7 +103,7 @@ class NewCampaignComponent extends React.Component {
             </FormGroup>
             <FormGroup>
               <Label htmlFor="message">Message Content</Label>
-              <Input type="textarea" id="message" placeholder="Input a message" required value={message} onChange={this.handleMessageChange} />
+              <Input type="textarea" id="message" name="message" placeholder="Input a message" required value={message} onChange={this.handleChange} />
             </FormGroup>
           </div>
           <div className={newCampaignClasses('footer')}>
