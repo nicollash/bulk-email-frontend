@@ -24,7 +24,7 @@ class NewCampaignComponent extends React.Component {
     message: "",
   }
 
-  componentWillMount() {
+  componentDidMount() {
     const { getCampaigns } = this.props;
 
     getCampaigns();
