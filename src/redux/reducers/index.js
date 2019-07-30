@@ -6,7 +6,8 @@ import { reducer as toastrReducer } from 'react-redux-toastr';
 import { persistReducer } from 'redux-persist';
 import storage from 'redux-persist/lib/storage'; // defaults to localStorage for web
 
-import authReducer from './authReducer'
+import authReducer from './authReducer';
+import campaignReducer from './campaignReducer';
 
 const persistConfig = {
   key: 'root',
@@ -16,6 +17,7 @@ const persistConfig = {
 export default function createReducer(history) {
   return combineReducers({
     auth: persistReducer(persistConfig, authReducer),
+    campaign: persistReducer(persistConfig, campaignReducer),
     router: connectRouter(history),
     toastr: toastrReducer,
   });

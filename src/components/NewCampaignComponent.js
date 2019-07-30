@@ -11,9 +11,7 @@ import '../styles/components/newCampaignComponent.css';
 const newCampaignClasses = getBEMClasses(['new-campaign']);
 
 const Channel = {
-  SMS: "SMS",
-  Facebook: "Facebook",
-  Email: "Email"
+  SMS: "SMS"
 }
 
 class NewCampaignComponent extends React.Component {
@@ -24,6 +22,12 @@ class NewCampaignComponent extends React.Component {
     bot: 3000,
     filepath: "",
     message: "",
+  }
+
+  componentDidMount() {
+    const { getCampaigns } = this.props;
+
+    getCampaigns();
   }
 
   // MARK: - Event handlers
@@ -86,6 +90,7 @@ class NewCampaignComponent extends React.Component {
 
   render() {
     const { name, channel, bot, filepath, message } = this.state;
+    const { campaigns } = this.props.campaign;
 
     const channelValues = [
       { value: Channel.SMS, text: "SMS" },
@@ -93,12 +98,9 @@ class NewCampaignComponent extends React.Component {
       { value: Channel.Email, text: "Email" }
     ];
 
-    const botValues = [
-      { value: 3000, text: "Campaign 3000" },
-      { value: 4000, text: "Campaign 4000" },
-      { value: 5000, text: "Campaign 5000" },
-      { value: 6000, text: "Campaign 6000" }
-    ];
+    const botValues = campaigns.map(campaign => {
+      return {value: campaign.id, text: campaign.name}
+    });
 
     return (
       <HomePageLayout>
@@ -107,10 +109,6 @@ class NewCampaignComponent extends React.Component {
             New Campaign
           </div>
           <div className={newCampaignClasses('content')}>
-            <FormGroup>
-              <Label htmlFor="name">Name</Label>
-              <Input type="text" id="name" placeholder="Enter campaign name" required value={name} onChange={this.handleNameChange} />
-            </FormGroup>
             <FormGroup>
               <Label htmlFor="channel">Channel</Label>
               <Select options={channelValues} id="channel" placeholder="Choose a channel" value={channel} onChange={this.handleChannelChange} />
@@ -129,6 +127,9 @@ class NewCampaignComponent extends React.Component {
                 </Button>
               </div>
               <input className="file-upload-input" type="file" onChange={this.handleUploadChange} ref={e => this.fileInput = e} />
+            </FormGroup>
+            <FormGroup>
+              <a href="./example.csv" download>Download CSV example</a>
             </FormGroup>
             <FormGroup>
               <Label htmlFor="message">Message Content</Label>
