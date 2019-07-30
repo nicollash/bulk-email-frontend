@@ -1,6 +1,6 @@
 .new-campaign__container {
     width: calc(100% - 100px);
-    margin-top: 55px;
+    padding-top: 55px;
     margin-left: 50px;
 }
 
@@ -14,6 +14,7 @@
 .new-campaign__content {
     display: flex;
     flex-direction: column;
+    width: 400px;
     padding: 30px 10px;
 }
 
@@ -24,4 +25,14 @@
 
 .file-upload-button {
     white-space: nowrap;
+}
+
+.new-campaign__row {
+    display: flex;
+    align-items: center;
+    margin-bottom: 5px;
+}
+
+.new-campaign__row label {
+    width: 120px;
 }

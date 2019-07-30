@@ -24,6 +24,13 @@ class NewCampaignComponent extends React.Component {
     bot: 3000,
     filepath: "",
     message: "",
+    csvFields: [],
+    fnameField: "",
+    lnameField: "",
+    pNumberField: "",
+    stateField: "",
+    addressField: "",
+    cityField: ""
   }
 
   // MARK: - Event handlers
@@ -47,17 +54,27 @@ class NewCampaignComponent extends React.Component {
     }
 
     let file = e.target.files[0];
+    let reader = new FileReader();
+    let that = this;
 
-    this.setState({
-      filepath: file.name
-    });
+    reader.readAsText(file, "UTF-8");
+    reader.onload = function(evt) {
+      let content = evt.target.result;
+      let header = content.split('\n')[0];
+      let headers = header.split(',');
+
+      that.setState({
+        filepath: file.name,
+        csvFields: headers
+      })
+    }
   }
 
   // MARK: - Lifecycle Methods
 
   render() {
-    const { name, channel, bot, filepath, message } = this.state;
-
+    const { name, channel, bot, filepath, message, csvFields, fnameField, lnameField, pNumberField, stateField, addressField, cityField } = this.state;
+    
     const channelValues = [
       { value: Channel.SMS, text: "SMS" },
       { value: Channel.Facebook, text: "Facebook" },
@@ -70,6 +87,13 @@ class NewCampaignComponent extends React.Component {
       { value: 5000, text: "Campaign 5000" },
       { value: 6000, text: "Campaign 6000" }
     ];
+
+    const fieldValues = csvFields.map(field => {
+      return {
+        value: field,
+        text: field
+      }
+    })
 
     return (
       <HomePageLayout>
@@ -100,6 +124,34 @@ class NewCampaignComponent extends React.Component {
                 </Button>
               </div>
               <input className="file-upload-input" type="file" onChange={this.handleUploadChange} ref={e => this.fileInput = e} />
+              { filepath &&
+                <div>
+                  <div className={newCampaignClasses('row')}>
+                    <Label htmlFor="fname">fname</Label>
+                    <Select options={fieldValues} id="fname" name="fname" placeholder="Choose a field" value={fnameField} onChange={this.handleChange} />
+                  </div>
+                  <div className={newCampaignClasses('row')}>
+                    <Label htmlFor="lname">lname</Label>
+                    <Select options={fieldValues} id="lname" name="lname" placeholder="Choose a field" value={lnameField} onChange={this.handleChange} />
+                  </div>
+                  <div className={newCampaignClasses('row')}>
+                    <Label htmlFor="pNumber">phoneNumber</Label>
+                    <Select options={fieldValues} id="pNumber" name="pNumber" placeholder="Choose a field" value={pNumberField} onChange={this.handleChange} />
+                  </div>
+                  <div className={newCampaignClasses('row')}>
+                    <Label htmlFor="state">state</Label>
+                    <Select options={fieldValues} id="state" name="state" placeholder="Choose a field" value={stateField} onChange={this.handleChange} />
+                  </div>
+                  <div className={newCampaignClasses('row')}>
+                    <Label htmlFor="address">address</Label>
+                    <Select options={fieldValues} id="address" name="address" placeholder="Choose a field" value={addressField} onChange={this.handleChange} />
+                  </div>
+                  <div className={newCampaignClasses('row')}>
+                    <Label htmlFor="city">city</Label>
+                    <Select options={fieldValues} id="city" name="city" placeholder="Choose a field" value={cityField} onChange={this.handleChange} />
+                  </div>
+                </div>
+              }
             </FormGroup>
             <FormGroup>
               <Label htmlFor="message">Message Content</Label>
