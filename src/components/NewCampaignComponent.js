@@ -127,28 +127,28 @@ class NewCampaignComponent extends React.Component {
               { filepath &&
                 <div>
                   <div className={newCampaignClasses('row')}>
-                    <Label htmlFor="fname">fname</Label>
-                    <Select options={fieldValues} id="fname" name="fname" placeholder="Choose a field" value={fnameField} onChange={this.handleChange} />
+                    <Label htmlFor="fnameField">fname</Label>
+                    <Select options={fieldValues} id="fnameField" name="fnameField" placeholder="Choose a field" value={fnameField} onChange={this.handleChange} />
                   </div>
                   <div className={newCampaignClasses('row')}>
-                    <Label htmlFor="lname">lname</Label>
-                    <Select options={fieldValues} id="lname" name="lname" placeholder="Choose a field" value={lnameField} onChange={this.handleChange} />
+                    <Label htmlFor="lnameField">lname</Label>
+                    <Select options={fieldValues} id="lnameField" name="lnameField" placeholder="Choose a field" value={lnameField} onChange={this.handleChange} />
                   </div>
                   <div className={newCampaignClasses('row')}>
-                    <Label htmlFor="pNumber">phoneNumber</Label>
-                    <Select options={fieldValues} id="pNumber" name="pNumber" placeholder="Choose a field" value={pNumberField} onChange={this.handleChange} />
+                    <Label htmlFor="pNumberField">phoneNumber</Label>
+                    <Select options={fieldValues} id="pNumberField" name="pNumberField" placeholder="Choose a field" value={pNumberField} onChange={this.handleChange} />
                   </div>
                   <div className={newCampaignClasses('row')}>
-                    <Label htmlFor="state">state</Label>
-                    <Select options={fieldValues} id="state" name="state" placeholder="Choose a field" value={stateField} onChange={this.handleChange} />
+                    <Label htmlFor="stateField">state</Label>
+                    <Select options={fieldValues} id="stateField" name="stateField" placeholder="Choose a field" value={stateField} onChange={this.handleChange} />
                   </div>
                   <div className={newCampaignClasses('row')}>
-                    <Label htmlFor="address">address</Label>
-                    <Select options={fieldValues} id="address" name="address" placeholder="Choose a field" value={addressField} onChange={this.handleChange} />
+                    <Label htmlFor="addressField">address</Label>
+                    <Select options={fieldValues} id="addressField" name="addressField" placeholder="Choose a field" value={addressField} onChange={this.handleChange} />
                   </div>
                   <div className={newCampaignClasses('row')}>
-                    <Label htmlFor="city">city</Label>
-                    <Select options={fieldValues} id="city" name="city" placeholder="Choose a field" value={cityField} onChange={this.handleChange} />
+                    <Label htmlFor="cityField">city</Label>
+                    <Select options={fieldValues} id="cityField" name="cityField" placeholder="Choose a field" value={cityField} onChange={this.handleChange} />
                   </div>
                 </div>
               }
