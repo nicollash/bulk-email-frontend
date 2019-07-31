@@ -1,8 +1,7 @@
 import React from 'react';
+import { Storage } from 'aws-amplify';
 import { Button, FormGroup, Input, Label } from 'reactstrap';
-
 import { getBEMClasses } from '../helpers/cssClassesHelper';
-
 import HomePageLayout from '../layouts/HomePageLayout';
 import Select from './common/Select';
 
@@ -15,6 +14,8 @@ const Channel = {
   Facebook: "Facebook",
   Email: "Email"
 }
+
+const VALID_FILE_TYPES = ['text/csv'];
 
 class NewCampaignComponent extends React.Component {
   //initialize state
@@ -48,12 +49,21 @@ class NewCampaignComponent extends React.Component {
   handleUploadChange = (e) => {
     e.stopPropagation();
     e.preventDefault();
+    
+    let file = e.target.files[0];
 
-    if (e.target.files.length === 0) {
+    Storage.put(`campaign_${new Date().getTime()}.csv`, file, {
+      progressCallback(progress) {
+        console.log(`Uploaded: ${progress.loaded}/${progress.total}`);
+      },
+    })
+      .then (result => console.log(result))
+      .catch(err => console.log(err));
+
+    if (!file || !VALID_FILE_TYPES.includes(file.type)) {
       return;
     }
 
-    let file = e.target.files[0];
     let reader = new FileReader();
     let that = this;
 
