@@ -87,14 +87,9 @@ class NewCampaignComponent extends React.Component {
   // MARK: - Lifecycle Methods
 
   render() {
-<<<<<<< HEAD
     const { name, channel, bot, filepath, message, csvFields, fnameField, lnameField, pNumberField, stateField, addressField, cityField } = this.state;
-    
-=======
-    const { name, channel, bot, filepath, message } = this.state;
     const { campaigns } = this.props.campaign;
 
->>>>>>> master
     const channelValues = [
       { value: Channel.SMS, text: "SMS" },
       { value: Channel.Facebook, text: "Facebook" },
@@ -120,13 +115,6 @@ class NewCampaignComponent extends React.Component {
           </div>
           <div className={newCampaignClasses('content')}>
             <FormGroup>
-<<<<<<< HEAD
-              <Label htmlFor="name">Name</Label>
-              <Input type="text" id="name" placeholder="Enter campaign name" required value={name} onChange={this.handleChange} />
-            </FormGroup>
-            <FormGroup>
-=======
->>>>>>> master
               <Label htmlFor="channel">Channel</Label>
               <Select options={channelValues} id="channel" name="channel" placeholder="Choose a channel" value={channel} onChange={this.handleChange} />
             </FormGroup>
