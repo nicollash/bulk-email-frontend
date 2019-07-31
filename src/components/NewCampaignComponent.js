@@ -10,9 +10,7 @@ import '../styles/components/newCampaignComponent.css';
 const newCampaignClasses = getBEMClasses(['new-campaign']);
 
 const Channel = {
-  SMS: "SMS",
-  Facebook: "Facebook",
-  Email: "Email"
+  SMS: "SMS"
 }
 
 const VALID_FILE_TYPES = ['text/csv'];
@@ -32,6 +30,12 @@ class NewCampaignComponent extends React.Component {
     stateField: "",
     addressField: "",
     cityField: ""
+  }
+
+  componentDidMount() {
+    const { getCampaigns } = this.props;
+
+    getCampaigns();
   }
 
   // MARK: - Event handlers
@@ -83,20 +87,23 @@ class NewCampaignComponent extends React.Component {
   // MARK: - Lifecycle Methods
 
   render() {
+<<<<<<< HEAD
     const { name, channel, bot, filepath, message, csvFields, fnameField, lnameField, pNumberField, stateField, addressField, cityField } = this.state;
     
+=======
+    const { name, channel, bot, filepath, message } = this.state;
+    const { campaigns } = this.props.campaign;
+
+>>>>>>> master
     const channelValues = [
       { value: Channel.SMS, text: "SMS" },
       { value: Channel.Facebook, text: "Facebook" },
       { value: Channel.Email, text: "Email" }
     ];
 
-    const botValues = [
-      { value: 3000, text: "Campaign 3000" },
-      { value: 4000, text: "Campaign 4000" },
-      { value: 5000, text: "Campaign 5000" },
-      { value: 6000, text: "Campaign 6000" }
-    ];
+    const botValues = campaigns.map(campaign => {
+      return {value: campaign.id, text: campaign.name}
+    });
 
     const fieldValues = csvFields.map(field => {
       return {
@@ -113,10 +120,13 @@ class NewCampaignComponent extends React.Component {
           </div>
           <div className={newCampaignClasses('content')}>
             <FormGroup>
+<<<<<<< HEAD
               <Label htmlFor="name">Name</Label>
               <Input type="text" id="name" placeholder="Enter campaign name" required value={name} onChange={this.handleChange} />
             </FormGroup>
             <FormGroup>
+=======
+>>>>>>> master
               <Label htmlFor="channel">Channel</Label>
               <Select options={channelValues} id="channel" name="channel" placeholder="Choose a channel" value={channel} onChange={this.handleChange} />
             </FormGroup>
@@ -162,6 +172,9 @@ class NewCampaignComponent extends React.Component {
                   </div>
                 </div>
               }
+            </FormGroup>
+            <FormGroup>
+              <a href="./example.csv" download>Download CSV example</a>
             </FormGroup>
             <FormGroup>
               <Label htmlFor="message">Message Content</Label>
