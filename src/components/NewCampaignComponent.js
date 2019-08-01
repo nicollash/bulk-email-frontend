@@ -4,6 +4,7 @@ import { Button, FormGroup, Input, Label } from 'reactstrap';
 import { getBEMClasses } from '../helpers/cssClassesHelper';
 import HomePageLayout from '../layouts/HomePageLayout';
 import Select from './common/Select';
+import ReactLoading from 'react-loading';
 
 import '../styles/components/newCampaignComponent.css';
 
@@ -29,7 +30,8 @@ class NewCampaignComponent extends React.Component {
     pNumberField: "",
     stateField: "",
     addressField: "",
-    cityField: ""
+    cityField: "",
+    isUploading: false
   }
 
   componentDidMount() {
@@ -53,11 +55,19 @@ class NewCampaignComponent extends React.Component {
   handleUploadChange = (e) => {
     e.stopPropagation();
     e.preventDefault();
+
+    this.setState({
+      isUploading: true
+    })
     
+    let that = this;
     let file = e.target.files[0];
 
     Storage.put(`campaign_${new Date().getTime()}.csv`, file, {
       progressCallback(progress) {
+        that.setState({
+          isUploading: false
+        });
         console.log(`Uploaded: ${progress.loaded}/${progress.total}`);
       },
     })
@@ -69,7 +79,6 @@ class NewCampaignComponent extends React.Component {
     }
 
     let reader = new FileReader();
-    let that = this;
 
     reader.readAsText(file, "UTF-8");
     reader.onload = function(evt) {
@@ -87,7 +96,7 @@ class NewCampaignComponent extends React.Component {
   // MARK: - Lifecycle Methods
 
   render() {
-    const { name, channel, bot, filepath, message, csvFields, fnameField, lnameField, pNumberField, stateField, addressField, cityField } = this.state;
+    const { name, channel, bot, filepath, message, csvFields, fnameField, lnameField, pNumberField, stateField, addressField, cityField, isUploading } = this.state;
     const { campaigns } = this.props.campaign;
 
     const channelValues = [
@@ -114,6 +123,11 @@ class NewCampaignComponent extends React.Component {
             New Campaign
           </div>
           <div className={newCampaignClasses('content')}>
+            { isUploading &&
+              <div className={newCampaignClasses('content-loading')}>
+                <ReactLoading type='spin' color='#ffc600' margin='auto' height={50} width={50} />
+              </div>
+            }
             <FormGroup>
               <Label htmlFor="channel">Channel</Label>
               <Select options={channelValues} id="channel" name="channel" placeholder="Choose a channel" value={channel} onChange={this.handleChange} />
@@ -132,7 +146,7 @@ class NewCampaignComponent extends React.Component {
                 </Button>
               </div>
               <input className="file-upload-input" type="file" onChange={this.handleUploadChange} ref={e => this.fileInput = e} />
-              { filepath &&
+              { (!isUploading && filepath) &&
                 <div>
                   <div className={newCampaignClasses('row')}>
                     <Label htmlFor="fnameField">fname</Label>
