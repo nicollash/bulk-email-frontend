@@ -6,6 +6,7 @@ import {signOutUser} from '../services/aws/aws_cognito';
 import overviewIcon from '../assets/images/002-dashboard.png';
 import signoutIcon from '../assets/images/logout.png';
 import plusIcon from '../assets/images/plus.png';
+import accountIcon from '../assets/images/008-account.png'
 import '../styles/components/sidebarComponent.css';
 
 const sidebarClasses = getBEMClasses(['side-bar']);
@@ -14,12 +15,18 @@ class SidebarComponent extends React.Component {
 
   goOverview = () => {
     const { history } = this.props;
-    history.push('./overview');
+    history.push('/overview');
   }
 
   goNewCampaign = () => {
     const { history } = this.props;
-    history.push('./create-campaign');
+    history.push('/create-campaign');
+  }
+
+  goAccount = () => {
+    const { history } = this.props;
+
+    history.push('/account');
   }
   
   signout = () => {
@@ -43,6 +50,10 @@ class SidebarComponent extends React.Component {
           </div>
         </div>
         <div className={sidebarClasses('nav-bottom')} >
+          <div className={sidebarClasses('nav-item')} onClick={this.goAccount}>
+            <img alt='' className={sidebarClasses('nav-icon')} src={accountIcon} />
+            <span>Account</span>
+          </div>
           <div className={sidebarClasses('nav-item')} onClick={this.signout} >
             <img alt='' className={sidebarClasses('nav-icon')} src={signoutIcon} />
             <span>Sign Out</span>

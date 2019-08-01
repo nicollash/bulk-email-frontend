@@ -22,6 +22,10 @@ import {
   AUTH_USER_SIGNED_OUT
 } from '../actionTypes'
 
+export const updateUser = () => {
+  
+}
+
 export const changePassword = (payload) => async (dispatch, getState) => {
   const { cognitoUser } = getState().auth.forgot
 

@@ -21,6 +21,7 @@ Amplify.configure({
     disabled: false
   }
 })
+
 export function refreshToken() {
   Auth.currentSession()
     .then(data => {
