@@ -129,11 +129,6 @@ class AccountComponent extends React.Component {
               <div className={accountClasses('block-content')}>
                 <div className={accountClasses('block-row')}>
                   <label className={accountClasses('block-row-title--longer')}>Account Name</label><span className={accountClasses('block-row-content')}>: { auth.userProfile.username}</span>
-                  {auth.userProfile.username && `[`}
-                  {auth.userProfile.username &&
-                  <span className='span-link' onClick={this.editAccount.bind(this)}>Edit</span>
-                  }
-                  {auth.userProfile.username && `]`}
                 </div>
                 <div className={accountClasses('block-row')}>
                   <label className={accountClasses('block-row-title--longer')}>Account Status</label><span className={accountClasses('block-row-content')}>: Active</span>
@@ -149,13 +144,13 @@ class AccountComponent extends React.Component {
               </div>
               <div className={accountClasses('block-content')}>
                 <div className={accountClasses('block-row')}>
-                  <label className={accountClasses('block-row-title')}>Email</label> <span className={accountClasses('block-row-content')}>: { auth.userProfile.attributes.email }</span> [<span className='span-link' onClick={this.editEmail.bind(this)}>Edit</span>]
+                  <label className={accountClasses('block-row-title')}>Email</label> <span className={accountClasses('block-row-content')}>: { auth.userProfile.attributes.email }</span> 
                 </div>
                 <div className={accountClasses('block-row')}>
-                  <label className={accountClasses('block-row-title')}>Phone</label> <span className={accountClasses('block-row-content')}>: { auth.userProfile.attributes.phone_number }</span> [<span className='span-link' onClick={this.editPhone.bind(this)}>Edit</span>]
+                  <label className={accountClasses('block-row-title')}>Phone</label> <span className={accountClasses('block-row-content')}>: { auth.userProfile.attributes.phone_number }</span> 
                 </div>
                 <div className={accountClasses('block-row')}>
-                  <label className={accountClasses('block-row-title')}>Password</label> <span className={accountClasses('block-row-content')}>: ********</span> [<span className='span-link' onClick={this.editPwd.bind(this)}>Change</span>]
+                  <label className={accountClasses('block-row-title')}>Password</label> <span className={accountClasses('block-row-content')}>: ********</span> 
                 </div>
               </div>
             </div>
