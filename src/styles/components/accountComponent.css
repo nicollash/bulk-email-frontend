@@ -1,0 +1,160 @@
+.account-page__container {
+    width: calc(100% - 100px);
+    margin-top: 30px;
+    margin-left: 50px;
+    height: 75px;
+}
+
+.account-page__title {
+    width: 100%;
+    font-size: 30px;
+    color: #535258;
+    border-bottom: 1px solid #8a8eb1;
+}
+
+.account-page__block-title {
+    margin-top: 30px;
+    border-bottom: 1px solid #8a8eb1;
+}
+
+.account-page__block-row {
+    margin-top: 10px;
+}
+
+.account-page__block-row a {
+    cursor: pointer;
+    color: #007bff !important;
+    font-size: 12px;
+}
+
+.account-page__block-row-title {
+    width: 75px;
+    margin-bottom: 0;
+}
+
+.account-page__block-row-title--longer {
+    width: 150px;
+    margin-bottom: 0;
+}
+
+.account-page__block-row-content {
+    font-size: 14px;
+}
+
+.account-page__modal {
+    width: 500px;
+    height: 350px;
+    background-color: white;
+    border: 1px solid #afabab;
+}
+
+.account-page__modal-title {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 50px;
+    border-bottom: 1px solid #aeabab;
+}
+
+.account-page__modal-content {
+    height: 180px;
+    margin-top: 50px;
+    border-bottom: 1px solid #aeabab;
+}
+
+.account-page__modal-content input {
+    width: 300px;
+}
+
+.account-page__modal-footer {
+    height: 75px;
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+}
+
+.account-page__modal-row {
+    display: flex;
+    flex-direction: column;
+    margin-left: 50px;
+    margin-top: 10px;
+}
+
+.account-page__modal-button {
+    width: 80px;
+    height: 35px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    background: #484c6b;
+    color: white;
+    font-weight: 300;
+    font-size: 13px;
+    margin-right: 10px;
+}
+
+.account-page__modal-button:hover {
+    opacity: 0.9;
+}
+
+.account__container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 55px;
+    height: 55px;
+    cursor: pointer;
+}
+
+.account__icon:hover {
+    opacity: 0.5;
+}
+
+.account__image {
+    width: 35px;
+    height: 35px;
+    border-radius: 17px;
+    border: 2px solid var(--gray);
+}
+
+.account__dropdown {
+    position: absolute;
+    width: 250px;
+    margin-top: 50px;
+    top: 0px;
+    right: 5px;
+    border: 1px solid var(--gray);
+    border-radius: 5px;
+    box-shadow: var(--gray) 0px 1px 15px 1px;
+}
+
+.account__dropdown-header {
+    display: flex;
+    align-items: center;
+    height: 40px;
+    color: var(--white);
+    background-color: var(--dark-green);
+    border: 1px solid var(--dark-green);
+    border-radius: 5px 5px 0 0;
+    font-weight: 300;
+    font-size: 16px;
+}
+
+.account__dropdown-header--title {
+    margin-left: 20px;
+}
+
+.account__dropdown-content {
+    height: 230px;
+    background-color: var(--fluent-gray);
+}
+
+.account__dropdown-footer {
+    height: 70px;
+    font-weight: 300;
+    font-size: 14px;
+    color: var(--white);
+    border-radius: 0 0 5px 5px;
+    background: var(--dark-green);
+}
