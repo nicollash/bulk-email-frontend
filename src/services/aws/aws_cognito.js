@@ -8,7 +8,7 @@ Amplify.configure({
     // REQUIRED only for Federated Authentication - Amazon Cognito Identity Pool ID
     identityPoolId: process.env.REACT_APP_IDENTITY_POOL_ID || 'us-east-1:fa266d05-be67-4e59-b740-37a7d22f1633',
     // REQUIRED - Amazon Cognito Region
-    region: 'us-east-1',
+    region: process.env.REACT_APP_REGION || 'us-east-1',
     // OPTIONAL - Amazon Cognito User Pool ID
     userPoolId: process.env.REACT_APP_USER_POOL_ID || 'us-east-1_tmpIXOt9R',
     // OPTIONAL - Amazon Cognito Web Client ID (26-char alphanumeric string)
@@ -19,17 +19,16 @@ Amplify.configure({
   Analytics: {
     // OPTIONAL - disable Analytics if true
     disabled: false
+  },
+  Storage: {
+    bucket: process.env.REACT_APP_S3_BUCKET || 'chatmantics-dev-csv', //REQUIRED -  Amazon S3 bucket
+    identityPoolId: process.env.REACT_APP_IDENTITY_POOL_ID || 'us-east-1:fa266d05-be67-4e59-b740-37a7d22f1633',
   }
 })
 
 export function refreshToken() {
   Auth.currentSession()
     .then(data => {
-      /*
-      localStorage.setItem('user_token', data.accessToken.jwtToken)
-      localStorage.setItem('id_token', data.idToken.jwtToken)
-      localStorage.setItem('refresh_token', data.refreshToken.token)
-      */
       return data
     })
     .catch(err => console.log('err currentSession: ', err))

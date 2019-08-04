@@ -41,11 +41,11 @@ export const getCampaignFailed = () => ({
 });
 
 export const createCampaigns = (data) => async (dispatch, getState) => {
-    const token = localStorage.getItem('id_token');
+    const { signInUserSession } = getState().auth.userProfile;
 
     dispatch(createCampaignRequested());
-    if (token) {
-        const res = await postJSON(baseUrl + '/data/campaign', data, token);
+    if (signInUserSession) {
+        const res = await postJSON(baseUrl + '/data/campaign', data, signInUserSession.idToken.jwtToken);
 
         if (res && res.status === 'success') {
             dispatch(createCampaignSucceeded());
