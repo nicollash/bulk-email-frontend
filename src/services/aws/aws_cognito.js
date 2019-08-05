@@ -39,6 +39,19 @@ export function createPassword(user, password) {
   return Auth.completeNewPassword(user, password)
 }
 
+export function updatePassword(oldPassword, newPassword) {
+  return Auth.currentAuthenticatedUser()
+    .then(user => {
+      return Auth.changePassword(user, oldPassword, newPassword);
+    })
+    .then(data => {
+      return data;
+    })
+    .catch(err => {
+      return err;
+    });
+}
+
 export function signInUser(username, password) {
   return Auth.signIn(username, password)
 }

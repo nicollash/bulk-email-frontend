@@ -4,8 +4,10 @@
 import React from 'react'
 import { getBEMClasses } from '../helpers/cssClassesHelper'
 import HomePageLayout from '../layouts/HomePageLayout'
+import Modal from 'react-modal'
 
 import '../styles/components/accountComponent.css'
+import '../styles/base/modal.css'
 
 const accountClasses = getBEMClasses(['account-page'])
 
@@ -16,8 +18,50 @@ class AccountComponent extends React.Component {
     this.state = {
       username: props.auth.userProfile.username,
       email: props.auth.userProfile.attributes.email,
-      phone_number: props.auth.userProfile.attributes.phone_number
+      phone_number: props.auth.userProfile.attributes.phone_number,
+      editPwd: false,
+      currentPassword: '',
+      password: '',
+      passwordConfirm: ''
     }
+  }
+
+  componentDidMount () {
+    Modal.setAppElement('body')
+  }
+
+  updateUser () {
+    const { setNewPassword } = this.props
+    const { currentPassword, password, passwordConfirm } = this.state
+
+    if (password === passwordConfirm && password !== '' && currentPassword !== '') {
+      setNewPassword({
+        currentPassword,
+        newPassword: password
+      })
+
+      this.hideModal()
+    }
+  }
+
+  editPwd () {
+    this.setState({
+      editPwd: true
+    })
+  }
+
+  hideModal () {
+    this.setState({
+      editPwd: false
+    })
+  }
+
+  onValueChanged (e) {
+    const { value } = e.target
+
+    this.setState({
+      [e.target.name]: value
+    })
   }
 
   render () {
@@ -58,12 +102,35 @@ class AccountComponent extends React.Component {
                   <label className={accountClasses('block-row-title')}>Phone</label> <span className={accountClasses('block-row-content')}>: { auth.userProfile.attributes.phone_number }</span> 
                 </div>
                 <div className={accountClasses('block-row')}>
-                  <label className={accountClasses('block-row-title')}>Password</label> <span className={accountClasses('block-row-content')}>: ********</span> 
+                  <label className={accountClasses('block-row-title')}>Password</label> <span className={accountClasses('block-row-content')}>: ********</span>  [<span className='span-link' onClick={this.editPwd.bind(this)}>Change</span>]
                 </div>
               </div>
             </div>
           </div>
         </div>
+        <Modal isOpen={this.state.editPwd} className={accountClasses('modal')}>
+          <div className={accountClasses('modal-title')}>
+            Change Password
+          </div>
+          <div className={accountClasses('modal-content')}>
+            <div className={accountClasses('modal-row')}>
+              <label>Current Password</label>
+              <input type='password' name='currentPassword' value={this.state.currentPassword} onChange={this.onValueChanged.bind(this)} />
+            </div>
+            <div className={accountClasses('modal-row')}>
+              <label>New Password</label>
+              <input type='password' name='password' value={this.state.password} onChange={this.onValueChanged.bind(this)} />
+            </div>
+            <div className={accountClasses('modal-row')}>
+              <label>Confirm Password</label>
+              <input type='password' name='passwordConfirm' value={this.state.passwordConfirm} onChange={this.onValueChanged.bind(this)} />
+            </div>
+          </div>
+          <div className={accountClasses('modal-footer')}>
+            <div className={accountClasses('modal-button')} onClick={this.updateUser.bind(this)}>Save</div>
+            <div className={accountClasses('modal-button')} onClick={this.hideModal.bind(this)}>Cancel</div>
+          </div>
+        </Modal>
       </HomePageLayout>
     )
   };

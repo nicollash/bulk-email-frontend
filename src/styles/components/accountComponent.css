@@ -43,7 +43,7 @@
 
 .account-page__modal {
     width: 500px;
-    height: 350px;
+    height: 400px;
     background-color: white;
     border: 1px solid #afabab;
 }
@@ -57,7 +57,7 @@
 }
 
 .account-page__modal-content {
-    height: 180px;
+    height: 230px;
     margin-top: 50px;
     border-bottom: 1px solid #aeabab;
 }

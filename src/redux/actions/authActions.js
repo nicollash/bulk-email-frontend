@@ -1,5 +1,6 @@
 import {
   signInUser,
+  updatePassword,
   createPassword,
   forgotPassword,
   changePasswordWithCode,
@@ -21,6 +22,11 @@ import {
   AUTH_INIT_PASSWORD_STATE,
   AUTH_USER_SIGNED_OUT
 } from '../actionTypes'
+
+export const setNewPassword = (payload) => async (dispatch, getState) => {
+  const res = await updatePassword(payload.currentPassword, payload.newPassword)
+
+}
 
 export const changePassword = (payload) => async (dispatch, getState) => {
   const { cognitoUser } = getState().auth.forgot
