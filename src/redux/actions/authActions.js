@@ -3,7 +3,6 @@ import {
   createPassword,
   forgotPassword,
   changePasswordWithCode,
-  refreshToken,
 } from '../../services/aws/aws_cognito'
 
 import {
@@ -129,11 +128,3 @@ export const loginFailed = payload => ({
   type: AUTH_LOGIN_FAILED,
   payload
 })
-
-export const refreshWithToken = () => async (dispatch, getState) => {
-  const { auth } = getState().auth
-
-  if (auth === 'AUTH_LOGIN_SUCCEEDED') {
-    await refreshToken()
-  }
-}

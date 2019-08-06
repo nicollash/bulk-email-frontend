@@ -26,14 +26,6 @@ Amplify.configure({
   }
 })
 
-export function refreshToken() {
-  Auth.currentSession()
-    .then(data => {
-      return data
-    })
-    .catch(err => console.log('err currentSession: ', err))
-}
-
 export function createPassword(user, password) {
   return Auth.completeNewPassword(user, password)
 }
