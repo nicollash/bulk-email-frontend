@@ -22,19 +22,6 @@ Amplify.configure({
   }
 })
 
-export function refreshToken() {
-  Auth.currentSession()
-    .then(data => {
-      /*
-      localStorage.setItem('user_token', data.accessToken.jwtToken)
-      localStorage.setItem('id_token', data.idToken.jwtToken)
-      localStorage.setItem('refresh_token', data.refreshToken.token)
-      */
-      return data
-    })
-    .catch(err => console.log('err currentSession: ', err))
-}
-
 export function createPassword(user, password) {
   return Auth.completeNewPassword(user, password)
 }
