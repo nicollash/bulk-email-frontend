@@ -49,7 +49,7 @@ class Select extends React.Component {
         value = e.length > 0 ? e[0].customOption ? e[0].label : e[0].id : null;
       }
 
-      this.props.onChange({ target: { value } });
+      this.props.onChange({ target: { value, name: this.props.name } });
     }
   }
 
