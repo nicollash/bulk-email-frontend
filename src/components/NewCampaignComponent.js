@@ -157,13 +157,15 @@ class NewCampaignComponent extends React.Component {
       }
     })
 
+    const contentClass = isUploading ? newCampaignClasses('content') + ' ' + newCampaignClasses('content-overlay') : newCampaignClasses('content')
+
     return (
       <HomePageLayout>
         <div className={newCampaignClasses('container')}>
           <div className={newCampaignClasses('title')}>
             New Queue
           </div>
-          <div className={newCampaignClasses('content')}>
+          <div className={contentClass}>
             { isUploading &&
               <div className={newCampaignClasses('content-loading')}>
                 <ReactLoading type='spin' color='#ffc600' margin='auto' height={50} width={50} />

@@ -18,6 +18,17 @@
     padding: 30px 10px;
 }
 
+.new-campaign__content-overlay {
+    opacity: 0.7;
+}
+
+.new-campaign__content-loading {
+    position: fixed;
+    left: 350px;
+    top: 350px;
+    z-index: 9999;
+}
+
 .file-upload-input {
     visibility: hidden;
     height: 0px;
