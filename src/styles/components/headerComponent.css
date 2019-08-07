@@ -3,7 +3,8 @@
 	justify-content: space-between;
 	align-items: center;
 	height: 55px;
-	border-bottom: 1px solid var(--gray);
+  border-bottom: 1px solid var(--gray);
+  background: white;
 }
 
 .header__logo {

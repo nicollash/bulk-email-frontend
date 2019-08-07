@@ -1,6 +1,7 @@
 import { connect } from 'react-redux';
 import NewCampaignComponent from '../components/NewCampaignComponent';
 import { getCampaigns } from '../redux/actions/campaignActions';
+import { createQueue } from '../redux/actions/queueActions';
 
 const mapStateToProps = state => {
   const { campaign } = state
@@ -11,7 +12,8 @@ const mapStateToProps = state => {
 };
 
 const mapDispatchToProps = {
-  getCampaigns
+  getCampaigns,
+  createQueue
 };
 
 export default connect(

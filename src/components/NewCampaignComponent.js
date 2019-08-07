@@ -19,19 +19,25 @@ const VALID_FILE_TYPES = ['text/csv'];
 class NewCampaignComponent extends React.Component {
   //initialize state
   state = {
-    name: "",
+    name: '',
     channel: Channel.SMS,
-    bot: 3000,
-    filepath: "",
-    message: "",
+    bot: '0',
+    tier: 1,
+    filepath: '',
+    message: '',
     csvFields: [],
-    fnameField: "",
-    lnameField: "",
-    pNumberField: "",
-    stateField: "",
-    addressField: "",
-    cityField: "",
-    isUploading: false
+    fnameField: '',
+    lnameField: '',
+    pNumberField: '',
+    stateField: '',
+    addressField1: '',
+    addressField2: '',
+    cityField: '',
+    zipField: '',
+    subIdField: '',
+    utmField: '',
+    isUploading: false,
+    key: ''
   }
 
   componentDidMount() {
@@ -63,16 +69,18 @@ class NewCampaignComponent extends React.Component {
     let that = this;
     let file = e.target.files[0];
 
-    Storage.put(`campaign_${new Date().getTime()}.csv`, file, {
-      progressCallback(progress) {
+    Storage.put(`campaign_${new Date().getTime()}.csv`, file, {})
+      .then (result => {
+        that.setState({
+          isUploading: false,
+          key: result.key
+        });
+      })
+      .catch(err => {
         that.setState({
           isUploading: false
         });
-        console.log(`Uploaded: ${progress.loaded}/${progress.total}`);
-      },
-    })
-      .then (result => console.log(result))
-      .catch(err => console.log(err));
+      });
 
     if (!file || !VALID_FILE_TYPES.includes(file.type)) {
       return;
@@ -93,10 +101,34 @@ class NewCampaignComponent extends React.Component {
     }
   }
 
+  handleSaveClick = () => {
+    const { createQueue } = this.props;
+    const { bot, channel, tier, key, fnameField, lnameField, pNumberField, stateField, addressField1, addressField2, cityField, zipField, subIdField, utmField } = this.state;
+    createQueue({
+      campaignId: bot,
+      channel,
+      tier,
+      bucket: 'chatmantics-dev-csv',
+      key,
+      keyMappings: {
+        fname: fnameField,
+        lname: lnameField,
+        p: pNumberField,
+        address1: addressField1,
+        address2: addressField2,
+        city: cityField,
+        state: stateField,
+        zip: zipField,
+        subId: subIdField,
+        utm: utmField
+      }
+    })
+  }
+
   // MARK: - Lifecycle Methods
 
   render() {
-    const { name, channel, bot, filepath, message, csvFields, fnameField, lnameField, pNumberField, stateField, addressField, cityField, isUploading } = this.state;
+    const { name, channel, bot, tier, filepath, message, csvFields, fnameField, lnameField, pNumberField, stateField, addressField1, addressField2, cityField, zipField, subIdField, utmField, isUploading } = this.state;
     const { campaigns } = this.props.campaign;
 
     const channelValues = [
@@ -106,8 +138,17 @@ class NewCampaignComponent extends React.Component {
     ];
 
     const botValues = campaigns.map(campaign => {
-      return {value: campaign.id, text: campaign.name}
+      return {value: ''+campaign.id, text: campaign.name}
     });
+
+    const tierValues = [
+      { value: 1, text: "1" },
+      { value: 2, text: "2" },
+      { value: 3, text: "3" },
+      { value: 4, text: "4" },
+      { value: 5, text: "5" },
+      { value: 6, text: "6" }
+    ];
 
     const fieldValues = csvFields.map(field => {
       return {
@@ -120,7 +161,7 @@ class NewCampaignComponent extends React.Component {
       <HomePageLayout>
         <div className={newCampaignClasses('container')}>
           <div className={newCampaignClasses('title')}>
-            New Campaign
+            New Queue
           </div>
           <div className={newCampaignClasses('content')}>
             { isUploading &&
@@ -135,6 +176,10 @@ class NewCampaignComponent extends React.Component {
             <FormGroup>
               <Label htmlFor="bot">Bot</Label>
               <Select options={botValues} id="bot" name="bot" placeholder="Choose a bot" value={bot} onChange={this.handleChange} />
+            </FormGroup>
+            <FormGroup>
+              <Label htmlFor="tier">Tier</Label>
+              <Select options={tierValues} id="tier" name="tier" placeholder="Choose a Tier" value={tier} onChange={this.handleChange} />
             </FormGroup>
             <FormGroup>
               <Label>File</Label>
@@ -165,12 +210,28 @@ class NewCampaignComponent extends React.Component {
                     <Select options={fieldValues} id="stateField" name="stateField" placeholder="Choose a field" value={stateField} onChange={this.handleChange} />
                   </div>
                   <div className={newCampaignClasses('row')}>
-                    <Label htmlFor="addressField">address</Label>
-                    <Select options={fieldValues} id="addressField" name="addressField" placeholder="Choose a field" value={addressField} onChange={this.handleChange} />
+                    <Label htmlFor="addressField1">address1</Label>
+                    <Select options={fieldValues} id="addressField1" name="addressField1" placeholder="Choose a field" value={addressField1} onChange={this.handleChange} />
+                  </div>
+                  <div className={newCampaignClasses('row')}>
+                    <Label htmlFor="addressField2">address2</Label>
+                    <Select options={fieldValues} id="addressField2" name="addressField2" placeholder="Choose a field" value={addressField2} onChange={this.handleChange} />
                   </div>
                   <div className={newCampaignClasses('row')}>
                     <Label htmlFor="cityField">city</Label>
                     <Select options={fieldValues} id="cityField" name="cityField" placeholder="Choose a field" value={cityField} onChange={this.handleChange} />
+                  </div>
+                  <div className={newCampaignClasses('row')}>
+                    <Label htmlFor="zipField">zip</Label>
+                    <Select options={fieldValues} id="zipField" name="zipField" placeholder="Choose a field" value={zipField} onChange={this.handleChange} />
+                  </div>
+                  <div className={newCampaignClasses('row')}>
+                    <Label htmlFor="subIdField">subId</Label>
+                    <Select options={fieldValues} id="subIdField" name="subIdField" placeholder="Choose a field" value={subIdField} onChange={this.handleChange} />
+                  </div>
+                  <div className={newCampaignClasses('row')}>
+                    <Label htmlFor="utmField">utm</Label>
+                    <Select options={fieldValues} id="utmField" name="utmField" placeholder="Choose a field" value={utmField} onChange={this.handleChange} />
                   </div>
                 </div>
               }

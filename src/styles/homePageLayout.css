@@ -4,6 +4,13 @@ body {
   font-family: sans-serif;
 }
 
+.main-layout__header {
+  width: 100%;
+  top: 0px;
+  position: fixed;
+  z-index: 9999;
+}
+
 .main-layout__body {
   height: 100%;
   padding-left: 100px;

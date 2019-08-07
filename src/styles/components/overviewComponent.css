@@ -1,6 +1,6 @@
 .overview__container {
     width: calc(100% - 100px);
-    margin-top: 55px;
+    padding-top: 100px;
     margin-left: 50px;
 }
 
