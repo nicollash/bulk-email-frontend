@@ -5,6 +5,7 @@ import React from 'react'
 import { getBEMClasses } from '../helpers/cssClassesHelper'
 import HomePageLayout from '../layouts/HomePageLayout'
 import Modal from 'react-modal'
+import ReactLoading from 'react-loading'
 
 import '../styles/components/accountComponent.css'
 import '../styles/base/modal.css'
@@ -30,6 +31,14 @@ class AccountComponent extends React.Component {
     Modal.setAppElement('body')
   }
 
+  componentWillReceiveProps (newProps) {
+    const { auth } = this.props;
+
+    if (this.state.editPwd && auth.isLoading && !newProps.auth.isLoading) {
+      this.hideModal()
+    }
+  }
+
   updateUser () {
     const { setNewPassword } = this.props
     const { currentPassword, password, passwordConfirm } = this.state
@@ -39,8 +48,6 @@ class AccountComponent extends React.Component {
         currentPassword,
         newPassword: password
       })
-
-      this.hideModal()
     }
   }
 
@@ -66,6 +73,8 @@ class AccountComponent extends React.Component {
 
   render () {
     const { auth } = this.props
+
+    const modalClass = auth.isLoading ? accountClasses('modal') + ' ' + accountClasses('modal-overlay') : accountClasses('modal')
 
     return (
       <HomePageLayout>
@@ -108,7 +117,12 @@ class AccountComponent extends React.Component {
             </div>
           </div>
         </div>
-        <Modal isOpen={this.state.editPwd} className={accountClasses('modal')}>
+        <Modal isOpen={this.state.editPwd} className={modalClass}>
+          { auth.isLoading &&
+            <div className={ accountClasses('modal-loading') }>
+                <ReactLoading type='spin' color='#ffc600' margin='auto' height={ 50 } width={ 50 } />
+            </div>
+          }
           <div className={accountClasses('modal-title')}>
             Change Password
           </div>

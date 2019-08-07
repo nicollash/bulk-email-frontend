@@ -48,6 +48,16 @@
     border: 1px solid #afabab;
 }
 
+.account-page__modal-overlay {
+    opacity: 0.6;
+}
+
+.account-page__modal-loading {
+    position: fixed;
+    top: calc(50% - 30px);
+    left: calc(50% - 30px);
+}
+
 .account-page__modal-title {
     display: flex;
     align-items: center;

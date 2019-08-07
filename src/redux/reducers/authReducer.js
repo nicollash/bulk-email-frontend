@@ -12,7 +12,10 @@ import {
   AUTH_PASSWORD_CHANGE_FAILED,
   AUTH_INIT_PASSWORD_STATE,
   AUTH_USER_SIGNED_OUT,
-  AUTH_CHECK_LIST
+  AUTH_CHECK_LIST,
+  AUTH_SET_PASSWORD_REQUESTED,
+  AUTH_SET_PASSWORD_SUCCEEDED,
+  AUTH_SET_PASSWORD_FAILED
 } from '../actionTypes'
 
 const initialState = {
@@ -30,6 +33,27 @@ const initialState = {
 }
 
 const actionHandlers = {
+  [AUTH_SET_PASSWORD_REQUESTED]: (state, { type, payload }) => {
+    return {
+      ...state,
+      auth: type,
+      isLoading: true
+    }
+  },
+  [AUTH_SET_PASSWORD_SUCCEEDED]: (state, { type, payload }) => {
+    return {
+      ...state,
+      auth: type,
+      isLoading: false
+    }
+  },
+  [AUTH_SET_PASSWORD_FAILED]: (state, { type, payload }) => {
+    return {
+      ...state,
+      auth: type,
+      isLoading: false
+    }
+  },
   [AUTH_CHECK_LIST]: (state, { type, payload }) => {
     return {
       ...state,
