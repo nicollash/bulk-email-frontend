@@ -14,7 +14,7 @@ export const getTextTemplates = campaignId => async (dispatch, getState) => {
     dispatch(getTextTemplatesRequested());
 
     const res = await getJSON(
-      baseUrl + "/data/text_template?campaignid=" + campaignId,
+      baseUrl + "data/text_template?campaignid=" + campaignId,
       token.idToken.jwtToken
     );
 

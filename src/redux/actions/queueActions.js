@@ -41,7 +41,7 @@ export const createQueue = data => async (dispatch, getState) => {
     const token = await Auth.currentSession();
     dispatch(createQueueRequested());
     const res = await postJSON(
-      baseUrl + "/queue",
+      baseUrl + "queue",
       data,
       token.idToken.jwtToken
     );
@@ -61,7 +61,7 @@ export const getQueues = () => async (dispatch, getState) => {
 
     dispatch(getQueuesRequested());
     const res = await getJSON(
-      baseUrl + "/data/bulk_job",
+      baseUrl + "data/bulk_job",
       token.idToken.jwtToken
     );
     
