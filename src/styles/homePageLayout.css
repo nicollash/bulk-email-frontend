@@ -11,8 +11,22 @@ body {
   z-index: 9999;
 }
 
+.main-layout__side-bar {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  margin-top: 64px;
+  padding-top: 15px;
+  position: fixed;
+  height: calc(100% - 64px);
+  width: 100%;
+  max-width: 200px;
+  background: #455a64;
+  border-right: 2px solid #33444c;
+}
+
 .main-layout__body {
   height: 100%;
-  padding-left: 100px;
+  padding-left: 200px;
   background-color: var(--fluent-gray);
 }

@@ -12,6 +12,7 @@ import 'react-redux-toastr/lib/css/react-redux-toastr.min.css'
 
 const LogInContainer = asyncComponent(() => import('./containers/LogInContainer').then(module => module.default))
 const NewCampaignContainer = asyncComponent(() => import('./containers/NewCampaignContainer').then(module => module.default))
+const QueueListContainer = asyncComponent(() => import('./containers/QueueListContainer').then(module => module.default))
 const ForgotPasswordContainer = asyncComponent(() => import('./containers/ForgotPasswordContainer').then(module => module.default))
 const ResetPasswordContainer = asyncComponent(() => import('./containers/ResetPasswordContainer').then(module => module.default))
 const NewPasswordRequestContainer = asyncComponent(() => import('./containers/NewPasswordRequestContainer').then(module => module.default))
@@ -25,7 +26,8 @@ class App extends Component {
       <React.Fragment>
         <Switch>
           <UnAuthenticatedRoute path={'/login'} component={LogInContainer} exact />
-          <AuthenticatedRoute path={'/create-campaign'} component={NewCampaignContainer} exact />
+          <AuthenticatedRoute path={'/create-queue'} component={NewCampaignContainer} exact />
+          <AuthenticatedRoute path={'/queue-list'} component={QueueListContainer} exact />
           <AuthenticatedRoute path={'/overview'} component={OverviewContainer} exact/>
           <AuthenticatedRoute path='/account' component={AccountContainer} />
           <UnAuthenticatedRoute path={'/forgot-password'} component={ForgotPasswordContainer} exact />

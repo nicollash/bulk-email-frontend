@@ -1,27 +1,27 @@
-.header__container {
-	display: flex;
-	justify-content: space-between;
-	align-items: center;
-	height: 55px;
-  border-bottom: 1px solid var(--gray);
-  background: white;
-}
-
-.header__logo {
-  display: inline-block;
-}
-
-.header__logo-container {
+.header__toolbar {
   display: flex;
+  justify-content: space-between;
 }
 
-.header__logout {
-  height: 45px;
-  width: 100px;
-  background-color: var(--gray);
-  color: var(--dark-blue);
-  border: none;
-  margin: 5px;
-  border-radius: 5px;
-  border: 2px solid var(--shadow-gray);
+.header__left-bar {
+  display: flex;
+  align-items: center;
+}
+
+.header__left-bar h6 {
+  font-weight: 600;
+}
+
+.header__profile-menu-container {
+  z-index: 9999 !important;
+}
+
+.header__profile-menu-container .MuiPaper-root {
+  position: absolute;
+  top: 50px !important;
+  z-index: 9999 !important;
+  left: unset !important;
+  right: 20px !important;
+  width: 150px;
+  border-radius: 0;
 }

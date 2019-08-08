@@ -1,65 +1,94 @@
 import React from 'react';
 import { getBEMClasses } from '../helpers/cssClassesHelper';
 
-import {signOutUser} from '../services/aws/aws_cognito';
+import List from '@material-ui/core/List';
+import ListItem from '@material-ui/core/ListItem';
+import ListItemIcon from '@material-ui/core/ListItemIcon';
+import ListItemText from '@material-ui/core/ListItemText';
+import Collapse from '@material-ui/core/Collapse';
+import Divider from '@material-ui/core/Divider';
 
-import overviewIcon from '../assets/images/002-dashboard.png';
-import signoutIcon from '../assets/images/logout.png';
-import plusIcon from '../assets/images/plus.png';
-import accountIcon from '../assets/images/008-account.png'
+import InboxIcon from '@material-ui/icons/MoveToInbox';
+import Add from '@material-ui/icons/Add';
+import SendIcon from '@material-ui/icons/Send';
+import ExpandLess from '@material-ui/icons/ExpandLess';
+import ExpandMore from '@material-ui/icons/ExpandMore';
+import StarBorder from '@material-ui/icons/StarBorder';
+
 import '../styles/components/sidebarComponent.css';
 
 const sidebarClasses = getBEMClasses(['side-bar']);
 
 class SidebarComponent extends React.Component {
 
+  constructor (props) {
+    super(props)
+
+    this.state = {
+      openQueue: true
+    };
+  }
+
   goOverview = () => {
     const { history } = this.props;
     history.push('/overview');
   }
 
-  goNewCampaign = () => {
+  goAddQueue = () => {
     const { history } = this.props;
-    history.push('/create-campaign');
+    history.push('/create-queue');
   }
 
-  goAccount = () => {
+  goQueueList = () => {
     const { history } = this.props;
-
-    history.push('/account');
+    history.push('/queue-list');
   }
-  
-  signout = () => {
-    const { signOut } = this.props;
-    if (signOutUser()) {
-      signOut();
-    }
+
+  toggleQueue = () => {
+    this.setState({
+      openQueue: !this.state.openQueue
+    })
   }
 
   render() {
+    const { openQueue } = this.state;
+
     return (
-      <div className={sidebarClasses('container')}>
-        <div className={sidebarClasses('nav')}>
-          <div className={sidebarClasses('nav-item')} onClick={this.goNewCampaign}>
-            <img alt='' className={sidebarClasses('nav-icon')} src={plusIcon} />
-            <span>New</span>
-          </div>
-          <div className={sidebarClasses('nav-item')} onClick={this.goOverview}>
-            <img alt='' className={sidebarClasses('nav-icon')} src={overviewIcon} />
-            <span>Overview</span>
-          </div>
-        </div>
-        <div className={sidebarClasses('nav-bottom')} >
-          <div className={sidebarClasses('nav-item')} onClick={this.goAccount}>
-            <img alt='' className={sidebarClasses('nav-icon')} src={accountIcon} />
-            <span>Account</span>
-          </div>
-          <div className={sidebarClasses('nav-item')} onClick={this.signout} >
-            <img alt='' className={sidebarClasses('nav-icon')} src={signoutIcon} />
-            <span>Sign Out</span>
-          </div>
-        </div>
-      </div>
+      <List
+        component="nav"
+      >
+        <ListItem button onClick={this.goOverview}>
+          <ListItemIcon>
+            <SendIcon />
+          </ListItemIcon>
+          <ListItemText primary="Overview" />
+        </ListItem>
+        <Divider component="li" />
+        <ListItem button onClick={this.toggleQueue}>
+          <ListItemIcon>
+            <InboxIcon />
+          </ListItemIcon>
+          <ListItemText primary="Queues" />
+          {openQueue ? <ExpandLess /> : <ExpandMore />}
+        </ListItem>
+        <Collapse in={openQueue} timeout="auto" unmountOnExit>
+          <List component="div" disablePadding>
+            <ListItem button onClick={this.goAddQueue}>
+              <ListItemIcon>
+                <Add />
+              </ListItemIcon>
+              <ListItemText primary="New Queue" />
+            </ListItem>
+            <ListItem button onClick={this.goQueueList}>
+              <ListItemIcon>
+                <StarBorder />
+              </ListItemIcon>
+              <ListItemText primary="Queue List" />
+            </ListItem>
+          </List>
+        </Collapse>
+        <Divider component="li" />
+      </List>
     )
   }
 }
