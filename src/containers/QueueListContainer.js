@@ -1,22 +1,23 @@
 import { connect } from 'react-redux';
-import NewCampaignComponent from '../components/NewCampaignComponent';
+import QueueListComponent from '../components/QueueListComponent';
 import { getCampaigns } from '../redux/actions/campaignActions';
-import { createQueue } from '../redux/actions/queueActions';
+import { getQueues } from '../redux/actions/queueActions';
 
 const mapStateToProps = state => {
-  const { campaign } = state
+  const { campaign, queue } = state
 
   return {
-    campaign
+    campaign,
+    queue
   }
 };
 
 const mapDispatchToProps = {
   getCampaigns,
-  createQueue
+  getQueues
 };
 
 export default connect(
   mapStateToProps,
   mapDispatchToProps
-)(NewCampaignComponent);
+)(QueueListComponent);

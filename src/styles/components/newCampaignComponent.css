@@ -1,6 +1,6 @@
 .new-campaign__container {
     width: calc(100% - 100px);
-    padding-top: 55px;
+    padding-top: 100px;
     margin-left: 50px;
 }
 
@@ -16,6 +16,17 @@
     flex-direction: column;
     width: 400px;
     padding: 30px 10px;
+}
+
+.new-campaign__content-overlay {
+    opacity: 0.7;
+}
+
+.new-campaign__content-loading {
+    position: fixed;
+    left: 350px;
+    top: 350px;
+    z-index: 9999;
 }
 
 .file-upload-input {

@@ -1,0 +1,5 @@
+.queue-list__container {
+    width: calc(100% - 100px);
+    padding-top: 85px;
+    margin-left: 50px;
+}
