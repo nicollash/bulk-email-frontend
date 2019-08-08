@@ -1,5 +1,6 @@
 import {
   signInUser,
+  updatePassword,
   createPassword,
   forgotPassword,
   changePasswordWithCode,
@@ -18,8 +19,35 @@ import {
   AUTH_PASSWORD_CHANGE_SUCCEEDED,
   AUTH_PASSWORD_CHANGE_FAILED,
   AUTH_INIT_PASSWORD_STATE,
-  AUTH_USER_SIGNED_OUT
+  AUTH_USER_SIGNED_OUT,
+  AUTH_SET_PASSWORD_REQUESTED,
+  AUTH_SET_PASSWORD_SUCCEEDED,
+  AUTH_SET_PASSWORD_FAILED
+
 } from '../actionTypes'
+
+export const changePasswordRequested = () => ({
+  type: AUTH_SET_PASSWORD_REQUESTED
+})
+
+export const changePasswordSucceeded = () => ({
+  type: AUTH_SET_PASSWORD_SUCCEEDED
+})
+
+export const changePasswordFailed = () => ({
+  type: AUTH_SET_PASSWORD_FAILED
+})
+
+export const setNewPassword = (payload) => async (dispatch, getState) => {
+  dispatch(changePasswordRequested());
+  const res = await updatePassword(payload.currentPassword, payload.newPassword)
+
+  if (res === 'SUCCESS') {
+    dispatch(changePasswordSucceeded());
+  } else {
+    dispatch(changePasswordFailed());
+  }
+}
 
 export const changePassword = (payload) => async (dispatch, getState) => {
   const { cognitoUser } = getState().auth.forgot
