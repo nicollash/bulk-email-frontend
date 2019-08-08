@@ -96,7 +96,7 @@ class NewCampaignComponent extends React.Component {
   // MARK: - Lifecycle Methods
 
   render() {
-    const { name, channel, bot, filepath, message, csvFields, fnameField, lnameField, pNumberField, stateField, addressField, cityField, isUploading } = this.state;
+    const { channel, bot, filepath, message, csvFields, fnameField, lnameField, pNumberField, stateField, addressField, cityField, isUploading } = this.state;
     const { campaigns } = this.props.campaign;
 
     const channelValues = [
