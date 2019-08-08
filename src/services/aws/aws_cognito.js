@@ -2,6 +2,8 @@
 /* eslint-disable no-cond-assign */
 
 import Amplify, { Auth } from 'aws-amplify';
+import { CognitoUser } from 'amazon-cognito-identity-js';
+import { userPool } from './aws_profile';
 
 Amplify.configure({
   Auth: {
@@ -54,7 +56,46 @@ export function changePasswordWithCode(cognitoUser, data) {
 
 // if a user forgets a password, we can instantiate the password reset process (requiring an email)
 export function forgotPassword(email) {
-  // forgot password here
+  return new Promise((res, rej) => {
+    // create `userData`
+    const userData = {
+      Username: email,
+      Pool: userPool
+    }
+
+    // create cognitoUser
+    const cognitoUser = new CognitoUser(userData);
+
+    // call the `forgotPassword()` function of `cognitoUser`
+    cognitoUser.forgotPassword({
+      // we are resolving the `cognitoUser` in our promise because the React component will use it to call `cognitoUser.confirmPassword()`
+      // thats also why we pass in the `forgotPassword` `this` to be used in the React component
+
+      // if successful, then we can resolve the promise with cognitoUser and the `this` declaration from the React component that calls `forgotPassword()`
+      // but we may also resolve the promise with the third function `inputVerificationCode()` which handles behind the scenes of `forgotPassword()`
+      onSuccess: function (result) {
+        res({
+          code: 'SUCCEEDED',
+          cognitoUser: cognitoUser,
+          thirdArg: this
+        })
+      },
+      // if failure, reject the promise
+      onFailure: function (err) {
+        res(err);
+      },
+      // Optional automatic callback that passes in `data` object from `forgotPassword()` and resolve the same was as `onSuccess`
+      // `inputVerificationCode()` handles behind the scenes of `forgotPassword()`, but we don't actually use it. Its here if needed in the future.
+      inputVerificationCode: function (data) {
+        res({
+          code: 'SUCCESS',
+          cognitoUser: cognitoUser,
+          thirdArg: this,
+          details: data
+        });
+      }
+    });
+  });
 }
 
 // signout the current user

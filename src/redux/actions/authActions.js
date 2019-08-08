@@ -49,7 +49,7 @@ export const initAuthPwdState = payload => ({
 })
 
 export const sendEmail = (email) => async (dispatch, getState) => {
-  const res = await forgotPassword(email)
+  const res = await forgotPassword(email);
 
   if (res.code === 'SUCCESS') {
     dispatch(forgotCodeSent(res))
