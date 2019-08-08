@@ -43,9 +43,19 @@
 
 .account-page__modal {
     width: 500px;
-    height: 350px;
+    height: 400px;
     background-color: white;
     border: 1px solid #afabab;
+}
+
+.account-page__modal-overlay {
+    opacity: 0.6;
+}
+
+.account-page__modal-loading {
+    position: fixed;
+    top: calc(50% - 30px);
+    left: calc(50% - 30px);
 }
 
 .account-page__modal-title {
@@ -57,7 +67,7 @@
 }
 
 .account-page__modal-content {
-    height: 180px;
+    height: 230px;
     margin-top: 50px;
     border-bottom: 1px solid #aeabab;
 }
