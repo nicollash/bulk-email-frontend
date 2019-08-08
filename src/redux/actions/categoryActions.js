@@ -13,7 +13,7 @@ export const getCategories = () => async (dispatch, getState) => {
     const token = await Auth.currentSession();
     dispatch(getCategoryRequested());
     const res = await getJSON(
-      baseUrl + "/data/category",
+      baseUrl + "data/category",
       token.idToken.jwtToken
     );
     if (res && res.status === "success") {

@@ -16,7 +16,7 @@ export const getCampaigns = () => async (dispatch, getState) => {
     const token = await Auth.currentSession();
     dispatch(getCampaignRequested());
     const res = await getJSON(
-      baseUrl + "/data/campaign",
+      baseUrl + "data/campaign",
       token.idToken.jwtToken
     );
     if (res && res.status === "success") {
@@ -47,7 +47,7 @@ export const createCampaigns = data => async (dispatch, getState) => {
     const token = await Auth.currentSession();
     dispatch(createCampaignRequested());
     const res = await postJSON(
-      baseUrl + "/data/campaign",
+      baseUrl + "data/campaign",
       data,
       token.idToken.jwtToken
     );
