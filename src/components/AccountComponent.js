@@ -10,7 +10,7 @@ import ReactLoading from 'react-loading'
 import '../styles/components/accountComponent.css'
 import '../styles/base/modal.css'
 
-const accountClasses = getBEMClasses(['account-page'])
+const accountClasses = getBEMClasses([ 'account-page' ])
 
 class AccountComponent extends React.Component {
   constructor (props) {
@@ -67,7 +67,7 @@ class AccountComponent extends React.Component {
     const { value } = e.target
 
     this.setState({
-      [e.target.name]: value
+      [ e.target.name ]: value
     })
   }
 
@@ -77,75 +77,75 @@ class AccountComponent extends React.Component {
     const modalClass = auth.isLoading ? accountClasses('modal') + ' ' + accountClasses('modal-overlay') : accountClasses('modal')
 
     return (
-      <HomePageLayout>
-        <div className={accountClasses('container')}>
-          <div className={accountClasses('title')}>
+        <HomePageLayout>
+            <div className={ accountClasses('container') }>
+                <div className={ accountClasses('title') }>
             Account
-          </div>
-          <div className={accountClasses('content')}>
-            <div className={accountClasses('content-block')}>
-              <div className={accountClasses('block-title')}>
+                </div>
+                <div className={ accountClasses('content') }>
+                    <div className={ accountClasses('content-block') }>
+                        <div className={ accountClasses('block-title') }>
                 Settings
-              </div>
-              <div className={accountClasses('block-content')}>
-                <div className={accountClasses('block-row')}>
-                  <label className={accountClasses('block-row-title--longer')}>Account Name</label><span className={accountClasses('block-row-content')}>: { auth.userProfile.username}</span>
-                </div>
-                <div className={accountClasses('block-row')}>
-                  <label className={accountClasses('block-row-title--longer')}>Account Status</label><span className={accountClasses('block-row-content')}>: Active</span>
-                </div>
-                <div className={accountClasses('block-row')}>
-                  <label className={accountClasses('block-row-title--longer')}>Approved Channels</label><span className={accountClasses('block-row-content')}>: SMS, VOICE</span>
-                </div>
-              </div>
-            </div>
-            <div className={accountClasses('content-block')}>
-              <div className={accountClasses('block-title')}>
+                        </div>
+                        <div className={ accountClasses('block-content') }>
+                            <div className={ accountClasses('block-row') }>
+                                <label className={ accountClasses('block-row-title--longer') }>Account Name</label><span className={ accountClasses('block-row-content') }>: { auth.userProfile.username}</span>
+                            </div>
+                            <div className={ accountClasses('block-row') }>
+                                <label className={ accountClasses('block-row-title--longer') }>Account Status</label><span className={ accountClasses('block-row-content') }>: Active</span>
+                            </div>
+                            <div className={ accountClasses('block-row') }>
+                                <label className={ accountClasses('block-row-title--longer') }>Approved Channels</label><span className={ accountClasses('block-row-content') }>: SMS, VOICE</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div className={ accountClasses('content-block') }>
+                        <div className={ accountClasses('block-title') }>
                 About You
-              </div>
-              <div className={accountClasses('block-content')}>
-                <div className={accountClasses('block-row')}>
-                  <label className={accountClasses('block-row-title')}>Email</label> <span className={accountClasses('block-row-content')}>: { auth.userProfile.attributes.email }</span> 
+                        </div>
+                        <div className={ accountClasses('block-content') }>
+                            <div className={ accountClasses('block-row') }>
+                                <label className={ accountClasses('block-row-title') }>Email</label> <span className={ accountClasses('block-row-content') }>: { auth.userProfile.attributes.email }</span> 
+                            </div>
+                            <div className={ accountClasses('block-row') }>
+                                <label className={ accountClasses('block-row-title') }>Phone</label> <span className={ accountClasses('block-row-content') }>: { auth.userProfile.attributes.phone_number }</span> 
+                            </div>
+                            <div className={ accountClasses('block-row') }>
+                                <label className={ accountClasses('block-row-title') }>Password</label> <span className={ accountClasses('block-row-content') }>: ********</span>  [<span className='span-link' onClick={ this.editPwd.bind(this) }>Change</span>]
+                            </div>
+                        </div>
+                    </div>
                 </div>
-                <div className={accountClasses('block-row')}>
-                  <label className={accountClasses('block-row-title')}>Phone</label> <span className={accountClasses('block-row-content')}>: { auth.userProfile.attributes.phone_number }</span> 
-                </div>
-                <div className={accountClasses('block-row')}>
-                  <label className={accountClasses('block-row-title')}>Password</label> <span className={accountClasses('block-row-content')}>: ********</span>  [<span className='span-link' onClick={this.editPwd.bind(this)}>Change</span>]
-                </div>
-              </div>
             </div>
-          </div>
-        </div>
-        <Modal isOpen={this.state.editPwd} className={modalClass}>
-          { auth.isLoading &&
-            <div className={ accountClasses('modal-loading') }>
-                <ReactLoading type='spin' color='#ffc600' margin='auto' height={ 50 } width={ 50 } />
-            </div>
+            <Modal isOpen={ this.state.editPwd } className={ modalClass }>
+                { auth.isLoading &&
+                <div className={ accountClasses('modal-loading') }>
+                    <ReactLoading type='spin' color='#ffc600' margin='auto' height={ 50 } width={ 50 } />
+                </div>
           }
-          <div className={accountClasses('modal-title')}>
+                <div className={ accountClasses('modal-title') }>
             Change Password
-          </div>
-          <div className={accountClasses('modal-content')}>
-            <div className={accountClasses('modal-row')}>
-              <label>Current Password</label>
-              <input type='password' name='currentPassword' value={this.state.currentPassword} onChange={this.onValueChanged.bind(this)} />
-            </div>
-            <div className={accountClasses('modal-row')}>
-              <label>New Password</label>
-              <input type='password' name='password' value={this.state.password} onChange={this.onValueChanged.bind(this)} />
-            </div>
-            <div className={accountClasses('modal-row')}>
-              <label>Confirm Password</label>
-              <input type='password' name='passwordConfirm' value={this.state.passwordConfirm} onChange={this.onValueChanged.bind(this)} />
-            </div>
-          </div>
-          <div className={accountClasses('modal-footer')}>
-            <div className={accountClasses('modal-button')} onClick={this.updateUser.bind(this)}>Save</div>
-            <div className={accountClasses('modal-button')} onClick={this.hideModal.bind(this)}>Cancel</div>
-          </div>
-        </Modal>
-      </HomePageLayout>
+                </div>
+                <div className={ accountClasses('modal-content') }>
+                    <div className={ accountClasses('modal-row') }>
+                        <label>Current Password</label>
+                        <input type='password' name='currentPassword' value={ this.state.currentPassword } onChange={ this.onValueChanged.bind(this) } />
+                    </div>
+                    <div className={ accountClasses('modal-row') }>
+                        <label>New Password</label>
+                        <input type='password' name='password' value={ this.state.password } onChange={ this.onValueChanged.bind(this) } />
+                    </div>
+                    <div className={ accountClasses('modal-row') }>
+                        <label>Confirm Password</label>
+                        <input type='password' name='passwordConfirm' value={ this.state.passwordConfirm } onChange={ this.onValueChanged.bind(this) } />
+                    </div>
+                </div>
+                <div className={ accountClasses('modal-footer') }>
+                    <div className={ accountClasses('modal-button') } onClick={ this.updateUser.bind(this) }>Save</div>
+                    <div className={ accountClasses('modal-button') } onClick={ this.hideModal.bind(this) }>Cancel</div>
+                </div>
+            </Modal>
+        </HomePageLayout>
     )
   };
 };

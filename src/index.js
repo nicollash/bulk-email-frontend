@@ -20,13 +20,13 @@ const store = configureStore(history);
 const persistor = persistStore(store);
 
 ReactDOM.render(
-  <Provider store={store}>
-    <PersistGate persistor={persistor}>
-      <ConnectedRouter history={history}>
-        <App />
-      </ConnectedRouter>
-    </PersistGate>
-  </Provider>,
+    <Provider store={ store }>
+        <PersistGate persistor={ persistor }>
+            <ConnectedRouter history={ history }>
+                <App />
+            </ConnectedRouter>
+        </PersistGate>
+    </Provider>,
   document.getElementById('root')
 );
 

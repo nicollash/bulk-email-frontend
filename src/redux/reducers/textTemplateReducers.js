@@ -10,20 +10,20 @@ const initialState = {
 };
 
 const actionHandlers = {
-    [GET_TEXT_TEMPLATE_REQUESTED]: (state) => {
+    [ GET_TEXT_TEMPLATE_REQUESTED ]: (state) => {
         return {
             ...state,
             isLoading: true
         }
     },
-    [GET_TEXT_TEMPLATE_SUCCEEDED]: (state, payload) => {
+    [ GET_TEXT_TEMPLATE_SUCCEEDED ]: (state, payload) => {
         return {
             ...state,
             textTemplates: payload,
             isLoading: false
         }
     },
-    [GET_TEXT_TEMPLATE_FAILED]: (state) => {
+    [ GET_TEXT_TEMPLATE_FAILED ]: (state) => {
         return {
             ...state,
             isLoading: false
@@ -32,6 +32,6 @@ const actionHandlers = {
 };
 
 export default function (state = initialState, action) {
-    const handler = actionHandlers[action.type];
+    const handler = actionHandlers[ action.type ];
     return handler ? handler(state, action) : state;
 };

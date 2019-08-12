@@ -29,12 +29,12 @@ export const addModifier = (modifiers, newModifier) => {
   let result;
 
   if (Array.isArray(modifiers)) {
-    result = [newModifier, ...modifiers];
+    result = [ newModifier, ...modifiers ];
   } else if (typeof modifiers === 'string') {
-    result = [newModifier, modifiers];
+    result = [ newModifier, modifiers ];
   } else if (typeof modifiers === 'object') {
     result = modifiers;
-    result[newModifier] = true;
+    result[ newModifier ] = true;
   }
 
   return result;

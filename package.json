@@ -10,6 +10,7 @@
     "bootstrap": "^4.3.1",
     "connected-react-router": "^6.5.0",
     "history": "^4.9.0",
+    "husky": "^3.0.3",
     "material-table": "^1.47.0",
     "react": "^16.8",
     "react-bem-helper": "^1.4.1",
@@ -35,7 +36,13 @@
     "test": "react-scripts test --env=jsdom",
     "eject": "react-scripts eject",
     "lint:eslint": "eslint --ignore-path .eslintignore src",
-    "lint:eslint:fix": "eslint --ignore-path .eslintignore src --fix"
+    "lint:eslint:fix": "eslint --ignore-path .eslintignore src --fix",
+    "precommit": "./node_modules/.bin/eslint src"
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "npm run precommit"
+    }
   },
   "browserslist": {
     "production": [

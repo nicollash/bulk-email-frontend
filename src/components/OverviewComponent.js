@@ -6,7 +6,7 @@ import HomePageLayout from '../layouts/HomePageLayout';
 
 import '../styles/components/overviewComponent.css';
 
-const overviewClasses = getBEMClasses(['overview']);
+const overviewClasses = getBEMClasses([ 'overview' ]);
 
 class OverviewComponent extends React.Component {
 
@@ -33,41 +33,41 @@ class OverviewComponent extends React.Component {
       progress
     } = this.state;
     return (
-      <HomePageLayout>
-        <div className={overviewClasses('container')} >
-          <div className={overviewClasses('title')} >
+        <HomePageLayout>
+            <div className={ overviewClasses('container') } >
+                <div className={ overviewClasses('title') } >
             Campaigns
-          </div>
-          <div className={overviewClasses('content')} >
-            <div className={overviewClasses('title--inner')} >
+                </div>
+                <div className={ overviewClasses('content') } >
+                    <div className={ overviewClasses('title--inner') } >
               Loans Followup
-            </div>
-            <div className={overviewClasses('followup')} >{loansFollowup}</div>
+                    </div>
+                    <div className={ overviewClasses('followup') } >{loansFollowup}</div>
 
-            <div className={overviewClasses('title--inner')} >
+                    <div className={ overviewClasses('title--inner') } >
               Auto Insurance Followup
-            </div>
-            <div className={overviewClasses('followup')} >{autoInsuranceFollowup}</div>
+                    </div>
+                    <div className={ overviewClasses('followup') } >{autoInsuranceFollowup}</div>
 
-            <div className={overviewClasses('daily-info')} >
-              <div className={overviewClasses('info-section')} >
-                <div className={overviewClasses('info-column')} >
-                  <label>Student Load Help</label>
-                  <label>Channel - {channel}</label>
-                  <label>Bot = {bot}</label>
+                    <div className={ overviewClasses('daily-info') } >
+                        <div className={ overviewClasses('info-section') } >
+                            <div className={ overviewClasses('info-column') } >
+                                <label>Student Load Help</label>
+                                <label>Channel - {channel}</label>
+                                <label>Bot = {bot}</label>
+                            </div>
+                            <div className={ overviewClasses('info-column') } >
+                                <label>FileName: {fileName}</label>
+                                <label>Messages Submitted - {submittedMsgCount}</label>
+                                <label>Messages Processed - {processedMsgCount}</label>
+                                <label>Progress - {progress}</label>
+                            </div>
+                        </div>
+                        <DatePicker></DatePicker>
+                    </div>
                 </div>
-                <div className={overviewClasses('info-column')} >
-                  <label>FileName: {fileName}</label>
-                  <label>Messages Submitted - {submittedMsgCount}</label>
-                  <label>Messages Processed - {processedMsgCount}</label>
-                  <label>Progress - {progress}</label>
-                </div>
-              </div>
-              <DatePicker></DatePicker>
             </div>
-          </div>
-        </div>
-      </HomePageLayout>
+        </HomePageLayout>
     );
   }
 }

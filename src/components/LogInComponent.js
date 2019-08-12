@@ -9,7 +9,7 @@ import LogoComponent from './LogoComponent'
 
 import '../styles/components/loginComponent.css';
 
-const loginClasses = getBEMClasses(['login']);
+const loginClasses = getBEMClasses([ 'login' ]);
 
 class LogInComponent extends React.Component {
 
@@ -58,7 +58,7 @@ class LogInComponent extends React.Component {
   handleChange = (evt) => {
     const { name, value } = evt.target;
     this.setState({
-      [name]: value
+      [ name ]: value
     })
   }
 
@@ -102,56 +102,56 @@ class LogInComponent extends React.Component {
     }
 
     return (
-      <div className={loginClasses('wrapper')}>
-        <div className={containerClass}>
-          {
+        <div className={ loginClasses('wrapper') }>
+            <div className={ containerClass }>
+                {
             auth.isLoading &&
-            <div className={loginClasses('container-loading')}>
-              <ReactLoading type='spin' color='#ffc600' margin='auto' height={50} width={50} />
+            <div className={ loginClasses('container-loading') }>
+                <ReactLoading type='spin' color='#ffc600' margin='auto' height={ 50 } width={ 50 } />
             </div>
           }
-          <LogoComponent />
-          <Form>
-            <FormGroup className={loginClasses('form-group')}>
-              <Input
+                <LogoComponent />
+                <Form>
+                    <FormGroup className={ loginClasses('form-group') }>
+                        <Input
                 type='mail'
                 required
                 placeholder='Enter Username or Email Address'
-                className={loginClasses('form-input')}
+                className={ loginClasses('form-input') }
                 name='username'
-                value={username}
-                onKeyDown={this.keyDownEmail}
-                onChange={this.handleChange} />
-              <span className={loginClasses('input-icon')}><i className='ti-email' /></span>
-            </FormGroup>
-            <FormGroup className={loginClasses('form-group')}>
-              <Input
+                value={ username }
+                onKeyDown={ this.keyDownEmail }
+                onChange={ this.handleChange } />
+                        <span className={ loginClasses('input-icon') }><i className='ti-email' /></span>
+                    </FormGroup>
+                    <FormGroup className={ loginClasses('form-group') }>
+                        <Input
                 type='Password'
-                className={loginClasses('form-input')}
+                className={ loginClasses('form-input') }
                 placeholder='Password'
-                value={password}
-                innerRef={this.passwordInput}
+                value={ password }
+                innerRef={ this.passwordInput }
                 name='password'
-                onKeyDown={this.keyDownPassword}
-                onChange={this.handleChange} />
-              <span className={loginClasses('input-icon')}><i className='ti-lock' /></span>
-            </FormGroup>
-            <FormGroup className={loginClasses('form-group')}>
-              <Button
+                onKeyDown={ this.keyDownPassword }
+                onChange={ this.handleChange } />
+                        <span className={ loginClasses('input-icon') }><i className='ti-lock' /></span>
+                    </FormGroup>
+                    <FormGroup className={ loginClasses('form-group') }>
+                        <Button
                 color='primary'
-                className={loginClasses('form-button')}
+                className={ loginClasses('form-button') }
                 variant='contained'
                 size='large'
-                onClick={this.doLogin}>
+                onClick={ this.doLogin }>
                 Sign In
-              </Button>
-              <div onClick={this.forgotPassword} className={loginClasses('forgot-password')}>
+                        </Button>
+                        <div onClick={ this.forgotPassword } className={ loginClasses('forgot-password') }>
                 Forgot your password?
-              </div>
-            </FormGroup>
-          </Form>
+                        </div>
+                    </FormGroup>
+                </Form>
+            </div>
         </div>
-      </div>
     )
   }
 }

@@ -14,7 +14,7 @@ import AccountCircle from '@material-ui/icons/AccountCircle';
 import { signOutUser } from '../services/aws/aws_cognito';
 
 import '../styles/components/headerComponent.css';
-const headerClasses = getBEMClasses(['header']);
+const headerClasses = getBEMClasses([ 'header' ]);
 
 class HeaderComponent extends React.Component {
   
@@ -56,51 +56,51 @@ class HeaderComponent extends React.Component {
     const { isMenuOpen } = this.state;
 
     const profileMenu = (
-      <Menu
+        <Menu
         id='primary-search-account-menu'
         keepMounted
-        open={isMenuOpen}
-        className={headerClasses('profile-menu-container')}
-        onClose={this.handleMenuClose}
+        open={ isMenuOpen }
+        className={ headerClasses('profile-menu-container') }
+        onClose={ this.handleMenuClose }
       >
-        <MenuItem onClick={this.goAccount}>Profile</MenuItem>
-        <MenuItem onClick={this.signOut}>Sign Out</MenuItem>
-      </Menu>
+            <MenuItem onClick={ this.goAccount }>Profile</MenuItem>
+            <MenuItem onClick={ this.signOut }>Sign Out</MenuItem>
+        </Menu>
     );
   
     return(
-      <header className={headerClasses('container')}>
-        <AppBar position="static">
-          <Toolbar className={headerClasses('toolbar')}>
-            {//<LogoIconComponent />
+        <header className={ headerClasses('container') }>
+            <AppBar position="static">
+                <Toolbar className={ headerClasses('toolbar') }>
+                    {//<LogoIconComponent />
             }
-            <div className={headerClasses('left-bar')}>
-              <IconButton
+                    <div className={ headerClasses('left-bar') }>
+                        <IconButton
                 edge="start"
                 color="inherit"
                 aria-label="open drawer"
               >
-                <MenuIcon />
-              </IconButton>
-              <Typography variant="h6" noWrap>
+                            <MenuIcon />
+                        </IconButton>
+                        <Typography variant="h6" noWrap>
                 Bulk SMS
-              </Typography>
-            </div>
-            <div>
-              <IconButton
+                        </Typography>
+                    </div>
+                    <div>
+                        <IconButton
                 edge="end"
                 aria-label="account of current user"
                 aria-haspopup="true"
                 color="inherit"
                 onClick={ this.openProfileMenu }
               >
-                <AccountCircle />
-              </IconButton>
-            </div>
-          </Toolbar>
-        </AppBar>
-        { profileMenu }
-      </header>
+                            <AccountCircle />
+                        </IconButton>
+                    </div>
+                </Toolbar>
+            </AppBar>
+            { profileMenu }
+        </header>
     )
   }
 }

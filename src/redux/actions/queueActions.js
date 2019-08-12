@@ -5,11 +5,11 @@ import {
   GET_QUEUES_REQUESTED,
   GET_QUEUES_SUCCEEDED,
   GET_QUEUES_FAILED
-} from "../actionTypes";
+} from '../actionTypes';
 
-import { getJSON, postJSON } from "../../services/fetch";
-import { baseUrl } from "../../services/config";
-import { Auth } from "aws-amplify";
+import { getJSON, postJSON } from '../../services/fetch';
+import { baseUrl } from '../../services/config';
+import { Auth } from 'aws-amplify';
 
 export const createQueueRequested = () => ({
   type: CREATE_QUEUE_REQUESTED
@@ -41,11 +41,11 @@ export const createQueue = data => async (dispatch, getState) => {
     const token = await Auth.currentSession();
     dispatch(createQueueRequested());
     const res = await postJSON(
-      baseUrl + "queue",
+      baseUrl + 'queue',
       data,
       token.idToken.jwtToken
     );
-    if (res && res.status === "success") {
+    if (res && res.status === 'success') {
       dispatch(createQueueSucceeded());
     } else {
       dispatch(createQueueFailed());
@@ -61,11 +61,11 @@ export const getQueues = () => async (dispatch, getState) => {
 
     dispatch(getQueuesRequested());
     const res = await getJSON(
-      baseUrl + "data/bulk_job",
+      baseUrl + 'data/bulk_job',
       token.idToken.jwtToken
     );
     
-    if (res && res.status === "success") {
+    if (res && res.status === 'success') {
       dispatch(getQueuesSucceeded(res.content.items));
     } else {
       dispatch(getQueuesFailed());
