@@ -46,7 +46,7 @@ class Select extends React.Component {
         value = e.map(i => i.customOption ? i.label : i.id);
       } else {
         // return label instead of id if new item is selected
-        value = e.length > 0 ? e[0].customOption ? e[0].label : e[0].id : null;
+        value = e.length > 0 ? e[ 0 ].customOption ? e[ 0 ].label : e[ 0 ].id : null;
       }
 
       this.props.onChange({ target: { value, name: this.props.name } });
@@ -62,14 +62,14 @@ class Select extends React.Component {
   updateState(props) {
     this.setTypeHeadTextEmpty();
 
-    let options = Utils.coalesce(props.options, []).map(o => ({ id: o.value, label: o.text }));
+    const options = Utils.coalesce(props.options, []).map(o => ({ id: o.value, label: o.text }));
 
     let values = [];
     if (props.value) {
       if (props.multiple && Array.isArray(props.value)) {
         values = props.value;
       } else {
-        values = [props.value];
+        values = [ props.value ];
       }
     }
 
@@ -81,7 +81,7 @@ class Select extends React.Component {
 
   setTypeHeadTextEmpty() {
     if (this.typeahead) {
-      this.typeahead.getInstance().setState({ text: "" });
+      this.typeahead.getInstance().setState({ text: '' });
     }
   }
 
@@ -109,23 +109,23 @@ class Select extends React.Component {
     const selected = options.filter(o => values.find(v => v === o.id));
 
     return (
-      <Typeahead
-        id={id}
+        <Typeahead
+        id={ id }
         align="justify"
-        allowNew={allowNew}
+        allowNew={ allowNew }
         className="select"
         clearButton
-        disabled={disabled}
-        multiple={multiple}
-        newSelectionPrefix={newSelectionPrefix}
-        options={options}
-        paginate={true}
-        placeholder={placeholder}
-        selected={selected}
-        onFocus={this.handleFocus}
-        onBlur={this.handleBlur}
-        onChange={this.handleChange}
-        ref={e => this.typeahead = e} />
+        disabled={ disabled }
+        multiple={ multiple }
+        newSelectionPrefix={ newSelectionPrefix }
+        options={ options }
+        paginate={ true }
+        placeholder={ placeholder }
+        selected={ selected }
+        onFocus={ this.handleFocus }
+        onBlur={ this.handleBlur }
+        onChange={ this.handleChange }
+        ref={ e => this.typeahead = e } />
     );
   }
 }

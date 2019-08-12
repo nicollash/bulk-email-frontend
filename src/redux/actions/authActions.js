@@ -49,18 +49,6 @@ export const setNewPassword = (payload) => async (dispatch, getState) => {
   }
 }
 
-export const changePassword = (payload) => async (dispatch, getState) => {
-  const { cognitoUser } = getState().auth.forgot
-
-  const res = await changePasswordWithCode(cognitoUser, payload)
-
-  if (res.code === 'SUCCEEDED') {
-    dispatch(passwordChangeSucceeded())
-  } else {
-    dispatch(passwordChangeFailed())
-  }
-}
-
 export const passwordChangeSucceeded = payload => ({
   type: AUTH_PASSWORD_CHANGE_SUCCEEDED,
   payload
@@ -76,11 +64,15 @@ export const initAuthPwdState = payload => ({
   payload
 })
 
-export const sendEmail = (email) => async (dispatch, getState) => {
-  const res = await forgotPassword(email);
+export const changePassword = (payload) => async (dispatch, getState) => {
+  const { cognitoUser } = getState().auth.forgot
 
-  if (res.code === 'SUCCESS') {
-    dispatch(forgotCodeSent(res))
+  const res = await changePasswordWithCode(cognitoUser, payload)
+
+  if (res.code === 'SUCCEEDED') {
+    dispatch(passwordChangeSucceeded())
+  } else {
+    dispatch(passwordChangeFailed())
   }
 }
 
@@ -89,37 +81,9 @@ export const forgotCodeSent = payload => ({
   payload
 })
 
-export const login = values => async (dispatch, getState) => {
-  dispatch(loginRequested())
-  try {
-    const userProfile = await signInUser(values.username, values.password)
-    if (userProfile.challengeName === 'NEW_PASSWORD_REQUIRED') {
-      dispatch(resetNewPassword(userProfile))
-    } else {
-      dispatch(loginSucceeded(userProfile))
-    }
-  } catch (error) {
-    dispatch(loginFailed())
-    setTimeout(function () {
-      dispatch(loginResetState())
-    }, 500)
-  }
-}
-
 export const signOut = () => ({
   type: AUTH_USER_SIGNED_OUT
 })
-
-export const createNewPassword = values => async (dispatch, getState) => {
-  try {
-    dispatch(setNewPasswordPending())
-    const userProfile = await createPassword(values.user, values.password)
-    if (!userProfile.challengeName) dispatch(setNewPasswordSuccess())
-    else throw Error('Something went wrong!');
-  } catch (error) {
-    dispatch(setNewPasswordFailed(error.message))
-  }
-}
 
 export const setNewPasswordSuccess = () => ({
   type: NEW_PASSWORD_SUCCESS
@@ -156,3 +120,39 @@ export const loginFailed = payload => ({
   type: AUTH_LOGIN_FAILED,
   payload
 })
+
+export const sendEmail = (email) => async (dispatch, getState) => {
+  const res = await forgotPassword(email);
+
+  if (res.code === 'SUCCESS') {
+    dispatch(forgotCodeSent(res))
+  }
+}
+
+export const login = values => async (dispatch, getState) => {
+  dispatch(loginRequested())
+  try {
+    const userProfile = await signInUser(values.username, values.password)
+    if (userProfile.challengeName === 'NEW_PASSWORD_REQUIRED') {
+      dispatch(resetNewPassword(userProfile))
+    } else {
+      dispatch(loginSucceeded(userProfile))
+    }
+  } catch (error) {
+    dispatch(loginFailed())
+    setTimeout(function () {
+      dispatch(loginResetState())
+    }, 500)
+  }
+}
+
+export const createNewPassword = values => async (dispatch, getState) => {
+  try {
+    dispatch(setNewPasswordPending())
+    const userProfile = await createPassword(values.user, values.password)
+    if (!userProfile.challengeName) dispatch(setNewPasswordSuccess())
+    else throw Error('Something went wrong!');
+  } catch (error) {
+    dispatch(setNewPasswordFailed(error.message))
+  }
+}

@@ -3,7 +3,7 @@ export function isContainUpperCase (str) {
   const regEx = /^[A-Z]/
 
   for (let i = 0; i < str.length; i++) {
-    if (regEx.test(str[i])) return true
+    if (regEx.test(str[ i ])) return true
   }
   return false
 }
@@ -12,7 +12,7 @@ export function isContainLowerCase (str) {
   const regEx = /^[a-z]/
 
   for (let i = 0; i < str.length; i++) {
-    if (regEx.test(str[i])) return true
+    if (regEx.test(str[ i ])) return true
   }
 
   return false
@@ -28,7 +28,7 @@ export function isContainNumber (str) {
   const regEx = new RegExp('[0-9]+')
 
   for (let i = 0; i < str.length; i++) {
-    if (regEx.test(str[i])) return true
+    if (regEx.test(str[ i ])) return true
   }
 
   return false
@@ -39,4 +39,3 @@ export function isEmailValid (str) {
 
   return regEx.test(str)
 }
-  

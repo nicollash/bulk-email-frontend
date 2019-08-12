@@ -6,11 +6,11 @@ const UnAuthenticatedRoute = (props, context) => {
 
   if (auth.isAuthenticated) {
     return (
-      <Redirect to='/home' />
+        <Redirect to='/home' />
     )
   } else {
     return (
-      <Route path={path} component={component} />
+        <Route path={ path } component={ component } />
     )
   }
 }

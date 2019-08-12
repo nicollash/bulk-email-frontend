@@ -13,38 +13,38 @@ const initialState = {
 };
 
 const actionHandlers = {
-    [GET_CAMPAIGN_REQUESTED]: (state) => {
+    [ GET_CAMPAIGN_REQUESTED ]: (state) => {
         return {
             ...state,
             isLoading: true
         }
     },
-    [GET_CAMPAIGN_SUCCEEDED]: (state, {type, payload}) => {
+    [ GET_CAMPAIGN_SUCCEEDED ]: (state, { type, payload }) => {
         return {
             ...state,
             campaigns: payload,
             isLoading: false
         }
     },
-    [GET_CAMPAIGN_FAILED]: (state) => {
+    [ GET_CAMPAIGN_FAILED ]: (state) => {
         return {
             ...state,
             isLoading: false
         }
     },
-    [CREATE_CAMPAIGN_REQUESTED]: (state) => {
+    [ CREATE_CAMPAIGN_REQUESTED ]: (state) => {
         return {
             ...state,
             isLoading: true
         }
     },
-    [CREATE_CAMPAIGN_SUCCEEDED]: (state) => {
+    [ CREATE_CAMPAIGN_SUCCEEDED ]: (state) => {
         return {
             ...state,
             isLoading: false
         }
     },
-    [CREATE_CAMPAIGN_FAILED]: (state) => {
+    [ CREATE_CAMPAIGN_FAILED ]: (state) => {
         return {
             ...state,
             isLoading: false
@@ -53,6 +53,6 @@ const actionHandlers = {
 };
 
 export default function (state = initialState, action) {
-    const handler = actionHandlers[action.type];
+    const handler = actionHandlers[ action.type ];
     return handler ? handler(state, action) : state;
 };

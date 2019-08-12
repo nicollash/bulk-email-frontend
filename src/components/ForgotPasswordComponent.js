@@ -6,8 +6,8 @@ import LogoComponent from './LogoComponent'
 
 import '../styles/components/forgotPasswordComponent.css'
 
-const baseClasses = getBEMClasses(['base'])
-const forgotPasswordClasses = getBEMClasses(['forgot-password'])
+const baseClasses = getBEMClasses([ 'base' ])
+const forgotPasswordClasses = getBEMClasses([ 'forgot-password' ])
 
 class ForgotPasswordComponent extends React.Component {
   state = {
@@ -24,10 +24,10 @@ class ForgotPasswordComponent extends React.Component {
   }
 
   handleChange = (evt) => {
-    const {name, value} = evt.target;
+    const { name, value } = evt.target;
 
     this.setState({
-      [name]: value
+      [ name ]: value
     })
   }
 
@@ -42,34 +42,34 @@ class ForgotPasswordComponent extends React.Component {
     const { email } = this.state
 
     return (
-      <div className={forgotPasswordClasses('wrapper')}>
-        <div className={forgotPasswordClasses('container')}>
-          <LogoComponent />
-          <h2 className={forgotPasswordClasses('title')}> </h2>
-          <Form>
-            <FormGroup className={forgotPasswordClasses('form-group')}>
-              <Input
+        <div className={ forgotPasswordClasses('wrapper') }>
+            <div className={ forgotPasswordClasses('container') }>
+                <LogoComponent />
+                <h2 className={ forgotPasswordClasses('title') }> </h2>
+                <Form>
+                    <FormGroup className={ forgotPasswordClasses('form-group') }>
+                        <Input
                 type='mail'
                 required
                 placeholder='Enter Username or Email Address'
-                className={forgotPasswordClasses('form-input')}
+                className={ forgotPasswordClasses('form-input') }
                 name="email"
-                value={email}
-                onChange={this.handleChange} />
-              <span className={forgotPasswordClasses('input-icon')}><i className='ti-email' /></span>
-            </FormGroup>
-            <FormGroup className='mb-15'>
-              <Button
-                className={forgotPasswordClasses('form-button') + ' ' + baseClasses('button-success')}
+                value={ email }
+                onChange={ this.handleChange } />
+                        <span className={ forgotPasswordClasses('input-icon') }><i className='ti-email' /></span>
+                    </FormGroup>
+                    <FormGroup className='mb-15'>
+                        <Button
+                className={ forgotPasswordClasses('form-button') + ' ' + baseClasses('button-success') }
                 variant='contained'
                 size='large'
-                onClick={this.sendEmail}>
+                onClick={ this.sendEmail }>
 								Send Verification Code
-              </Button>
-            </FormGroup>
-          </Form>
+                        </Button>
+                    </FormGroup>
+                </Form>
+            </div>
         </div>
-      </div>
     )
   }
 }

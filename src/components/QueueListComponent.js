@@ -5,7 +5,7 @@ import HomePageLayout from '../layouts/HomePageLayout';
 
 import '../styles/components/queueListComponent.css';
 
-const queueListClasses = getBEMClasses(['queue-list']);
+const queueListClasses = getBEMClasses([ 'queue-list' ]);
 
 class QueueListComponent extends React.Component {
   //initialize state
@@ -20,8 +20,8 @@ class QueueListComponent extends React.Component {
   }
 
   // MARK: - Event handlers
-  handleChange = ({target}) => this.setState({
-    [target.name]: target.value
+  handleChange = ({ target }) => this.setState({
+    [ target.name ]: target.value
   })
 
   // MARK: - Lifecycle Methods
@@ -40,18 +40,18 @@ class QueueListComponent extends React.Component {
     ];
 
     return (
-      <HomePageLayout>
-        <div className={queueListClasses('container')}>
-          <MaterialTable
+        <HomePageLayout>
+            <div className={ queueListClasses('container') }>
+                <MaterialTable
             title="Queue List"
-            columns={columns}
-            data={queues}
-            options={{
+            columns={ columns }
+            data={ queues }
+            options={ {
               pageSize: 10
-            }}
+            } }
           />
-        </div>
-      </HomePageLayout>
+            </div>
+        </HomePageLayout>
     )
   }
 }
