@@ -150,6 +150,13 @@ class NewCampaignComponent extends React.Component {
 		{ value: 6, text: '6' }
 	];
 
+	const fieldValues = csvFields.map(field => {
+		return {
+		  value: field,
+		  text: field
+		}
+	  })
+
 	const channelItems = channelValues.map(channel => {
 		return (<MenuItem key={ channel.value } value={ channel.text }>{ channel.text }</MenuItem>)
 	})
@@ -160,12 +167,9 @@ class NewCampaignComponent extends React.Component {
 		return (<MenuItem key={ tier.value } value={ tier.value }>{ tier.value }</MenuItem>)
     });
 
-    const fieldValues = csvFields.map(field => {
-      return {
-        value: field,
-        text: field
-      }
-    })
+    const fieldItems = fieldValues.map(field => {
+		return (<MenuItem key={ field.value } value={ field.value }>{ field.value }</MenuItem>)
+	});
 
     const contentClass = isUploading ? newCampaignClasses('content') + ' ' + newCampaignClasses('content-overlay') : newCampaignClasses('content')
 
@@ -178,33 +182,85 @@ class NewCampaignComponent extends React.Component {
                     </Toolbar>
                 </AppBar>
                 <Paper className={ contentClass }>
-                    <div>
+                    <div className = { newCampaignClasses('content-row') }>
+						Channel : 
                         <Select value = { channel } onChange={ this.handleChange } inputProps={ { name: 'channel' } } >
                             { channelItems }
                         </Select>
-                    </div>
-                    <div>
-                        <Select value = { bot } onChange={ this.handleChange } inputProps={ { name: 'bot' } } >
+						Bot : 
+                        <Select value = { bot } onChange={ this.handleChange } inputProps={ { name: 'bot' } } className = { newCampaignClasses('select') } >
                             { botItems }
                         </Select>
-                    </div>
-                    <div>
+						Tier : 
                         <Select value = { tier } onChange={ this.handleChange } inputProps={ { name: 'tier' } } >
                             { tierItems }
                         </Select>
                     </div>
-                    <div>
-                        <span>File</span>
-                        <div style={ { display: 'flex', alignItems: 'center' } }>
-                            <div style={ { flex: '1 1 auto' } }>{ filepath }</div>
-                            <Button className="file-upload-button" variant="contained" color="primary" onClick={ this.handleUploadClick }>
-								Upload File
-                            </Button>
-                        </div>
-                        <input className="file-upload-input" type="file" onChange={ this.handleUploadChange } ref={ e => this.fileInput = e } />
-                        <a href="./example.csv" download>Download CSV example</a>
+                    <div className = { newCampaignClasses('content-row') }>
+                        <div style={ { flex: '1 1 auto' } }>{ filepath }</div>
                     </div>
-                    <div>
+                    <div className = { newCampaignClasses('content-row') }>
+                        <Button className="file-upload-button" variant="contained" color="primary" onClick={ this.handleUploadClick }>
+							Upload File
+                        </Button>
+                        <a href="./example.csv" download>Download CSV example</a>
+                        <input className="file-upload-input" type="file" onChange={ this.handleUploadChange } ref={ e => this.fileInput = e } />
+                    </div>
+                    <div className = { newCampaignClasses('content-row') }>
+						fname : 
+                        <Select value = { fnameField } onChange={ this.handleChange } inputProps={ { name: 'fnameField' } } >
+                            { fieldItems }
+                        </Select>
+                    </div>
+                    <div className = { newCampaignClasses('content-row') }>
+						lname : 
+                        <Select value = { lnameField } onChange={ this.handleChange } inputProps={ { name: 'lnameField' } } >
+                            { fieldItems }
+                        </Select>
+                    </div>
+                    <div className = { newCampaignClasses('content-row') }>
+						phoneNumber : 
+                        <Select value = { pNumberField } onChange={ this.handleChange } inputProps={ { name: 'pNumberField' } } >
+                            { fieldItems }
+                        </Select>
+                    </div>
+                    <div className = { newCampaignClasses('content-row') }>
+						address1 : 
+                        <Select value = { addressField1 } onChange={ this.handleChange } inputProps={ { name: 'addressField1' } } >
+                            { fieldItems }
+                        </Select>
+                    </div>
+                    <div className = { newCampaignClasses('content-row') }>
+						address2 : 
+                        <Select value = { addressField2 } onChange={ this.handleChange } inputProps={ { name: 'addressField2' } } >
+                            { fieldItems }
+                        </Select>
+                    </div>
+                    <div className = { newCampaignClasses('content-row') }>
+						city : 
+                        <Select value = { cityField } onChange={ this.handleChange } inputProps={ { name: 'cityField' } } >
+                            { fieldItems }
+                        </Select>
+                    </div>
+                    <div className = { newCampaignClasses('content-row') }>
+						zip : 
+                        <Select value = { zipField } onChange={ this.handleChange } inputProps={ { name: 'zipField' } } >
+                            { fieldItems }
+                        </Select>
+                    </div>
+                    <div className = { newCampaignClasses('content-row') }>
+						subId : 
+                        <Select value = { subIdField } onChange={ this.handleChange } inputProps={ { name: 'subIdField' } } >
+                            { fieldItems }
+                        </Select>
+                    </div>
+                    <div className = { newCampaignClasses('content-row') }>
+						tum : 
+                        <Select value = { utmField } onChange={ this.handleChange } inputProps={ { name: 'utmField' } } >
+                            { fieldItems }
+                        </Select>
+                    </div>
+                    <div className = { newCampaignClasses('content-row') }>
                         <TextField
 							id="outlined-multiline-static"
 							label="Message Content"
@@ -216,7 +272,7 @@ class NewCampaignComponent extends React.Component {
 							onChange={ this.handleChange }
 						/>
                     </div>
-                    <div>
+                    <div className = { newCampaignClasses('content-row') }>
                         <Button variant="contained" color="primary" onClick={ this.handleSaveClick }>
 							Save
                         </Button>

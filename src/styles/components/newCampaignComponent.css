@@ -19,5 +19,26 @@
 }
 
 .file-upload-input {
-    display: none;
+    height: 0;
+    visibility: hidden;
+}
+
+.new-campaign__content-row {
+    padding-left: 20px;
+    padding-top: 30px;
+}
+
+.new-campaign__content-row > div {
+    margin-right: 30px;
+    margin-left: 10px;
+    min-width: 60px;
+}
+
+.new-campaign__content-row > a {
+    font-size: 14px;
+    margin-left: 20px;
+}
+
+.new-campaign__select {
+    width: 150px;
 }
