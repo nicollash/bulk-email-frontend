@@ -7,6 +7,7 @@ import Card from '@material-ui/core/Card';
 import CardContent from '@material-ui/core/CardContent';
 import Select from '@material-ui/core/Select';
 import MenuItem from '@material-ui/core/MenuItem';
+import Avatar from '@material-ui/core/Avatar';
 import {
   MuiPickersUtilsProvider,
   KeyboardDatePicker,
@@ -45,45 +46,107 @@ class OverviewComponent extends React.Component {
         <HomePageLayout>
             <div className={ overviewClasses('container') } >
                 <AppBar position="static" className={ overviewClasses('title') }>
-                    <Toolbar>
-              Campaign Overview
-                        <Select
-                value = { this.state.channel }
-                onChange={ this.handleChange }
-                inputProps={ {
-                  name: 'channel'
-                } }
-              >
-                            <MenuItem value={ 'SMS' }>SMS</MenuItem>
-                            <MenuItem value={ 'SMFacebookS' }>Facebook</MenuItem>
-                            <MenuItem value={ 'Email' }>Email</MenuItem>
-                        </Select>
-                        <MuiPickersUtilsProvider utils={ DateFnsUtils }>
-                            <KeyboardDatePicker
-                  disableToolbar
-                  format = "MM/dd/yyyy"
-                  margin = "normal"
-                  id = "date-picker-inline"
-                  value = { this.state.filterDate }
-                  onChange = { this.changeFilterDate }
-                  KeyboardButtonProps = { {
-                    'aria-label': 'change date',
-                  } }
-                />
-                        </MuiPickersUtilsProvider>
+                    <Toolbar className={ overviewClasses('title-toolbar') }>
+                        Campaign Overview
+                        <div className={ overviewClasses('toolbar-right') }>
+                            <Select value = { this.state.channel } onChange={ this.handleChange } inputProps={ { name: 'channel' } } >
+                                <MenuItem value={ 'SMS' }>SMS</MenuItem>
+                                <MenuItem value={ 'SMFacebookS' }>Facebook</MenuItem>
+                                <MenuItem value={ 'Email' }>Email</MenuItem>
+                            </Select>
+                            <MuiPickersUtilsProvider utils={ DateFnsUtils }>
+                                <KeyboardDatePicker
+                            disableToolbar
+                            format = "MM/dd/yyyy"
+                            margin = "normal"
+                            id = "date-picker-inline"
+                            value = { this.state.filterDate }
+                            onChange = { this.changeFilterDate }
+                            KeyboardButtonProps = { {
+                              'aria-label': 'change date',
+                            } }
+                          />
+                            </MuiPickersUtilsProvider>
+                        </div>
                     </Toolbar>
                 </AppBar>
                 <Paper className={ overviewClasses('content') }>
                     <Card className={ overviewClasses('card-content') }>
                         <CardContent>
-                            <div className={ overviewClasses('card-item') }>
-                  Student Loan Help
+                            <div className={ overviewClasses('card-content-left') }>
+                                <div className={ overviewClasses('card-item') }>
+                                Student Loan Help
+                                </div>
+                                <div className={ overviewClasses('card-item') }>
+                                Channel : <span className='span-value'>SMS</span>
+                                </div>
+                                <div className={ overviewClasses('card-item') }>
+                                Date : <span className='span-value'>2019-08-06</span>
+                                </div>
                             </div>
-                            <div className={ overviewClasses('card-item') }>
-                  Channel : <span className='span-value'>SMS</span>
+                            <div className={ overviewClasses('card-content-right') }>
+                                <div className={ overviewClasses('card-content-avatars') }>
+                                    <Avatar>12</Avatar>
+                                    <Avatar>33</Avatar>
+                                    <Avatar>40</Avatar>
+                                </div>
+                                <div className={ overviewClasses('card-content-analytics') }>
+                                View Analytics
+                                </div>
                             </div>
-                            <div className={ overviewClasses('card-item') }>
-                  Date : <span className='span-value'>2019-08-06</span>
+                        </CardContent>
+                    </Card>
+                </Paper>
+                <Paper className={ overviewClasses('content') }>
+                    <Card className={ overviewClasses('card-content') }>
+                        <CardContent>
+                            <div className={ overviewClasses('card-content-left') }>
+                                <div className={ overviewClasses('card-item') }>
+                                Student Loan Help
+                                </div>
+                                <div className={ overviewClasses('card-item') }>
+                                Channel : <span className='span-value'>SMS</span>
+                                </div>
+                                <div className={ overviewClasses('card-item') }>
+                                Date : <span className='span-value'>2019-08-06</span>
+                                </div>
+                            </div>
+                            <div className={ overviewClasses('card-content-right') }>
+                                <div className={ overviewClasses('card-content-avatars') }>
+                                    <Avatar>12</Avatar>
+                                    <Avatar>33</Avatar>
+                                    <Avatar>40</Avatar>
+                                </div>
+                                <div className={ overviewClasses('card-content-analytics') }>
+                                View Analytics
+                                </div>
+                            </div>
+                        </CardContent>
+                    </Card>
+                </Paper>
+                <Paper className={ overviewClasses('content') }>
+                    <Card className={ overviewClasses('card-content') }>
+                        <CardContent>
+                            <div className={ overviewClasses('card-content-left') }>
+                                <div className={ overviewClasses('card-item') }>
+                                Student Loan Help
+                                </div>
+                                <div className={ overviewClasses('card-item') }>
+                                Channel : <span className='span-value'>SMS</span>
+                                </div>
+                                <div className={ overviewClasses('card-item') }>
+                                Date : <span className='span-value'>2019-08-06</span>
+                                </div>
+                            </div>
+                            <div className={ overviewClasses('card-content-right') }>
+                                <div className={ overviewClasses('card-content-avatars') }>
+                                    <Avatar>12</Avatar>
+                                    <Avatar>33</Avatar>
+                                    <Avatar>40</Avatar>
+                                </div>
+                                <div className={ overviewClasses('card-content-analytics') }>
+                                View Analytics
+                                </div>
                             </div>
                         </CardContent>
                     </Card>

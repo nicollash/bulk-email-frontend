@@ -13,3 +13,72 @@
     font-weight: 700 !important;
     box-shadow: none !important;
 }
+
+.overview__title-toolbar {
+    display: flex;
+    justify-content: space-between;
+}
+
+.overview__toolbar-right {
+    width: 300px;
+    display: flex;
+    justify-content: space-between;
+}
+
+.overview__toolbar-right > .MuiInputBase-root {
+    width: 100px;
+}
+
+.overview__toolbar-right > .MuiFormControl-root {
+    width: 150px;
+    margin-top: 0;
+    margin-bottom: 0;
+}
+
+.overview__content {
+    margin-top: 30px;
+}
+
+.overview__card-content > .MuiCardContent-root {
+    display: flex;
+    justify-content: space-between;
+}
+
+.overview__card-content-right {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    min-width: 60%;
+}
+
+.overview__card-content-avatars {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    min-width: 250px;
+}
+
+.overview__card-content-avatars .MuiAvatar-root {
+    width: 60px;
+    height: 60px;
+    font-size: 15px;
+}
+
+.overview__card-item {
+    color: #455a63;
+    font-size: 14px;
+}
+
+.overview__card-content-analytics {
+    font-size: 13px;
+    font-weight: 600;
+    cursor: pointer;
+}
+
+.overview__card-content-analytics:hover {
+    color: #803e3e;
+}
+
+.MuiCardContent-root:last-child {
+    padding-bottom: 16px !important;
+}
