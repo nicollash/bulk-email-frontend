@@ -4,46 +4,20 @@
     margin-left: 50px;
 }
 
-.new-campaign__title {
-    width: 100%;
-    font-size: 30px;
-    color: #535258;
-    border-bottom: 1px solid #8a8eb1;
+.new-campaign__container > .MuiPaper-root {
+    background-color: white;
 }
 
 .new-campaign__content {
-    display: flex;
-    flex-direction: column;
-    width: 400px;
-    padding: 30px 10px;
+    margin-top: 30px;
 }
 
-.new-campaign__content-overlay {
-    opacity: 0.7;
-}
-
-.new-campaign__content-loading {
-    position: fixed;
-    left: 350px;
-    top: 350px;
-    z-index: 9999;
+.new-campaign__title {
+    color: #455a63 !important;
+    font-weight: 700 !important;
+    box-shadow: none !important;
 }
 
 .file-upload-input {
-    visibility: hidden;
-    height: 0px;
-}
-
-.file-upload-button {
-    white-space: nowrap;
-}
-
-.new-campaign__row {
-    display: flex;
-    align-items: center;
-    margin-bottom: 5px;
-}
-
-.new-campaign__row label {
-    width: 120px;
+    display: none;
 }
