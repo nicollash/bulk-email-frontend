@@ -4,8 +4,16 @@
 import React from 'react'
 import { getBEMClasses } from '../helpers/cssClassesHelper'
 import HomePageLayout from '../layouts/HomePageLayout'
-import Modal from 'react-modal'
-import ReactLoading from 'react-loading'
+import Modal from '@material-ui/core/Modal';
+
+import AppBar from '@material-ui/core/AppBar';
+import Toolbar from '@material-ui/core/Toolbar';
+import Paper from '@material-ui/core/Paper';
+import Card from '@material-ui/core/Card';
+import CardContent from '@material-ui/core/CardContent';
+import TextField from '@material-ui/core/TextField';
+import Button from '@material-ui/core/Button';
+import CircularProgress from '@material-ui/core/CircularProgress';
 
 import '../styles/components/accountComponent.css'
 import '../styles/base/modal.css'
@@ -27,22 +35,18 @@ class AccountComponent extends React.Component {
     }
   }
 
-  componentDidMount () {
-    Modal.setAppElement('body')
-  }
-
   componentWillReceiveProps (newProps) {
     const { auth } = this.props;
 
     if (this.state.editPwd && auth.isLoading && !newProps.auth.isLoading) {
-      this.hideModal()
+      this.handleClose()
     }
   }
 
-  updateUser () {
+  updateUser = () => {
     const { setNewPassword } = this.props
     const { currentPassword, password, passwordConfirm } = this.state
-
+    
     if (password === passwordConfirm && password !== '' && currentPassword !== '') {
       setNewPassword({
         currentPassword,
@@ -51,98 +55,126 @@ class AccountComponent extends React.Component {
     }
   }
 
-  editPwd () {
-    this.setState({
-      editPwd: true
-    })
-  }
-
-  hideModal () {
-    this.setState({
-      editPwd: false
-    })
-  }
-
-  onValueChanged (e) {
+  onValueChanged = (name, e) => {
     const { value } = e.target
 
     this.setState({
-      [ e.target.name ]: value
+      [ name ]: value
     })
   }
+
+  editPwd = () => {
+    this.setState({
+      editPwd: true
+    });
+  };
+
+  handleClose = () => {
+    this.setState({
+      editPwd: false
+    });
+  };
 
   render () {
     const { auth } = this.props
 
-    const modalClass = auth.isLoading ? accountClasses('modal') + ' ' + accountClasses('modal-overlay') : accountClasses('modal')
+    const modalClass = auth.isLoading ? accountClasses('modal-container') + ' ' + accountClasses('modal-overlay') : accountClasses('modal-container')
 
     return (
         <HomePageLayout>
             <div className={ accountClasses('container') }>
-                <div className={ accountClasses('title') }>
-            Account
-                </div>
-                <div className={ accountClasses('content') }>
-                    <div className={ accountClasses('content-block') }>
-                        <div className={ accountClasses('block-title') }>
-                Settings
-                        </div>
-                        <div className={ accountClasses('block-content') }>
-                            <div className={ accountClasses('block-row') }>
-                                <label className={ accountClasses('block-row-title--longer') }>Account Name</label><span className={ accountClasses('block-row-content') }>: { auth.userProfile.username}</span>
+                <AppBar position="static" className={ accountClasses('title') }>
+                    <Toolbar>
+              Account
+                    </Toolbar>
+                </AppBar>
+                <Paper className={ accountClasses('content') }>
+                    <Toolbar className={ accountClasses('card-title') }>
+              Settings
+                    </Toolbar>
+                    <Card className={ accountClasses('card-content') }>
+                        <CardContent>
+                            <div className={ accountClasses('card-item') }>
+                  Account : <span className='span-value'>{ auth.userProfile.username }</span>
                             </div>
-                            <div className={ accountClasses('block-row') }>
-                                <label className={ accountClasses('block-row-title--longer') }>Account Status</label><span className={ accountClasses('block-row-content') }>: Active</span>
+                            <div className={ accountClasses('card-item') }>
+                  Account Status : <span className='span-value'>Active</span>
                             </div>
-                            <div className={ accountClasses('block-row') }>
-                                <label className={ accountClasses('block-row-title--longer') }>Approved Channels</label><span className={ accountClasses('block-row-content') }>: SMS, VOICE</span>
+                            <div className={ accountClasses('card-item') }>
+                  Approved Channels : <span className='span-value'>SMS, VOICE</span>
                             </div>
-                        </div>
-                    </div>
-                    <div className={ accountClasses('content-block') }>
-                        <div className={ accountClasses('block-title') }>
-                About You
-                        </div>
-                        <div className={ accountClasses('block-content') }>
-                            <div className={ accountClasses('block-row') }>
-                                <label className={ accountClasses('block-row-title') }>Email</label> <span className={ accountClasses('block-row-content') }>: { auth.userProfile.attributes.email }</span> 
+                        </CardContent>
+                    </Card>
+                    <Toolbar className={ accountClasses('card-title') }>
+              About You
+                    </Toolbar>
+                    <Card className={ accountClasses('card-content') }>
+                        <CardContent>
+                            <div className={ accountClasses('card-item') }>
+                  Email : <span className='span-value'>{ auth.userProfile.attributes.email }</span>
                             </div>
-                            <div className={ accountClasses('block-row') }>
-                                <label className={ accountClasses('block-row-title') }>Phone</label> <span className={ accountClasses('block-row-content') }>: { auth.userProfile.attributes.phone_number }</span> 
+                            <div className={ accountClasses('card-item') }>
+                  Phone : <span className='span-value'>{ auth.userProfile.attributes.phone_number }</span>
                             </div>
-                            <div className={ accountClasses('block-row') }>
-                                <label className={ accountClasses('block-row-title') }>Password</label> <span className={ accountClasses('block-row-content') }>: ********</span>  [<span className='span-link' onClick={ this.editPwd.bind(this) }>Change</span>]
+                            <div className={ accountClasses('card-item') }>
+                  Password : <span className='span-value'>********</span> [<span className='span-link' onClick={ this.editPwd }>Change</span>]
                             </div>
-                        </div>
-                    </div>
-                </div>
+                        </CardContent>
+                    </Card>
+                </Paper>
             </div>
-            <Modal isOpen={ this.state.editPwd } className={ modalClass }>
-                { auth.isLoading &&
-                <div className={ accountClasses('modal-loading') }>
-                    <ReactLoading type='spin' color='#ffc600' margin='auto' height={ 50 } width={ 50 } />
-                </div>
-          }
-                <div className={ accountClasses('modal-title') }>
-            Change Password
-                </div>
-                <div className={ accountClasses('modal-content') }>
-                    <div className={ accountClasses('modal-row') }>
-                        <label>Current Password</label>
-                        <input type='password' name='currentPassword' value={ this.state.currentPassword } onChange={ this.onValueChanged.bind(this) } />
-                    </div>
-                    <div className={ accountClasses('modal-row') }>
-                        <label>New Password</label>
-                        <input type='password' name='password' value={ this.state.password } onChange={ this.onValueChanged.bind(this) } />
-                    </div>
-                    <div className={ accountClasses('modal-row') }>
-                        <label>Confirm Password</label>
-                        <input type='password' name='passwordConfirm' value={ this.state.passwordConfirm } onChange={ this.onValueChanged.bind(this) } />
-                    </div>
-                </div>
-                <div className={ accountClasses('modal-footer') }>
-                    <div className={ accountClasses('modal-button') } onClick={ this.updateUser.bind(this) }>Save</div>
-                    <div className={ accountClasses('modal-button') } onClick={ this.hideModal.bind(this) }>Cancel</div>
+            <Modal
+          open={ this.state.editPwd }
+          onClose={ this.handleClose }
+        >
+                <div className={ modalClass }>
+                    { auth.isLoading &&
+                    <CircularProgress className={ accountClasses('modal-loading') } />
+            }
+                    <AppBar position="static" className={ accountClasses('modal-title') }>
+                        <Toolbar>
+                Password Change
+                        </Toolbar>
+                    </AppBar>
+                    <Paper>
+                        <TextField
+                className={ accountClasses('input-field') }
+                label="Current Password"
+                type="password"
+                margin="normal"
+                variant="outlined"
+                value={ this.state.currentPassword }
+                onChange={ this.onValueChanged.bind(this, 'currentPassword') }
+              />
+                        <TextField
+                className={ accountClasses('input-field') }
+                label="New Password"
+                type="password"
+                margin="normal"
+                variant="outlined"
+                value={ this.state.password }
+                onChange={ this.onValueChanged.bind(this, 'password') }
+              />
+                        <TextField
+                className={ accountClasses('input-field') }
+                label="Confirm Password"
+                type="password"
+                margin="normal"
+                variant="outlined"
+                value={ this.state.passwordConfirm }
+                onChange={ this.onValueChanged.bind(this, 'passwordConfirm') }
+              />
+                    </Paper>
+                    <AppBar position="static" className={ accountClasses('modal-footer') }>
+                        <Toolbar>
+                            <Button variant="outlined" color="secondary" onClick={ this.updateUser }>
+                  Save
+                            </Button>
+                            <Button variant="outlined" color="primary" onClick={ this.handleClose }>
+                  Cancel
+                            </Button>
+                        </Toolbar>
+                    </AppBar>
                 </div>
             </Modal>
         </HomePageLayout>

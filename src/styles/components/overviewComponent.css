@@ -4,57 +4,81 @@
     margin-left: 50px;
 }
 
-.overview__title {
-    width: 100%;
-    font-size: 30px;
-    color: #535258;
-    border-bottom: 1px solid #8a8eb1;
+.overview__container > .MuiPaper-root {
+    background-color: white;
 }
 
-.overview__title--inner {
-    width: 100%;
-    font-size: 18px;
-    color: #535258;
-    margin-bottom: 10px;
+.overview__title {
+    color: #455a63 !important;
+    font-weight: 700 !important;
+    box-shadow: none !important;
+}
+
+.overview__title-toolbar {
+    display: flex;
+    justify-content: space-between;
+}
+
+.overview__toolbar-right {
+    width: 300px;
+    display: flex;
+    justify-content: space-between;
+}
+
+.overview__toolbar-right > .MuiInputBase-root {
+    width: 100px;
+}
+
+.overview__toolbar-right > .MuiFormControl-root {
+    width: 150px;
+    margin-top: 0;
+    margin-bottom: 0;
 }
 
 .overview__content {
-    display: flex;
-    flex-direction: column;
-    padding: 30px 10px;
+    margin-top: 30px;
 }
 
-.overview__followup {
-    width: 70%;
-    max-width: 700px;
-    height: 100px;
-    background-color: #ffffff;
-    border-radius: 5px;
-    border: 1px solid #8a8eb1;
-    margin-bottom: 30px;
+.overview__card-content > .MuiCardContent-root {
+    display: flex;
+    justify-content: space-between;
 }
 
-.overview__info-section {
-    width: 70%;
-    max-width: 700px;
-    min-height: 100px;
-    background-color: #ffffff;
-    border-radius: 5px;
-    border: 1px solid #8a8eb1;
-    margin-right: 20px;
-    padding: 20px;
+.overview__card-content-right {
     display: flex;
-    justify-content: space-around;
-    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+    min-width: 60%;
 }
 
-.overview__info-column {
+.overview__card-content-avatars {
     display: flex;
-    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+    min-width: 250px;
 }
 
-.overview__daily-info {
-    display: flex;
-    width: 100%;
-    flex-wrap: wrap;
+.overview__card-content-avatars .MuiAvatar-root {
+    width: 60px;
+    height: 60px;
+    font-size: 15px;
+}
+
+.overview__card-item {
+    color: #455a63;
+    font-size: 14px;
+}
+
+.overview__card-content-analytics {
+    font-size: 13px;
+    font-weight: 600;
+    cursor: pointer;
+}
+
+.overview__card-content-analytics:hover {
+    color: #803e3e;
+}
+
+.MuiCardContent-root:last-child {
+    padding-bottom: 16px !important;
 }

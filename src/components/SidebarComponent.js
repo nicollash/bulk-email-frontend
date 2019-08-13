@@ -68,7 +68,7 @@ class SidebarComponent extends React.Component {
                 <ListItemIcon>
                     <InboxIcon />
                 </ListItemIcon>
-                <ListItemText primary="Queues" />
+                <ListItemText primary="Campaigns" />
                 {openQueue ? <ExpandLess /> : <ExpandMore />}
             </ListItem>
             <Collapse in={ openQueue } timeout="auto" unmountOnExit>
@@ -77,17 +77,16 @@ class SidebarComponent extends React.Component {
                         <ListItemIcon>
                             <Add />
                         </ListItemIcon>
-                        <ListItemText primary="New Queue" />
+                        <ListItemText primary="New Campaign" />
                     </ListItem>
                     <ListItem button onClick={ this.goQueueList }>
                         <ListItemIcon>
                             <StarBorder />
                         </ListItemIcon>
-                        <ListItemText primary="Queue List" />
+                        <ListItemText primary="Campaign List" />
                     </ListItem>
                 </List>
             </Collapse>
-            <Divider component="li" />
         </List>
     )
   }

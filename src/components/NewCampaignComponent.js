@@ -1,10 +1,15 @@
 import React from 'react';
 import { Storage } from 'aws-amplify';
-import { Button, FormGroup, Input, Label } from 'reactstrap';
 import { getBEMClasses } from '../helpers/cssClassesHelper';
 import HomePageLayout from '../layouts/HomePageLayout';
-import Select from './common/Select';
-import ReactLoading from 'react-loading';
+
+import AppBar from '@material-ui/core/AppBar';
+import Toolbar from '@material-ui/core/Toolbar';
+import Paper from '@material-ui/core/Paper';
+import Select from '@material-ui/core/Select';
+import MenuItem from '@material-ui/core/MenuItem';
+import Button from '@material-ui/core/Button';
+import TextField from '@material-ui/core/TextField';
 
 import '../styles/components/newCampaignComponent.css';
 
@@ -136,119 +141,143 @@ class NewCampaignComponent extends React.Component {
       { value: Channel.Facebook, text: 'Facebook' },
       { value: Channel.Email, text: 'Email' }
     ];
+	const tierValues = [
+		{ value: 1, text: '1' },
+		{ value: 2, text: '2' },
+		{ value: 3, text: '3' },
+		{ value: 4, text: '4' },
+		{ value: 5, text: '5' },
+		{ value: 6, text: '6' }
+	];
 
-    const botValues = campaigns.map(campaign => {
-      return { value: ''+campaign.id, text: campaign.name }
+	const fieldValues = csvFields.map(field => {
+		return {
+		  value: field,
+		  text: field
+		}
+	  })
+
+	const channelItems = channelValues.map(channel => {
+		return (<MenuItem key={ channel.value } value={ channel.text }>{ channel.text }</MenuItem>)
+	})
+    const botItems = campaigns.map(campaign => {
+		return (<MenuItem key={ campaign.id } value={ campaign.id }>{ campaign.name }</MenuItem>)
+	});
+	const tierItems = tierValues.map(tier => {
+		return (<MenuItem key={ tier.value } value={ tier.value }>{ tier.value }</MenuItem>)
     });
 
-    const tierValues = [
-      { value: 1, text: '1' },
-      { value: 2, text: '2' },
-      { value: 3, text: '3' },
-      { value: 4, text: '4' },
-      { value: 5, text: '5' },
-      { value: 6, text: '6' }
-    ];
-
-    const fieldValues = csvFields.map(field => {
-      return {
-        value: field,
-        text: field
-      }
-    })
+    const fieldItems = fieldValues.map(field => {
+		return (<MenuItem key={ field.value } value={ field.value }>{ field.value }</MenuItem>)
+	});
 
     const contentClass = isUploading ? newCampaignClasses('content') + ' ' + newCampaignClasses('content-overlay') : newCampaignClasses('content')
 
     return (
         <HomePageLayout>
-            <div className={ newCampaignClasses('container') }>
-                <div className={ newCampaignClasses('title') }>
-            New Queue
-                </div>
-                <div className={ contentClass }>
-                    { isUploading &&
-                    <div className={ newCampaignClasses('content-loading') }>
-                        <ReactLoading type='spin' color='#ffc600' margin='auto' height={ 50 } width={ 50 } />
+            <div className={ newCampaignClasses('container') } >
+                <AppBar position="static" className={ newCampaignClasses('title') }>
+                    <Toolbar className={ newCampaignClasses('title-toolbar') }>
+						New Campaign
+                    </Toolbar>
+                </AppBar>
+                <Paper className={ contentClass }>
+                    <div className = { newCampaignClasses('content-row') }>
+						Channel : 
+                        <Select value = { channel } onChange={ this.handleChange } inputProps={ { name: 'channel' } } >
+                            { channelItems }
+                        </Select>
+						Bot : 
+                        <Select value = { bot } onChange={ this.handleChange } inputProps={ { name: 'bot' } } className = { newCampaignClasses('select') } >
+                            { botItems }
+                        </Select>
+						Tier : 
+                        <Select value = { tier } onChange={ this.handleChange } inputProps={ { name: 'tier' } } >
+                            { tierItems }
+                        </Select>
                     </div>
-            }
-                    <FormGroup>
-                        <Label htmlFor="channel">Channel</Label>
-                        <Select options={ channelValues } id="channel" name="channel" placeholder="Choose a channel" value={ channel } onChange={ this.handleChange } />
-                    </FormGroup>
-                    <FormGroup>
-                        <Label htmlFor="bot">Bot</Label>
-                        <Select options={ botValues } id="bot" name="bot" placeholder="Choose a bot" value={ bot } onChange={ this.handleChange } />
-                    </FormGroup>
-                    <FormGroup>
-                        <Label htmlFor="tier">Tier</Label>
-                        <Select options={ tierValues } id="tier" name="tier" placeholder="Choose a Tier" value={ tier } onChange={ this.handleChange } />
-                    </FormGroup>
-                    <FormGroup>
-                        <Label>File</Label>
-                        <div style={ { display: 'flex', alignItems: 'center' } }>
-                            <div style={ { flex: '1 1 auto' } }>{filepath}</div>
-                            <Button className="file-upload-button" color="primary" size="sm" onClick={ this.handleUploadClick }>
-                  Choose File...
-                                <i className="fa fa-upload"></i>
-                            </Button>
-                        </div>
-                        <input className="file-upload-input" type="file" onChange={ this.handleUploadChange } ref={ e => this.fileInput = e } />
-                        { (!isUploading && filepath) &&
-                        <div>
-                            <div className={ newCampaignClasses('row') }>
-                                <Label htmlFor="fnameField">fname</Label>
-                                <Select options={ fieldValues } id="fnameField" name="fnameField" placeholder="Choose a field" value={ fnameField } onChange={ this.handleChange } />
-                            </div>
-                            <div className={ newCampaignClasses('row') }>
-                                <Label htmlFor="lnameField">lname</Label>
-                                <Select options={ fieldValues } id="lnameField" name="lnameField" placeholder="Choose a field" value={ lnameField } onChange={ this.handleChange } />
-                            </div>
-                            <div className={ newCampaignClasses('row') }>
-                                <Label htmlFor="pNumberField">phoneNumber</Label>
-                                <Select options={ fieldValues } id="pNumberField" name="pNumberField" placeholder="Choose a field" value={ pNumberField } onChange={ this.handleChange } />
-                            </div>
-                            <div className={ newCampaignClasses('row') }>
-                                <Label htmlFor="stateField">state</Label>
-                                <Select options={ fieldValues } id="stateField" name="stateField" placeholder="Choose a field" value={ stateField } onChange={ this.handleChange } />
-                            </div>
-                            <div className={ newCampaignClasses('row') }>
-                                <Label htmlFor="addressField1">address1</Label>
-                                <Select options={ fieldValues } id="addressField1" name="addressField1" placeholder="Choose a field" value={ addressField1 } onChange={ this.handleChange } />
-                            </div>
-                            <div className={ newCampaignClasses('row') }>
-                                <Label htmlFor="addressField2">address2</Label>
-                                <Select options={ fieldValues } id="addressField2" name="addressField2" placeholder="Choose a field" value={ addressField2 } onChange={ this.handleChange } />
-                            </div>
-                            <div className={ newCampaignClasses('row') }>
-                                <Label htmlFor="cityField">city</Label>
-                                <Select options={ fieldValues } id="cityField" name="cityField" placeholder="Choose a field" value={ cityField } onChange={ this.handleChange } />
-                            </div>
-                            <div className={ newCampaignClasses('row') }>
-                                <Label htmlFor="zipField">zip</Label>
-                                <Select options={ fieldValues } id="zipField" name="zipField" placeholder="Choose a field" value={ zipField } onChange={ this.handleChange } />
-                            </div>
-                            <div className={ newCampaignClasses('row') }>
-                                <Label htmlFor="subIdField">subId</Label>
-                                <Select options={ fieldValues } id="subIdField" name="subIdField" placeholder="Choose a field" value={ subIdField } onChange={ this.handleChange } />
-                            </div>
-                            <div className={ newCampaignClasses('row') }>
-                                <Label htmlFor="utmField">utm</Label>
-                                <Select options={ fieldValues } id="utmField" name="utmField" placeholder="Choose a field" value={ utmField } onChange={ this.handleChange } />
-                            </div>
-                        </div>
-              }
-                    </FormGroup>
-                    <FormGroup>
+                    <div className = { newCampaignClasses('content-row') }>
+                        <div style={ { flex: '1 1 auto' } }>{ filepath }</div>
+                    </div>
+                    <div className = { newCampaignClasses('content-row') }>
+                        <Button className="file-upload-button" variant="contained" color="primary" onClick={ this.handleUploadClick }>
+							Upload File
+                        </Button>
                         <a href="./example.csv" download>Download CSV example</a>
-                    </FormGroup>
-                    <FormGroup>
-                        <Label htmlFor="message">Message Content</Label>
-                        <Input type="textarea" id="message" name="message" placeholder="Input a message" required value={ message } onChange={ this.handleChange } />
-                    </FormGroup>
-                </div>
-                <div className={ newCampaignClasses('footer') }>
-                    <Button color="success" onClick={ this.handleSaveClick }>Save</Button>
-                </div>
+                        <input className="file-upload-input" type="file" onChange={ this.handleUploadChange } ref={ e => this.fileInput = e } />
+                    </div>
+                    <div className = { newCampaignClasses('content-row') }>
+						fname : 
+                        <Select value = { fnameField } onChange={ this.handleChange } inputProps={ { name: 'fnameField' } } >
+                            { fieldItems }
+                        </Select>
+                    </div>
+                    <div className = { newCampaignClasses('content-row') }>
+						lname : 
+                        <Select value = { lnameField } onChange={ this.handleChange } inputProps={ { name: 'lnameField' } } >
+                            { fieldItems }
+                        </Select>
+                    </div>
+                    <div className = { newCampaignClasses('content-row') }>
+						phoneNumber : 
+                        <Select value = { pNumberField } onChange={ this.handleChange } inputProps={ { name: 'pNumberField' } } >
+                            { fieldItems }
+                        </Select>
+                    </div>
+                    <div className = { newCampaignClasses('content-row') }>
+						address1 : 
+                        <Select value = { addressField1 } onChange={ this.handleChange } inputProps={ { name: 'addressField1' } } >
+                            { fieldItems }
+                        </Select>
+                    </div>
+                    <div className = { newCampaignClasses('content-row') }>
+						address2 : 
+                        <Select value = { addressField2 } onChange={ this.handleChange } inputProps={ { name: 'addressField2' } } >
+                            { fieldItems }
+                        </Select>
+                    </div>
+                    <div className = { newCampaignClasses('content-row') }>
+						city : 
+                        <Select value = { cityField } onChange={ this.handleChange } inputProps={ { name: 'cityField' } } >
+                            { fieldItems }
+                        </Select>
+                    </div>
+                    <div className = { newCampaignClasses('content-row') }>
+						zip : 
+                        <Select value = { zipField } onChange={ this.handleChange } inputProps={ { name: 'zipField' } } >
+                            { fieldItems }
+                        </Select>
+                    </div>
+                    <div className = { newCampaignClasses('content-row') }>
+						subId : 
+                        <Select value = { subIdField } onChange={ this.handleChange } inputProps={ { name: 'subIdField' } } >
+                            { fieldItems }
+                        </Select>
+                    </div>
+                    <div className = { newCampaignClasses('content-row') }>
+						tum : 
+                        <Select value = { utmField } onChange={ this.handleChange } inputProps={ { name: 'utmField' } } >
+                            { fieldItems }
+                        </Select>
+                    </div>
+                    <div className = { newCampaignClasses('content-row') }>
+                        <TextField
+							id="outlined-multiline-static"
+							label="Message Content"
+							multiline
+							rows="4"
+							margin="normal"
+							variant="outlined"
+							value={ message }
+							onChange={ this.handleChange }
+						/>
+                    </div>
+                    <div className = { newCampaignClasses('content-row') }>
+                        <Button variant="contained" color="primary" onClick={ this.handleSaveClick }>
+							Save
+                        </Button>
+                    </div>
+                </Paper>
             </div>
         </HomePageLayout>
     )
