@@ -23,27 +23,27 @@ class App extends Component {
   
   render() {
     return (
-      <React.Fragment>
-        <Switch>
-          <UnAuthenticatedRoute path={'/login'} component={LogInContainer} exact />
-          <AuthenticatedRoute path={'/create-queue'} component={NewCampaignContainer} exact />
-          <AuthenticatedRoute path={'/queue-list'} component={QueueListContainer} exact />
-          <AuthenticatedRoute path={'/overview'} component={OverviewContainer} exact/>
-          <AuthenticatedRoute path='/account' component={AccountContainer} />
-          <UnAuthenticatedRoute path={'/forgot-password'} component={ForgotPasswordContainer} exact />
-          <UnAuthenticatedRoute path={'/reset-password'} component={ResetPasswordContainer} exact />
-          <UnAuthenticatedRoute path={'/request-password'} component={NewPasswordRequestContainer} />
-          <Redirect to="/overview" />
-        </Switch>
-        <ReduxToastr
-          timeOut={3000}
+        <React.Fragment>
+            <Switch>
+                <UnAuthenticatedRoute path={ '/login' } component={ LogInContainer } exact />
+                <AuthenticatedRoute path={ '/create-queue' } component={ NewCampaignContainer } exact />
+                <AuthenticatedRoute path={ '/queue-list' } component={ QueueListContainer } exact />
+                <AuthenticatedRoute path={ '/overview' } component={ OverviewContainer } exact/>
+                <AuthenticatedRoute path='/account' component={ AccountContainer } />
+                <UnAuthenticatedRoute path={ '/forgot-password' } component={ ForgotPasswordContainer } exact />
+                <UnAuthenticatedRoute path={ '/reset-password' } component={ ResetPasswordContainer } exact />
+                <UnAuthenticatedRoute path={ '/request-password' } component={ NewPasswordRequestContainer } />
+                <Redirect to="/overview" />
+            </Switch>
+            <ReduxToastr
+          timeOut={ 3000 }
           newestOnTop
           preventDuplicates
           position='top-right'
           transitionIn='bounceIn'
           transitionOut='bounceOut'
           closeOnToastrClick />
-      </React.Fragment>
+        </React.Fragment>
     );
   }
 }

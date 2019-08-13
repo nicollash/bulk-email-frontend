@@ -4,8 +4,8 @@ export class Utils {
 
   static coalesce() {
     for (let i = 0; i < arguments.length; i++) {
-      if (arguments[i] != null) {
-        return arguments[i];
+      if (arguments[ i ] != null) {
+        return arguments[ i ];
       }
     }
 
@@ -42,7 +42,7 @@ export class Utils {
       return object.map(e => Utils.toLowerCase(e));
     }
 
-    if (typeof object !== "object") {
+    if (typeof object !== 'object') {
       return object;
     }
 
@@ -54,11 +54,11 @@ export class Utils {
       return undefined;
     }
 
-    let result = {};
+    const result = {};
 
-    for (let key in object) {
+    for (const key in object) {
       if (Object.prototype.hasOwnProperty.call(object, key)) {
-        result[key.charAt(0).toLowerCase() + key.slice(1)] = Utils.toLowerCase(object[key]);
+        result[ key.charAt(0).toLowerCase() + key.slice(1) ] = Utils.toLowerCase(object[ key ]);
       }
     }
 
@@ -70,7 +70,7 @@ export class Utils {
       return object.map(e => Utils.toUpperCase(e));
     }
 
-    if (typeof object !== "object") {
+    if (typeof object !== 'object') {
       return object;
     }
 
@@ -82,11 +82,11 @@ export class Utils {
       return undefined;
     }
 
-    let result = {};
+    const result = {};
 
-    for (let key in object) {
+    for (const key in object) {
       if (Object.prototype.hasOwnProperty.call(object, key)) {
-        result[key.charAt(0).toUpperCase() + key.slice(1)] = Utils.toUpperCase(object[key]);
+        result[ key.charAt(0).toUpperCase() + key.slice(1) ] = Utils.toUpperCase(object[ key ]);
       }
     }
 
@@ -94,36 +94,36 @@ export class Utils {
   }
 
   static toMap(items, key) {
-    let result = new Map();
+    const result = new Map();
 
     if (items == null || key == null) {
       return result;
     }
 
-    for (let item of items) {
-      result.set(item[key], item);
+    for (const item of items) {
+      result.set(item[ key ], item);
     }
 
     return result;
   }
 
   static toMultiMap(items, key) {
-    let result = new Map();
+    const result = new Map();
 
     if (items == null || key == null) {
       return result;
     }
 
-    for (let item of items) {
-      let values = Utils.coalesce(result.get(item[key]), []);
+    for (const item of items) {
+      const values = Utils.coalesce(result.get(item[ key ]), []);
       values.push(item);
-      result.set(item[key], values);
+      result.set(item[ key ], values);
     }
 
     return result;
   }
 
   static toUnique(array) {
-    return [...new Set(array)]
+    return [ ...new Set(array) ]
   }
 }

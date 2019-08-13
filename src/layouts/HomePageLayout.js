@@ -10,31 +10,31 @@ const homePageLayoutClasses = getBEMClasses('main-layout');
 class HomePageLayout extends React.Component {
   render() {
     return (
-      <React.Fragment>
+        <React.Fragment>
 
-        <div className={homePageLayoutClasses('container')}>
+            <div className={ homePageLayoutClasses('container') }>
 
-          <div className={homePageLayoutClasses('header')}>
-            <HeaderContainer />
-          </div>
+                <div className={ homePageLayoutClasses('header') }>
+                    <HeaderContainer />
+                </div>
 
-          <div className={homePageLayoutClasses('side-bar')}>
-            <SidebarContainer />
-          </div>
+                <div className={ homePageLayoutClasses('side-bar') }>
+                    <SidebarContainer />
+                </div>
 
-          <div className={homePageLayoutClasses('body')}>
-            { this.props.children }
-          </div>
+                <div className={ homePageLayoutClasses('body') }>
+                    { this.props.children }
+                </div>
 
-          <div className={homePageLayoutClasses('footer')}>
-            <div className={homePageLayoutClasses('footer-row')}>
+                <div className={ homePageLayoutClasses('footer') }>
+                    <div className={ homePageLayoutClasses('footer-row') }>
+
+                    </div>
+                </div>
 
             </div>
-          </div>
-
-        </div>
         
-      </React.Fragment>
+        </React.Fragment>
     );
   }
 }

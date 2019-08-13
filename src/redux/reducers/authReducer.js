@@ -33,34 +33,34 @@ const initialState = {
 }
 
 const actionHandlers = {
-  [AUTH_SET_PASSWORD_REQUESTED]: (state, { type, payload }) => {
+  [ AUTH_SET_PASSWORD_REQUESTED ]: (state, { type, payload }) => {
     return {
       ...state,
       auth: type,
       isLoading: true
     }
   },
-  [AUTH_SET_PASSWORD_SUCCEEDED]: (state, { type, payload }) => {
+  [ AUTH_SET_PASSWORD_SUCCEEDED ]: (state, { type, payload }) => {
     return {
       ...state,
       auth: type,
       isLoading: false
     }
   },
-  [AUTH_SET_PASSWORD_FAILED]: (state, { type, payload }) => {
+  [ AUTH_SET_PASSWORD_FAILED ]: (state, { type, payload }) => {
     return {
       ...state,
       auth: type,
       isLoading: false
     }
   },
-  [AUTH_CHECK_LIST]: (state, { type, payload }) => {
+  [ AUTH_CHECK_LIST ]: (state, { type, payload }) => {
     return {
       ...state,
       auth: type
     }
   },
-  [AUTH_INIT_PASSWORD_STATE]: (state, { type }) => {
+  [ AUTH_INIT_PASSWORD_STATE ]: (state, { type }) => {
     return {
       ...state,
       auth: type,
@@ -68,28 +68,28 @@ const actionHandlers = {
       passwordChangedFailed: false
     }
   },
-  [AUTH_PASSWORD_CHANGE_SUCCEEDED]: (state, { type }) => {
+  [ AUTH_PASSWORD_CHANGE_SUCCEEDED ]: (state, { type }) => {
     return {
       ...state,
       auth: type,
       passwordChanged: true
     }
   },
-  [AUTH_PASSWORD_CHANGE_FAILED]: (state, { type }) => {
+  [ AUTH_PASSWORD_CHANGE_FAILED ]: (state, { type }) => {
     return {
       ...state,
       auth: type,
       passwordChangedFailed: true
     }
   },
-  [AUTH_LOGIN_RESET_STATE]: (state, { type }) => {
+  [ AUTH_LOGIN_RESET_STATE ]: (state, { type }) => {
     return {
       ...state,
       auth: type,
       isLoading: false
     }
   },
-  [AUTH_USER_SIGNED_OUT]: (state, {type}) => {
+  [ AUTH_USER_SIGNED_OUT ]: (state, { type }) => {
     return {
       ...state,
       auth: type,
@@ -97,7 +97,7 @@ const actionHandlers = {
       userCred: {}
     }
   },
-  [NEW_PASSWORD_PENDING]: (state, {type}) => {
+  [ NEW_PASSWORD_PENDING ]: (state, { type }) => {
     return {
       ...state,
       auth: type,
@@ -105,7 +105,7 @@ const actionHandlers = {
       errMsg: '',
     }
   },
-  [NEW_PASSWORD_REQUIRED]: (state, { type, payload }) => {
+  [ NEW_PASSWORD_REQUIRED ]: (state, { type, payload }) => {
     return {
       ...state,
       auth: type,
@@ -113,14 +113,14 @@ const actionHandlers = {
       isLoading: false
     }
   },
-  [NEW_PASSWORD_SUCCESS]: (state, { type }) => {
+  [ NEW_PASSWORD_SUCCESS ]: (state, { type }) => {
     return {
       ...state,
       auth: type,
       isLoading: false
     }
   },
-  [NEW_PASSWORD_FAILED]: (state, { type, ...action }) => {
+  [ NEW_PASSWORD_FAILED ]: (state, { type, ...action }) => {
     return {
       ...state,
       auth: type,
@@ -128,7 +128,7 @@ const actionHandlers = {
       errMsg: action.error,
     }
   },
-  [AUTH_LOGIN_REQUESTED]: (state, { type }) => {
+  [ AUTH_LOGIN_REQUESTED ]: (state, { type }) => {
     return {
       ...state,
       auth: type,
@@ -136,7 +136,7 @@ const actionHandlers = {
       isLoading: true
     }
   },
-  [AUTH_LOGIN_SUCCEEDED]: (state, { type, payload }) => {
+  [ AUTH_LOGIN_SUCCEEDED ]: (state, { type, payload }) => {
     return {
       ...state,
       auth: type,
@@ -145,7 +145,7 @@ const actionHandlers = {
       isLoading: false
     }
   },
-  [AUTH_LOGIN_FAILED]: (state, { type }) => {
+  [ AUTH_LOGIN_FAILED ]: (state, { type }) => {
     return {
       ...state,
       auth: type,
@@ -153,7 +153,7 @@ const actionHandlers = {
       isLoading: false
     }
   },
-  [AUTH_FORGOT_CODE_SENT]: (state, { type, payload }) => {
+  [ AUTH_FORGOT_CODE_SENT ]: (state, { type, payload }) => {
     return {
       ...state,
       auth: type,
@@ -163,6 +163,6 @@ const actionHandlers = {
 }
 
 export default function (state = initialState, action) {
-  const handler = actionHandlers[action.type];
+  const handler = actionHandlers[ action.type ];
   return handler ? handler(state, action) : state;
 }

@@ -18,16 +18,16 @@ export default function DatePickers() {
   const classes = useStyles();
 
   return (
-    <form className={classes.container} noValidate>
-      <TextField
+      <form className={ classes.container } noValidate>
+          <TextField
         id="date"
         type="date"
         defaultValue="2000-01-01"
-        className={classes.textField}
-        InputLabelProps={{
+        className={ classes.textField }
+        InputLabelProps={ {
           shrink: true,
-        }}
+        } }
       />
-    </form>
+      </form>
   );
 }

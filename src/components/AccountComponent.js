@@ -18,7 +18,7 @@ import CircularProgress from '@material-ui/core/CircularProgress';
 import '../styles/components/accountComponent.css'
 import '../styles/base/modal.css'
 
-const accountClasses = getBEMClasses(['account-page'])
+const accountClasses = getBEMClasses([ 'account-page' ])
 
 class AccountComponent extends React.Component {
   constructor (props) {
@@ -59,7 +59,7 @@ class AccountComponent extends React.Component {
     const { value } = e.target
 
     this.setState({
-      [name]: value
+      [ name ]: value
     })
   }
 
@@ -81,64 +81,64 @@ class AccountComponent extends React.Component {
     const modalClass = auth.isLoading ? accountClasses('modal-container') + ' ' + accountClasses('modal-overlay') : accountClasses('modal-container')
 
     return (
-      <HomePageLayout>
-        <div className={accountClasses('container')}>
-          <AppBar position="static" className={accountClasses('title')}>
-            <Toolbar>
+        <HomePageLayout>
+            <div className={ accountClasses('container') }>
+                <AppBar position="static" className={ accountClasses('title') }>
+                    <Toolbar>
               Account
-            </Toolbar>
-          </AppBar>
-          <Paper className={accountClasses('content')}>
-            <Toolbar className={accountClasses('card-title')}>
+                    </Toolbar>
+                </AppBar>
+                <Paper className={ accountClasses('content') }>
+                    <Toolbar className={ accountClasses('card-title') }>
               Settings
-            </Toolbar>
-            <Card className={accountClasses('card-content')}>
-              <CardContent>
-                <div className={accountClasses('card-item')}>
+                    </Toolbar>
+                    <Card className={ accountClasses('card-content') }>
+                        <CardContent>
+                            <div className={ accountClasses('card-item') }>
                   Account : <span className='span-value'>{ auth.userProfile.username }</span>
-                </div>
-                <div className={accountClasses('card-item')}>
+                            </div>
+                            <div className={ accountClasses('card-item') }>
                   Account Status : <span className='span-value'>Active</span>
-                </div>
-                <div className={accountClasses('card-item')}>
+                            </div>
+                            <div className={ accountClasses('card-item') }>
                   Approved Channels : <span className='span-value'>SMS, VOICE</span>
-                </div>
-              </CardContent>
-            </Card>
-            <Toolbar className={accountClasses('card-title')}>
+                            </div>
+                        </CardContent>
+                    </Card>
+                    <Toolbar className={ accountClasses('card-title') }>
               About You
-            </Toolbar>
-            <Card className={accountClasses('card-content')}>
-              <CardContent>
-                <div className={accountClasses('card-item')}>
+                    </Toolbar>
+                    <Card className={ accountClasses('card-content') }>
+                        <CardContent>
+                            <div className={ accountClasses('card-item') }>
                   Email : <span className='span-value'>{ auth.userProfile.attributes.email }</span>
-                </div>
-                <div className={accountClasses('card-item')}>
+                            </div>
+                            <div className={ accountClasses('card-item') }>
                   Phone : <span className='span-value'>{ auth.userProfile.attributes.phone_number }</span>
-                </div>
-                <div className={accountClasses('card-item')}>
-                  Password : <span className='span-value'>********</span> [<span className='span-link' onClick={this.editPwd}>Change</span>]
-                </div>
-              </CardContent>
-            </Card>
-          </Paper>
-        </div>
-        <Modal
-          open={this.state.editPwd}
-          onClose={this.handleClose}
+                            </div>
+                            <div className={ accountClasses('card-item') }>
+                  Password : <span className='span-value'>********</span> [<span className='span-link' onClick={ this.editPwd }>Change</span>]
+                            </div>
+                        </CardContent>
+                    </Card>
+                </Paper>
+            </div>
+            <Modal
+          open={ this.state.editPwd }
+          onClose={ this.handleClose }
         >
-          <div className={modalClass}>
-            { auth.isLoading &&
-              <CircularProgress className={ accountClasses('modal-loading') } />
+                <div className={ modalClass }>
+                    { auth.isLoading &&
+                    <CircularProgress className={ accountClasses('modal-loading') } />
             }
-            <AppBar position="static" className={accountClasses('modal-title')}>
-              <Toolbar>
+                    <AppBar position="static" className={ accountClasses('modal-title') }>
+                        <Toolbar>
                 Password Change
-              </Toolbar>
-            </AppBar>
-            <Paper>
-              <TextField
-                className={accountClasses('input-field')}
+                        </Toolbar>
+                    </AppBar>
+                    <Paper>
+                        <TextField
+                className={ accountClasses('input-field') }
                 label="Current Password"
                 type="password"
                 margin="normal"
@@ -146,8 +146,8 @@ class AccountComponent extends React.Component {
                 value={ this.state.currentPassword }
                 onChange={ this.onValueChanged.bind(this, 'currentPassword') }
               />
-              <TextField
-                className={accountClasses('input-field')}
+                        <TextField
+                className={ accountClasses('input-field') }
                 label="New Password"
                 type="password"
                 margin="normal"
@@ -155,8 +155,8 @@ class AccountComponent extends React.Component {
                 value={ this.state.password }
                 onChange={ this.onValueChanged.bind(this, 'password') }
               />
-              <TextField
-                className={accountClasses('input-field')}
+                        <TextField
+                className={ accountClasses('input-field') }
                 label="Confirm Password"
                 type="password"
                 margin="normal"
@@ -164,20 +164,20 @@ class AccountComponent extends React.Component {
                 value={ this.state.passwordConfirm }
                 onChange={ this.onValueChanged.bind(this, 'passwordConfirm') }
               />
-            </Paper>
-            <AppBar position="static" className={accountClasses('modal-footer')}>
-              <Toolbar>
-                <Button variant="outlined" color="secondary" onClick={ this.updateUser }>
+                    </Paper>
+                    <AppBar position="static" className={ accountClasses('modal-footer') }>
+                        <Toolbar>
+                            <Button variant="outlined" color="secondary" onClick={ this.updateUser }>
                   Save
-                </Button>
-                <Button variant="outlined" color="primary" onClick={ this.handleClose }>
+                            </Button>
+                            <Button variant="outlined" color="primary" onClick={ this.handleClose }>
                   Cancel
-                </Button>
-              </Toolbar>
-            </AppBar>
-          </div>
-        </Modal>
-      </HomePageLayout>
+                            </Button>
+                        </Toolbar>
+                    </AppBar>
+                </div>
+            </Modal>
+        </HomePageLayout>
     )
   };
 };

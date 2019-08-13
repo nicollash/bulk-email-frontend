@@ -17,7 +17,7 @@ import StarBorder from '@material-ui/icons/StarBorder';
 
 import '../styles/components/sidebarComponent.css';
 
-const sidebarClasses = getBEMClasses(['side-bar']);
+const sidebarClasses = getBEMClasses([ 'side-bar' ]);
 
 class SidebarComponent extends React.Component {
 
@@ -54,41 +54,40 @@ class SidebarComponent extends React.Component {
     const { openQueue } = this.state;
 
     return (
-      <List
+        <List
         component="nav"
       >
-        <ListItem button onClick={this.goOverview}>
-          <ListItemIcon>
-            <SendIcon />
-          </ListItemIcon>
-          <ListItemText primary="Overview" />
-        </ListItem>
-        <Divider component="li" />
-        <ListItem button onClick={this.toggleQueue}>
-          <ListItemIcon>
-            <InboxIcon />
-          </ListItemIcon>
-          <ListItemText primary="Campaigns" />
-          {openQueue ? <ExpandLess /> : <ExpandMore />}
-        </ListItem>
-        <Collapse in={openQueue} timeout="auto" unmountOnExit>
-          <List component="div" disablePadding>
-            <ListItem button onClick={this.goAddQueue}>
-              <ListItemIcon>
-                <Add />
-              </ListItemIcon>
-              <ListItemText primary="New Campaign" />
+            <ListItem button onClick={ this.goOverview }>
+                <ListItemIcon>
+                    <SendIcon />
+                </ListItemIcon>
+                <ListItemText primary="Overview" />
             </ListItem>
-            <ListItem button onClick={this.goQueueList}>
-              <ListItemIcon>
-                <StarBorder />
-              </ListItemIcon>
-              <ListItemText primary="Campaign List" />
+            <Divider component="li" />
+            <ListItem button onClick={ this.toggleQueue }>
+                <ListItemIcon>
+                    <InboxIcon />
+                </ListItemIcon>
+                <ListItemText primary="Campaigns" />
+                {openQueue ? <ExpandLess /> : <ExpandMore />}
             </ListItem>
-          </List>
-        </Collapse>
-        <Divider component="li" />
-      </List>
+            <Collapse in={ openQueue } timeout="auto" unmountOnExit>
+                <List component="div" disablePadding>
+                    <ListItem button onClick={ this.goAddQueue }>
+                        <ListItemIcon>
+                            <Add />
+                        </ListItemIcon>
+                        <ListItemText primary="New Campaign" />
+                    </ListItem>
+                    <ListItem button onClick={ this.goQueueList }>
+                        <ListItemIcon>
+                            <StarBorder />
+                        </ListItemIcon>
+                        <ListItemText primary="Campaign List" />
+                    </ListItem>
+                </List>
+            </Collapse>
+        </List>
     )
   }
 }

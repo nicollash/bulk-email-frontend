@@ -8,8 +8,8 @@ import { toastr } from 'react-redux-toastr'
 
 import '../styles/components/forgotPasswordComponent.css'
 
-const baseClasses = getBEMClasses(['base'])
-const forgotPasswordClasses = getBEMClasses(['forgot-password'])
+const baseClasses = getBEMClasses([ 'base' ])
+const forgotPasswordClasses = getBEMClasses([ 'forgot-password' ])
 
 class ResetPasswordComponent extends React.Component {
   
@@ -35,7 +35,7 @@ class ResetPasswordComponent extends React.Component {
   handleChange = (evt) => {
     const { name, value } = evt.target;
     this.setState({
-      [name]: value
+      [ name ]: value
     })
   }
 
@@ -51,56 +51,56 @@ class ResetPasswordComponent extends React.Component {
     const { auth } = this.props
 
     return (
-      <div className={forgotPasswordClasses('wrapper')}>
-        <div className={forgotPasswordClasses('container')}>
-          <LogoComponent />
-          <h2 className={forgotPasswordClasses('title')}>Verification code was sent to your {auth.forgot.details.CodeDeliveryDetails.DeliveryMedium === 'SMS' ? 'phone' : 'email' } successfully.</h2>
-          <Form>
-            <FormGroup className={forgotPasswordClasses('form-group')}>
-              <Input
+        <div className={ forgotPasswordClasses('wrapper') }>
+            <div className={ forgotPasswordClasses('container') }>
+                <LogoComponent />
+                <h2 className={ forgotPasswordClasses('title') }>Verification code was sent to your {auth.forgot.details.CodeDeliveryDetails.DeliveryMedium === 'SMS' ? 'phone' : 'email' } successfully.</h2>
+                <Form>
+                    <FormGroup className={ forgotPasswordClasses('form-group') }>
+                        <Input
                 type='text'
                 name='pin'
-                className={forgotPasswordClasses('form-input')}
+                className={ forgotPasswordClasses('form-input') }
                 placeholder='Verification code'
-                value={pin}
-                onChange={this.handleChange}
+                value={ pin }
+                onChange={ this.handleChange }
               />
-              <span className={forgotPasswordClasses('input-icon')}><i className='ti-lock' /></span>
-            </FormGroup>
-            <FormGroup className={forgotPasswordClasses('form-group')}>
-              <Input
+                        <span className={ forgotPasswordClasses('input-icon') }><i className='ti-lock' /></span>
+                    </FormGroup>
+                    <FormGroup className={ forgotPasswordClasses('form-group') }>
+                        <Input
                 type='Password'
                 name='password'
-                className={forgotPasswordClasses('form-input')}
+                className={ forgotPasswordClasses('form-input') }
                 placeholder='Password'
-                value={password}
-                onChange={this.handleChange}
+                value={ password }
+                onChange={ this.handleChange }
               />
-              <span className={forgotPasswordClasses('input-icon')}><i className='ti-lock' /></span>
-            </FormGroup>
-            <FormGroup className={forgotPasswordClasses('form-group')}>
-              <Input
+                        <span className={ forgotPasswordClasses('input-icon') }><i className='ti-lock' /></span>
+                    </FormGroup>
+                    <FormGroup className={ forgotPasswordClasses('form-group') }>
+                        <Input
                 type='Password'
                 name='confirmPassword'
-                className={forgotPasswordClasses('form-input')}
+                className={ forgotPasswordClasses('form-input') }
                 placeholder='Confirm Password'
-                value={confirmPassword}
-                onChange={this.handleChange}
+                value={ confirmPassword }
+                onChange={ this.handleChange }
               />
-              <span className={forgotPasswordClasses('input-icon')}><i className='ti-lock' /></span>
-            </FormGroup>
-            <FormGroup className='mb-15'>
-              <Button
-                className={forgotPasswordClasses('form-button') + ' ' + baseClasses('button-success')}
+                        <span className={ forgotPasswordClasses('input-icon') }><i className='ti-lock' /></span>
+                    </FormGroup>
+                    <FormGroup className='mb-15'>
+                        <Button
+                className={ forgotPasswordClasses('form-button') + ' ' + baseClasses('button-success') }
                 variant='contained'
                 size='large'
-                onClick={this.changePassword}>
+                onClick={ this.changePassword }>
                   Change Password
-              </Button>
-            </FormGroup>
-          </Form>
+                        </Button>
+                    </FormGroup>
+                </Form>
+            </div>
         </div>
-      </div>
     )
   }
 }

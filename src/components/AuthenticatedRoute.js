@@ -7,16 +7,16 @@ const AuthenticatedRoute = (props, context) => {
 
   if (auth.isAuthenticated) {
     return (
-      <Route path={path} component={component} />
+        <Route path={ path } component={ component } />
     )
   } else {
     if (component !== LogInContainer) {
       return (
-        <Redirect to='/login' />
+          <Redirect to='/login' />
       )
     } else {
       return (
-        <Route path={path} component={component} />
+          <Route path={ path } component={ component } />
       )
     }
   }

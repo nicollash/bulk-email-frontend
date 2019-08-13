@@ -4,6 +4,10 @@
     margin-left: 50px;
 }
 
+.overview__container > .MuiPaper-root {
+    background-color: white;
+}
+
 .overview__title {
     color: #455a63 !important;
     font-weight: 700 !important;
