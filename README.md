@@ -5,7 +5,7 @@
     `npm install -g webpack`
 
     Clone the project:  
-    `git clone https://github.com/chatmantics-dev/bulksms-frontend.git`
+    `git clone https://github.com/nicollash/bulk-email-frontend.git`
 
     Install npm dependencies:  
     `npm install`
